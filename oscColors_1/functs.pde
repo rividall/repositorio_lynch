@@ -28,5 +28,5 @@ void drawline() {
   strokeWeight(oscSize);
   stroke(oscCol);
   line(prevX, prevY, coordX, coordY);
-  println(prevX + " " + prevY +" "+ coordX +" "+ coordY);
+  //println(prevX + " " + prevY +" "+ coordX +" "+ coordY);
 }
