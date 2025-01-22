@@ -1,0 +1,1 @@
+- Documentación de código SVG de trabajo en Outthink, 2024-2025

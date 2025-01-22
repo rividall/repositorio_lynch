@@ -1,0 +1,22 @@
+<svg width="1663" height="887" viewBox="0 0 1663 887" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Property 1=1gBars">
+<rect width="1663" height="887" fill="white"/>
+<rect id="rectBase" opacity="0.01" x="210" y="816" width="1200" height="4" fill="black">
+                                    <animate attributeName="width" values="1200;58;1200;1200" begin="0s" dur="4s" repeatCount="1" fill="freeze" calcMode="linear" keyTimes="0;0.333;0.667;1"/>
+                                    <animate attributeName="opacity" values="0.01;0.01;0.99;1" begin="0s" dur="4s" repeatCount="1" fill="freeze" calcMode="linear" keyTimes="0;0.333;0.667;1"/></rect>
+<g id="graphBars" opacity="0.01">
+<rect id="g1" width="1" height="252" transform="matrix(1 0 0 -1 210 816)" fill="#D9D9D9">
+                                    <animate attributeName="height" values="252;74;536;536" begin="0s" dur="4s" repeatCount="1" fill="freeze" calcMode="linear" keyTimes="0;0.333;0.667;1"/></rect>
+<rect id="g2" width="1" height="252" transform="matrix(1 0 0 -1 510 816)" fill="#D9D9D9">
+                                    <animate attributeName="height" values="252;74;536;536" begin="0s" dur="4s" repeatCount="1" fill="freeze" calcMode="linear" keyTimes="0;0.333;0.667;1"/></rect>
+<rect id="g3" width="1" height="252" transform="matrix(1 0 0 -1 810 816)" fill="#D9D9D9">
+                                    <animate attributeName="height" values="252;74;536;536" begin="0s" dur="4s" repeatCount="1" fill="freeze" calcMode="linear" keyTimes="0;0.333;0.667;1"/></rect>
+<rect id="g4" width="1" height="252" transform="matrix(1 0 0 -1 1110 816)" fill="#D9D9D9">
+                                    <animate attributeName="height" values="252;74;536;536" begin="0s" dur="4s" repeatCount="1" fill="freeze" calcMode="linear" keyTimes="0;0.333;0.667;1"/></rect>
+<rect id="g5" width="1" height="252" transform="matrix(1 0 0 -1 1409 816)" fill="#D9D9D9">
+                                    <animate attributeName="height" values="252;74;536;536" begin="0s" dur="4s" repeatCount="1" fill="freeze" calcMode="linear" keyTimes="0;0.333;0.667;1"/></rect>
+
+                                    <animate attributeName="opacity" values="0.01;0.02;1;1" begin="0s" dur="4s" repeatCount="1" fill="freeze" calcMode="linear" keyTimes="0;0.333;0.667;1"/></g>
+
+                                    </g>
+</svg>
