@@ -1,249 +1,249 @@
-id,category_name
-1,Beading & Jewelry Making
-2,Fabric Decorating
-3,Knitting & Crochet Supplies
-4,Printmaking Supplies
-5,Scrapbooking & Stamping Supplies
-6,Sewing Products
-7,Craft & Hobby Fabric
-8,Needlework Supplies
-9,"Arts, Crafts & Sewing Storage"
-10,"Painting, Drawing & Art Supplies"
-11,Craft Supplies & Materials
-12,Gift Wrapping Supplies
-13,Party Decorations
-14,Automotive Paint & Paint Supplies
-15,Heavy Duty & Commercial Vehicle Equipment
-16,Automotive Tires & Wheels
-17,Automotive Tools & Equipment
-18,Automotive Performance Parts & Accessories
-19,Car Care
-20,Oils & Fluids
-21,Automotive Replacement Parts
-22,"Lights, Bulbs & Indicators"
-23,Automotive Interior Accessories
-24,Automotive Exterior Accessories
-25,Automotive Enthusiast Merchandise
-26,Car Electronics & Accessories
-27,RV Parts & Accessories
-28,Motorcycle & Powersports
-29,Baby Diapering Products
-30,Baby & Toddler Feeding Supplies
-31,Pregnancy & Maternity Products
-32,Child Safety Car Seats & Accessories
-33,Baby Safety Products
-34,Toilet Training Products
-35,Baby Care Products
-36,Baby Travel Gear
-38,Baby Activity & Entertainment Products
-39,Baby Gifts
-40,Baby Stationery
-41,"Nursery Furniture, Bedding & Décor"
-42,Baby
-43,Baby Boys' Clothing & Shoes
-44,Baby Strollers & Accessories
-45,Beauty & Personal Care
-46,Perfumes & Fragrances
-47,Hair Care Products
-48,Makeup
-49,Skin Care Products
-50,Beauty Tools & Accessories
-51,"Foot, Hand & Nail Care Products"
-52,Personal Care Products
-53,Shaving & Hair Removal Products
-54,Computer Servers
-55,Data Storage
-56,Computer Monitors
-57,Computers & Tablets
-58,Tablet Replacement Parts
-60,Computer Networking
-63,Computer Components
-64,Tablet Accessories
-65,Laptop Accessories
-66,Computer External Components
-68,Wearable Technology
-69,Televisions & Video Products
-70,GPS & Navigation
-71,Headphones & Earbuds
-72,Office Electronics
-73,Portable Audio & Video
-74,eBook Readers & Accessories
-75,Cell Phones & Accessories
-76,Accessories & Supplies
-77,Video Projectors
-78,Vehicle Electronics
-79,Camera & Photo
-80,Security & Surveillance Equipment
-81,Computers
-82,Home Audio & Theater Products
-83,Video Game Consoles & Accessories
-84,Boys' Clothing
-87,Boys' Accessories
-88,Boys' Jewelry
-89,Boys' Watches
-90,Boys' Shoes
-91,Girls' Clothing
-94,Girls' Accessories
-95,Girls' Jewelry
-96,Girls' Watches
-97,Girls' Shoes
-98,Girls' School Uniforms
-99,Travel Duffel Bags
-100,Messenger Bags
-101,Travel Tote Bags
-102,Garment Bags
-103,Luggage Sets
-104,Suitcases
-105,Travel Accessories
-106,Rain Umbrellas
-107,Backpacks
-108,Luggage
-109,Laptop Bags
-110,Men's Clothing
-112,Men's Accessories
-113,Men's Watches
-114,Men's Shoes
-116,Women's Clothing
-118,Women's Handbags
-120,Women's Accessories
-121,Women's Watches
-122,Women's Shoes
-123,Women's Jewelry
-124,Kids' Furniture
-125,Gift Cards
-126,Oral Care Products
-127,Vision Products
-128,Wellness & Relaxation Products
-129,Baby & Child Care Products
-130,Household Supplies
-131,Health Care Products
-132,Diet & Sports Nutrition
-133,Home Use Medical Supplies & Equipment
-134,Sexual Wellness Products
-135,Health & Household
-136,Sports Nutrition Products
-137,Stationery & Gift Wrapping Supplies
-138,Commercial Door Products
-139,Power Transmission Products
-140,Industrial Materials
-141,Industrial Hardware
-142,Abrasive & Finishing Products
-143,"Industrial Adhesives, Sealants & Lubricants"
-144,Material Handling Products
-145,"Test, Measure & Inspect"
-146,Industrial Power & Hand Tools
-147,"Hydraulics, Pneumatics & Plumbing"
-148,Filtration
-149,Electronic Components
-150,Lab & Scientific Products
-151,Janitorial & Sanitation Supplies
-152,Occupational Health & Safety Products
-153,Cutting Tools
-154,Fasteners
-155,Science Education Supplies
-156,Food Service Equipment & Supplies
-157,Additive Manufacturing Products
-158,Professional Medical Supplies
-159,Professional Dental Supplies
-160,Packaging & Shipping Supplies
-161,Retail Store Fixtures & Equipment
-162,Industrial & Scientific
-163,Bath Products
-164,Bedding
-165,Home Décor Products
-166,Furniture
-167,Household Cleaning Supplies
-168,Seasonal Décor
-169,Home Lighting & Ceiling Fans
-170,Kitchen & Dining
-171,"Heating, Cooling & Air Quality"
-172,Kids' Home Store
-173,Home Storage & Organization
-174,Wall Art
-175,Vacuum Cleaners & Floor Care
-176,Ironing Products
-177,Party Supplies
-178,Pet Bird Supplies
-179,Cat Supplies
-180,Dog Supplies
-181,Fish & Aquatic Pets
-182,Horse Supplies
-183,Reptiles & Amphibian Supplies
-184,Small Animal Supplies
-185,Smart Home: New Smart Devices
-186,Smart Home: Voice Assistants and Hubs
-187,Smart Home: Smart Locks and Entry
-188,Smart Home: Home Entertainment
-189,Smart Home: WiFi and Networking
-190,Smart Home: Security Cameras and Systems
-191,Smart Home: Lighting
-192,Smart Home: Plugs and Outlets
-193,Smart Home: Vacuums and Mops
-194,Smart Home Thermostats - Compatibility Checker
-195,Smart Home: Lawn and Garden
-196,Smart Home: Other Solutions
-197,Smart Home - Heating & Cooling
-198,Sports & Fitness
-199,Outdoor Recreation
-200,Sports & Outdoors
-201,Home Appliances
-203,Pumps & Plumbing Equipment
-204,"Paint, Wall Treatments & Supplies"
-205,Safety & Security
-206,Light Bulbs
-207,Power Tools & Hand Tools
-208,Kitchen & Bath Fixtures
-209,Lighting & Ceiling Fans
-210,Electrical Equipment
-211,Hardware
-212,Building Supplies
-213,Measuring & Layout
-214,Welding & Soldering
-215,Tools & Home Improvement
-216,Kids' Party Supplies
-217,Toy Figures & Playsets
-218,Novelty Toys & Amusements
-219,Arts & Crafts Supplies
-220,Building Toys
-221,Dolls & Accessories
-222,Kids' Electronics
-223,Games & Accessories
-224,Learning & Education Toys
-225,Kids' Dress Up & Pretend Play
-226,Puppets & Puppet Theaters
-227,Puzzles
-228,Sports & Outdoor Play Toys
-229,Stuffed Animals & Plush Toys
-230,Baby & Toddler Toys
-231,"Tricycles, Scooters & Wagons"
-232,Finger Toys
-233,Toy Vehicle Playsets
-234,Kids' Play Trains & Trams
-235,Kids' Play Trucks
-236,Kids' Play Cars & Race Cars
-237,Kids' Play Boats
-238,Kids' Play Buses
-239,Kids' Play Tractors
-240,"Slot Cars, Race Tracks & Accessories"
-241,"Sony PSP Games, Consoles & Accessories"
-242,"Nintendo DS Games, Consoles & Accessories"
-243,"PlayStation 3 Games, Consoles & Accessories"
-244,"Wii Games, Consoles & Accessories"
-245,"Xbox 360 Games, Consoles & Accessories"
-248,Mac Games & Accessories
-249,"Nintendo 3DS & 2DS Consoles, Games & Accessories"
-250,Legacy Systems
-251,"PlayStation Vita Games, Consoles & Accessories"
-252,"Wii U Games, Consoles & Accessories"
-253,"PlayStation 4 Games, Consoles & Accessories"
-254,"Xbox One Games, Consoles & Accessories"
-255,Video Games
-256,Online Video Game Services
-259,Virtual Reality Hardware & Accessories
-260,"Nintendo Switch Consoles, Games & Accessories"
-261,"PlayStation 5 Consoles, Games & Accessories"
-262,"Xbox Series X & S Consoles, Games & Accessories"
-263,PC Games & Accessories
-264,Baby Girls' Clothing & Shoes
-265,Boys' School Uniforms
-270,Toys & Games
+id,category_name,newCat,newName
+2,Automotive Paint & Paint Supplies,1,Automotive Products
+3,Heavy Duty & Commercial Vehicle Equipment,1,Automotive Products
+4,Automotive Tires & Wheels,1,Automotive Products
+5,Automotive Tools & Equipment,1,Automotive Products
+6,Automotive Performance Parts & Accessories,1,Automotive Products
+7,Car Care,1,Automotive Products
+8,Oils & Fluids,1,Automotive Products
+9,Automotive Replacement Parts,1,Automotive Products
+14,Lights_ Bulbs & Indicators,1,Automotive Products
+15,Automotive Interior Accessories,1,Automotive Products
+16,Automotive Exterior Accessories,1,Automotive Products
+17,Automotive Enthusiast Merchandise,1,Automotive Products
+18,Car Electronics & Accessories,1,Automotive Products
+19,RV Parts & Accessories,1,Automotive Products
+20,Motorcycle & Powersports,1,Automotive Products
+21,Baby Diapering Products,2,Baby Products
+22,Baby & Toddler Feeding Supplies,2,Baby Products
+23,Pregnancy & Maternity Products,2,Baby Products
+24,Child Safety Car Seats & Accessories,2,Baby Products
+25,Baby Safety Products,2,Baby Products
+26,Toilet Training Products,2,Baby Products
+27,Baby Care Products,2,Baby Products
+28,Baby Travel Gear,2,Baby Products
+29,Baby Activity & Entertainment Products,2,Baby Products
+30,Baby Gifts,2,Baby Products
+31,Baby Stationery,2,Baby Products
+32,Nursery Furniture_ Bedding & Décor,2,Baby Products
+33,Baby,2,Baby Products
+34,Baby Boys' Clothing & Shoes,2,Baby Products
+35,Baby Strollers & Accessories,2,Baby Products
+36,Baby & Child Care Products,2,Baby Products
+38,Baby Girls' Clothing & Shoes,2,Baby Products
+39,Baby & Toddler Toys,2,Baby Products
+40,Beauty & Personal Care,3,Personal Products
+41,Perfumes & Fragrances,3,Personal Products
+42,Hair Care Products,3,Personal Products
+43,Makeup,3,Personal Products
+44,Skin Care Products,3,Personal Products
+129,Beauty Tools & Accessories,3,Personal Products
+264,Foot_ Hand & Nail Care Products,3,Personal Products
+230,Personal Care Products,3,Personal Products
+45,Shaving & Hair Removal Products,3,Personal Products
+46,Health Care Products,3,Personal Products
+47,Oral Care Products,3,Personal Products
+48,Vision Products,3,Personal Products
+49,Wellness & Relaxation Products,3,Personal Products
+50,Sexual Wellness Products,3,Personal Products
+51,Computer Servers,4,Computer Products
+52,Data Storage,4,Computer Products
+53,Computer Monitors,4,Computer Products
+131,Computers & Tablets,4,Computer Products
+126,Tablet Replacement Parts,4,Computer Products
+127,Computer Networking,4,Computer Products
+128,Computer Components,4,Computer Products
+134,Tablet Accessories,4,Computer Products
+54,Laptop Accessories,4,Computer Products
+55,Computer External Components,4,Computer Products
+56,Wearable Technology,4,Computer Products
+57,Televisions & Video Products,4,Computer Products
+58,GPS & Navigation,4,Computer Products
+60,Headphones & Earbuds,4,Computer Products
+63,Office Electronics,4,Computer Products
+64,Portable Audio & Video,4,Computer Products
+65,eBook Readers & Accessories,4,Computer Products
+66,Cell Phones & Accessories,4,Computer Products
+68,Video Projectors,4,Computer Products
+69,Vehicle Electronics,4,Computer Products
+70,Camera & Photo,4,Computer Products
+71,Security & Surveillance Equipment,4,Computer Products
+72,Hardware,4,Computer Products
+73,Boys' Clothing,5,Boys' Products
+74,Boys' Accessories,5,Boys' Products
+75,Boys' Jewelry,5,Boys' Products
+77,Boys' Watches,5,Boys' Products
+78,Boys' Shoes,5,Boys' Products
+79,Boys' School Uniforms,5,Boys' Products
+80,Girls' Clothing,6,Girls' Products
+211,Girls' Accessories,6,Girls' Products
+84,Girls' Jewelry,6,Girls' Products
+87,Girls' Watches,6,Girls' Products
+88,Girls' Shoes,6,Girls' Products
+89,Girls' School Uniforms,6,Girls' Products
+90,Men's Clothing,7,Men's Products
+265,Men's Accessories,7,Men's Products
+91,Men's Watches,7,Men's Products
+94,Men's Shoes,7,Men's Products
+95,Women's Clothing,8,Women's products
+96,Women's Handbags,8,Women's products
+97,Women's Accessories,8,Women's products
+98,Women's Watches,8,Women's products
+110,Women's Shoes,8,Women's products
+112,Women's Jewelry,8,Women's products
+113,Commercial Door Products,9,Industry   Products
+114,Power Transmission Products,9,Industry   Products
+116,Industrial Materials,9,Industry   Products
+118,Industrial Hardware,9,Industry   Products
+120,Abrasive & Finishing Products,9,Industry   Products
+121,Industrial Adhesives_ Sealants & Lubricants,9,Industry   Products
+122,Material Handling Products,9,Industry   Products
+123,Test_ Measure & Inspect,9,Industry   Products
+138,Industrial Power & Hand Tools,9,Industry   Products
+139,Hydraulics_ Pneumatics & Plumbing,9,Industry   Products
+140,Filtration,9,Industry   Products
+141,Electronic Components,9,Industry   Products
+142,Industrial & Scientific,9,Industry   Products
+143,Travel Duffel Bags,10,Bag Products
+144,Messenger Bags,10,Bag Products
+145,Travel Tote Bags,10,Bag Products
+146,Garment Bags,10,Bag Products
+147,Luggage Sets,10,Bag Products
+148,Suitcases,10,Bag Products
+149,Backpacks,10,Bag Products
+162,Luggage,10,Bag Products
+99,Laptop Bags,10,Bag Products
+100,Home Appliances,11, Construction Products
+101,Pumps & Plumbing Equipment,11, Construction Products
+102,Paint_ Wall Treatments & Supplies,11, Construction Products
+103,Safety & Security,11, Construction Products
+104,Light Bulbs,11, Construction Products
+107,Power Tools & Hand Tools,11, Construction Products
+108,Kitchen & Bath Fixtures,11, Construction Products
+109,Lighting & Ceiling Fans,11, Construction Products
+201,Electrical Equipment,11, Construction Products
+203,Building Supplies,11, Construction Products
+204,Measuring & Layout,11, Construction Products
+205,Welding & Soldering,11, Construction Products
+206,Tools & Home Improvement,11, Construction Products
+207,Retail Store Fixtures & Equipment,11, Construction Products
+208,Heating_ Cooling & Air Quality,11, Construction Products
+209,Cutting Tools,11, Construction Products
+210,Wall Art,11, Construction Products
+212,Smart Home: New Smart Devices,12,Smart Home Devices & Products
+213,Smart Home: Voice Assistants and Hubs,12,Smart Home Devices & Products
+214,Smart Home: Smart Locks and Entry,12,Smart Home Devices & Products
+215,Smart Home: Home Entertainment,12,Smart Home Devices & Products
+161,Smart Home: WiFi and Networking,12,Smart Home Devices & Products
+171,Smart Home: Security Cameras and Systems,12,Smart Home Devices & Products
+153,Smart Home: Lighting,12,Smart Home Devices & Products
+174,Smart Home: Plugs and Outlets,12,Smart Home Devices & Products
+185,Smart Home: Vacuums and Mops,12,Smart Home Devices & Products
+186,Smart Home Thermostats - Compatibility Checker,12,Smart Home Devices & Products
+187,Smart Home: Lawn and Garden,12,Smart Home Devices & Products
+188,Smart Home: Other Solutions,12,Smart Home Devices & Products
+189,Smart Home - Heating & Cooling,12,Smart Home Devices & Products
+190,Diet & Sports Nutrition,13,Sport Products
+191,Sports Nutrition Products,13,Sport Products
+192,Sports & Fitness,13,Sport Products
+193,Outdoor Recreation,13,Sport Products
+194,Sports & Outdoors,13,Sport Products
+195,Sports & Outdoor Play Toys,13,Sport Products
+196,Home Audio & Theater Products,14,Household Products
+197,Health & Household,14,Household Products
+132,Bath Products,14,Household Products
+136,Bedding,14,Household Products
+198,Home Décor Products,14,Household Products
+199,Furniture,14,Household Products
+200,Home Lighting & Ceiling Fans,14,Household Products
+228,Kitchen & Dining,14,Household Products
+82,Kids' Home Store,14,Household Products
+135,Home Storage & Organization,14,Household Products
+163,Home Use Medical Supplies & Equipment,14,Household Products
+164,Household Supplies,14,Household Products
+165,Seasonal Décor,14,Household Products
+166,Household Cleaning Supplies,14,Household Products
+169,Vacuum Cleaners & Floor Care,14,Household Products
+170,Ironing Products,14,Household Products
+172,Sony PSP Games_ Consoles & Accessories,15,Video Game Products
+173,Nintendo DS Games_ Consoles & Accessories,15,Video Game Products
+133,PlayStation 3 Games_ Consoles & Accessories,15,Video Game Products
+130,Wii Games_ Consoles & Accessories,15,Video Game Products
+168,Xbox 360 Games_ Consoles & Accessories,15,Video Game Products
+167,Mac Games & Accessories,15,Video Game Products
+175,Nintendo 3DS & 2DS Consoles_ Games & Accessories,15,Video Game Products
+176,Legacy Systems,15,Video Game Products
+241,PlayStation Vita Games_ Consoles & Accessories,15,Video Game Products
+242,Wii U Games_ Consoles & Accessories,15,Video Game Products
+243,PlayStation 4 Games_ Consoles & Accessories,15,Video Game Products
+244,Xbox One Games_ Consoles & Accessories,15,Video Game Products
+245,Video Games,15,Video Game Products
+248,Online Video Game Services,15,Video Game Products
+249,Virtual Reality Hardware & Accessories,15,Video Game Products
+250,Nintendo Switch Consoles_ Games & Accessories,15,Video Game Products
+251,PlayStation 5 Consoles_ Games & Accessories,15,Video Game Products
+252,Xbox Series X & S Consoles_ Games & Accessories,15,Video Game Products
+253,PC Games & Accessories,15,Video Game Products
+254,Computers,15,Video Game Products
+255,Video Game Consoles & Accessories,15,Video Game Products
+256,Kids' Party Supplies,16,Miscellaneous
+259,Kids' Electronics,16,Miscellaneous
+260,Kids' Dress Up & Pretend Play,16,Miscellaneous
+261,Kids' Furniture,16,Miscellaneous
+262,Dolls & Accessories,16,Miscellaneous
+263,Games & Accessories,16,Miscellaneous
+81,Puppets & Puppet Theaters,16,Miscellaneous
+83,Puzzles,16,Miscellaneous
+216,Party Decorations,16,Miscellaneous
+222,Travel Accessories,16,Miscellaneous
+225,Rain Umbrellas,16,Miscellaneous
+124,Gift Cards,16,Miscellaneous
+221,Fasteners,16,Miscellaneous
+223,Additive Manufacturing Products,16,Miscellaneous
+226,Toy Vehicle Playsets,17,Toy Products
+227,Kids' Play Trains & Trams,17,Toy Products
+13,Kids' Play Trucks,17,Toy Products
+105,Kids' Play Cars & Race Cars,17,Toy Products
+106,Kids' Play Boats,17,Toy Products
+125,Kids' Play Buses,17,Toy Products
+154,Kids' Play Tractors,17,Toy Products
+157,Slot Cars_ Race Tracks & Accessories,17,Toy Products
+233,Toy Figures & Playsets,17,Toy Products
+234,Novelty Toys & Amusements,17,Toy Products
+235,Building Toys,17,Toy Products
+236,Learning & Education Toys,17,Toy Products
+237,Stuffed Animals & Plush Toys,17,Toy Products
+238,Tricycles_ Scooters & Wagons,17,Toy Products
+239,Finger Toys,17,Toy Products
+240,Toys & Games,17,Toy Products
+217,Painting_ Drawing & Art Supplies,18,Supplie     Products
+218,Craft Supplies & Materials,18,Supplie     Products
+220,Gift Wrapping Supplies,18,Supplie     Products
+224,Accessories & Supplies,18,Supplie     Products
+229,Stationery & Gift Wrapping Supplies,18,Supplie     Products
+231,Janitorial & Sanitation Supplies,18,Supplie     Products
+232,Science Education Supplies,18,Supplie     Products
+270,Food Service Equipment & Supplies,18,Supplie     Products
+10,Professional Medical Supplies,18,Supplie     Products
+11,Professional Dental Supplies,18,Supplie     Products
+12,Packaging & Shipping Supplies,18,Supplie     Products
+76,Party Supplies,18,Supplie     Products
+137,Pet Bird Supplies,18,Supplie     Products
+151,Cat Supplies,18,Supplie     Products
+155,Dog Supplies,18,Supplie     Products
+156,Fish & Aquatic Pets,18,Supplie     Products
+158,Horse Supplies,18,Supplie     Products
+159,Reptiles & Amphibian Supplies,18,Supplie     Products
+160,Small Animal Supplies,18,Supplie     Products
+177,Arts & Crafts Supplies,18,Supplie     Products
+178,Lab & Scientific Supplies,18,Supplie     Products
+179,Occupational Health & Safety Supplies,18,Supplie     Products
+180,Beading & Jewelry Supplies,18,Supplie     Products
+181,Fabric Decorating,18,Supplie     Products
+182,Knitting & Crochet Supplies,18,Supplie     Products
+183,Printmaking Supplies,18,Supplie     Products
+184,Scrapbooking & Stamping Supplies,18,Supplie     Products
+219,Sewing Products,18,Supplie     Products
+150,Craft & Hobby Fabric,18,Supplie     Products
+152,Needlework Supplies,18,Supplie     Products
+1,Arts_ Crafts & Sewing Storage,18,Supplie     Products
