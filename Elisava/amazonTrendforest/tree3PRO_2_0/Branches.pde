@@ -1,3 +1,10 @@
+void generateNewTree(int newBranchPosX, int newBranchPosY) {
+  branches.clear();
+  leaves.clear();
+  branches.add(new Branch(newBranchPosX, newBranchPosY, newBranchPosX, newBranchPosY-sz, 0, null));
+  subDivide(branches.get(0));
+}
+
 class Branch {
   PVector start;
   PVector end;
@@ -18,7 +25,9 @@ class Branch {
   }
 
   void display() {
-    stroke(10, 57, 20+this.level*4);
+    //println(this.level);
+    //stroke(10, 57, 20+this.level*4);
+    stroke(93+(this.level*12), 48+(this.level*7), 38+(this.level*7)); // PDF exporter prints RGB values, so green changes after printing
     strokeWeight(maxLevel*2.5-this.level*2);
 
     if (this.parent != null) {
@@ -34,8 +43,6 @@ class Branch {
     direction.sub(this.start);
     float branchLength = direction.mag()*0.8;
 
-    // Javascript doesn't have PVector.rotate() method
-    // so need to manually get its new angle.
     float worldAngle = degrees(atan2(direction.x, direction.y))+angle;
     direction.x = sin(radians(worldAngle));
     direction.y = cos(radians(worldAngle));
@@ -46,5 +53,42 @@ class Branch {
     newEnd.add(direction);
 
     return new Branch(this.end.x, this.end.y, newEnd.x, newEnd.y, this.level+1, this);
+  }
+}
+
+void subDivide(Branch branch) {
+  ArrayList<Branch> newBranches = new ArrayList<Branch>();
+
+  int newBranchCount = (int)random(1, 4);
+
+  float minLength = 1.1;
+  float maxLength = 1.2;
+
+  switch(newBranchCount) {
+  case 2:
+    newBranches.add(branch.newBranch(random(-35.0, -10.0), random(minLength, maxLength)));
+    newBranches.add(branch.newBranch(random(10.0, 35.0), random(minLength, maxLength)));
+    break;
+  case 3:
+    newBranches.add(branch.newBranch(random(-35.0, -15.0), random(minLength, maxLength)));
+    newBranches.add(branch.newBranch(random(-10.0, 10.0), random(minLength, maxLength)));
+    newBranches.add(branch.newBranch(random(15.0, 35.0), random(minLength, maxLength)));
+    break;
+  default:
+    newBranches.add(branch.newBranch(random(-35.0, 35.0), random(minLength, maxLength)));
+    break;
+  }
+
+  for (Branch newBranch : newBranches) {
+    branches.add(newBranch);
+
+    if (newBranch.level < maxLevel) {
+      subDivide(newBranch);
+    } else {
+      // Randomly generate leaves position on last branch
+      for (int i = 0; i < 5; i++) {
+        leaves.add(new Leaf(newBranch.end.x, newBranch.end.y, newBranch));
+      }
+    }
   }
 }
