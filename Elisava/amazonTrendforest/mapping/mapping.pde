@@ -1,4 +1,5 @@
 /*
+Code created by Jose Claramonte and Ricardo Vidal Lynch
 Mapping category mean prices and rating to x and y coordinates on the poster
 */
 Table table;
