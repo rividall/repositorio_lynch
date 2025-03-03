@@ -20,8 +20,12 @@ int soilMoistureValue = 0;
 #define DHTPIN 0
 #define DHTTYPE DHT11
 DHT dht(DHTPIN, DHTTYPE);
+float h = 0;
+float t = 0;
 // GAS lvl
 int gasValue = 0;
+// LIGHT
+int lightLvl = 0;
 // --
 void setup() {
   FastLED.addLeds<WS2812B, DATA_PIN, RGB>(leds, NUM_LEDS);
@@ -31,6 +35,8 @@ void setup() {
   LCD_Init();
   Lvgl_Init();
   ui_init();
+
+  wirelessSetup();
 }
 
 void loop() {
@@ -38,7 +44,10 @@ void loop() {
   tempHum();
   soilM();
   ledSt();
+  lightLVL();
   Timer_Loop();
+
+  wirelessLoop();
   delay(5);
 }
 
@@ -70,8 +79,8 @@ void soilM() {
 }
 
 void tempHum() {
-  float h = dht.readHumidity();
-  float t = dht.readTemperature();
+  h = dht.readHumidity();
+  t = dht.readTemperature();
   lv_label_set_text(ui_tempN, String(t).c_str());
   lv_label_set_text(ui_humN, String(h).c_str());
 }
@@ -80,4 +89,8 @@ void gasM() {
   int g = analogRead(2);
   gasValue = map(g, 0, 4095, 0, 255);
   lv_label_set_text(ui_gasN, String(gasValue).c_str());
+}
+
+void lightLVL(){
+  lightLvl = map(analogRead(3),0,1024,100,0);
 }

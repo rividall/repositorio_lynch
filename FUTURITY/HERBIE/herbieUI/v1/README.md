@@ -1,4 +1,4 @@
-V1has simple electronics and a simple iFace
+V1 has: - Simple electronics and a simple iFace
 
 - Analog Read - Shown in an arc
 - Digital Read DHT11 - Shown in 2 labels
