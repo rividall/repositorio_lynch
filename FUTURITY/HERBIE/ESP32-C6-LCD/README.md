@@ -1,1 +1,0 @@
-EXAMPLE from Waveshare page

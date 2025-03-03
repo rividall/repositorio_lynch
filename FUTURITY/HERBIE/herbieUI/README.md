@@ -1,2 +1,0 @@
-Herbie code for the ESP32-C6-LCD1.47 by Waveshare
-TO BE USED WITH LVGL LIBRARY, VERSION 8.3.9
