@@ -1,0 +1,35 @@
+QMainWindow {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    }
+
+CentralWidget{
+    background-image: url("imgs/jungle.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+QWidget {
+    background: transparent;
+    font-family: "Comic Sans MS";
+    font-size: 18px;
+}
+
+QPushButton {
+    background-color: #87CEFA;
+    border-radius: 10px;
+    padding: 8px;
+    min-width: 80px;
+}
+
+QPushButton:hover {
+    background-color: #00BFFF;
+}
+
+QTextEdit {
+    background-color: #FFFACD;
+    border: 2px solid #FFD700;
+    border-radius: 10px;
+    padding: 10px;
+}

@@ -1,0 +1,57 @@
+{
+  "title": "The Crystal Caverns",
+  "pages": [
+    {
+      "text": "You enter the Crystal Caverns, where numbers echo through tunnels.",
+      "image": "page1.png"
+    },
+    {
+      "text": "You find a glowing puzzle door.",
+      "image": "page2.png",
+      "mini_game": {
+        "type": "potentiometer_game"
+      }
+    },
+    {
+      "text": "The door opens to reveal a chamber of floating equations.",
+      "image": "page3.png"
+    },
+    {
+      "text": "Choose your magical crystal.",
+      "image": "page4.png",
+      "mini_game": {
+        "type": "color_choice",
+        "options": [
+          "Purple",
+          "Cyan",
+          "Gold"
+        ],
+        "target": "crystal_color"
+      }
+    },
+    {
+      "text": "An old mathematician tests your logic.",
+      "image": "page5.png",
+      "mini_game": {
+        "type": "multiple_choice",
+        "options": [
+          "A",
+          "B",
+          "C"
+        ],
+        "target": "logic_answer"
+      }
+    },
+    {
+      "text": "You solve a maze of operations by memory.",
+      "image": "page6.png",
+      "mini_game": {
+        "type": "memory_game"
+      }
+    },
+    {
+      "text": "The final cavern glows with approval.",
+      "image": "page7.png"
+    }
+  ]
+}
