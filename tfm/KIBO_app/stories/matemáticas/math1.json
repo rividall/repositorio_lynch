@@ -1,0 +1,67 @@
+{
+  "title": "Expedición a la Bahía de los Números",
+  "pages": [
+    {
+      "text": "—Hola, soy Kibo, tu compañero pingüino de aventuras. Hoy nos espera una misión helada. Una tormenta ha desordenado los cristales matemágicos del norte, y solo tú puedes ayudarnos a encontrarlos y ordenarlos. ¿Preparado para navegar entre icebergs y resolver desafíos?",
+      "image": "page1.png"
+    },
+    {
+      "text": "Subes a bordo de nuestro rompehielos rojo. El viento silba mientras nos adentramos en el mar congelado. El radar muestra anomalías: ¡los cristales están escondidos en diferentes zonas! Necesitamos activarlos uno a uno, pero cada uno está protegido por un acertijo. Yo estaré contigo todo el camino.",
+      "image": "page2.png"
+    },
+    {
+      "text": "En la pantalla, ves tres bloques de hielo flotando. Cada uno tiene una operación escondida dentro. Usa los botones cuadrados para seleccionar el resultado correcto. Si aciertas las tres, el primer cristal se ilumina.",
+      "image": "page3.png",
+      "mini_game": {
+        "type": "multiple_choice",
+        "options": [
+          "+",
+          "-",
+          "×",
+          "÷"
+        ],
+        "target": "operation_puzzle"
+      }
+    },
+    {
+      "text": "Continuamos navegando mientras las auroras bailan en el cielo. La radio del barco capta una señal extraña. A lo lejos, un oso polar nos hace señas desde la cima de un iceberg. Subimos juntos con cuidado. El oso habla en susurros: —Uno de los cristales está escondido en una adivinanza antigua. Solo alguien con mente ágil podrá resolverla.",
+      "image": "page4.png"
+    },
+    {
+      "text": "El oso recita: “Soy menor que 20 y múltiplo de 3. Si me divides por 3, obtienes lo que ves. Soy impar y no miento, y entre los cristales soy el aliento.” Usa los botones para escribir la respuesta correcta. ¿Cuál es el número?",
+      "image": "page5.png",
+      "mini_game": {
+        "type": "number_guess",
+        "target": "riddle_answer"
+      }
+    },
+    {
+      "text": "Descendemos por una grieta helada. El ambiente cambia, más tranquilo. Dentro de una cueva de hielo, los cristales reflejan nuestras sombras. Te sientas en el suelo, y yo a tu lado. —¿Sabes? Antes temía la oscuridad del hielo, pero contigo aquí, me siento valiente.",
+      "image": "page6.png"
+    },
+    {
+      "text": "En la pantalla aparecen una serie de símbolos árticos: copos, pingüinos, barcos, números. Los ves brillar en un orden. Usa los botones para repetir la secuencia exacta.",
+      "image": "page7.png",
+      "mini_game": {
+        "type": "memory_game",
+        "target": "ice_sequence"
+      }
+    },
+    {
+      "text": "El último cristal está cerca de la base, en el corazón del rompehielos. Bajo cubierta, una compuerta se abre lentamente. En el interior, un pedestal de hielo sostiene el cristal maestro. Pero no se activa con botones… sino con algo más profundo.",
+      "image": "page8.png"
+    },
+    {
+      "text": "Frente a ti, aparecen frases como: '5 + 3 es mayor que 9', 'El número 12 es múltiplo de 4', '7 es un número par'. Gira la nariz a la izquierda si es falso (ojo rojo), o a la derecha si es verdadero (ojo verde).",
+      "image": "page9.png",
+      "mini_game": {
+        "type": "true_false",
+        "target": "final_logic"
+      }
+    },
+    {
+      "text": "Al salir a cubierta, los diez cristales flotan sobre ti, brillando como estrellas. La aurora boreal los envuelve, y yo, orgulloso, digo: —Eres el héroe del Ártico. Has devuelto el equilibrio a nuestro mundo helado. ¿Listo para la próxima misión?",
+      "image": "page10.png"
+    }
+  ]
+}

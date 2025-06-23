@@ -1,21 +1,11 @@
-
 import os
 from kivy.uix.image import Image
 
 class ImageManager:
     @staticmethod
     def get_image_widget(image_name, **kwargs):
-        image_map = {
-            "home": "home.png",
-            "splash": "splash.png",
-            "logo": "logo.png",
-            # Add more mappings as needed
-        }
-
-        filename = image_map.get(image_name)
-        if not filename:
-            print(f"⚠️ Unknown image: '{image_name}'")
-            return None
+        # Directly construct filename
+        filename = f"{image_name}.png"
 
         # Absolute path resolution
         current_dir = os.path.dirname(os.path.abspath(__file__))

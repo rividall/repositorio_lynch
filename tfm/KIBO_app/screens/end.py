@@ -2,7 +2,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
-from screens.utils import make_back_button
+from core.utils import make_back_button
 
 class EndScreen(Screen):
     def __init__(self, **kwargs):

@@ -14,14 +14,7 @@ class VideoManager:
         if video_name in cls._preloaded_videos:
             return  # Already preloaded
 
-        video_map = {
-            "homeTOsplash": "homeTOsplash.mp4",
-            "splashTOhome": "splashTOhome.mp4",
-            "story_start": "story_start.mp4",
-            # Add more mappings here
-        }
-
-        filename = video_map.get(video_name)
+        filename = f"{video_name}.mp4"
         if not filename:
             print(f"⚠️ Unknown video to preload: '{video_name}'")
             return
@@ -39,55 +32,58 @@ class VideoManager:
         video.allow_stretch = True
         video.keep_ratio = False
         video.options = {'eos': 'stop'}
+        video.opacity = 0
 
         cls._preloaded_videos[video_name] = video
 
-    def play_video(self, video_name, on_finish=None, loop=False, use_preloaded=True):
-        # Try to use preloaded video if available
+    def play_video(self, video_name, on_finish=None, loop=False, use_preloaded=True, background_widget=None):
+        def reveal_and_remove_bg(video_widget):
+            def reveal_video(*args):
+                def delayed_show(dt):
+                    video_widget.opacity = 1
+                    if background_widget and background_widget.parent:
+                        self.parent_layout.remove_widget(background_widget)
+                Clock.schedule_once(delayed_show, 0.1)
+            video_widget.bind(texture=reveal_video)
+
+
+        filename = f"{video_name}.mp4"
+        if not filename:
+            print(f"⚠️ Unknown video: '{video_name}'")
+            if on_finish:
+                on_finish()
+            return
+
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        video_dir = os.path.normpath(os.path.join(current_dir, "..", "assets", "video"))
+        path = os.path.join(video_dir, filename)
+
+        if not os.path.exists(path):
+            print(f"⚠️ Video file not found: {path}")
+            if on_finish:
+                on_finish()
+            return
+
+        if self.video_widget:
+            self.parent_layout.remove_widget(self.video_widget)
+
+        # Load preloaded or create new
         if use_preloaded and video_name in self._preloaded_videos:
-            video = self._preloaded_videos[video_name]
-            if self.video_widget:
-                self.parent_layout.remove_widget(self.video_widget)
-            self.video_widget = video
+            self.video_widget = self._preloaded_videos[video_name]
             self.video_widget.state = 'play'
             self.video_widget.options = {'eos': 'loop' if loop else 'stop'}
-            self.parent_layout.add_widget(self.video_widget)
+            # ⚠ Ensure no duplicate parenting
+            if self.video_widget.parent:
+                self.video_widget.parent.remove_widget(self.video_widget)
         else:
-            # Regular loading flow (as before)
-            video_map = {
-                "homeTOsplash": "homeTOsplash.mp4",
-                "splashTOhome": "splashTOhome.mp4",
-                "story_start": "story_start.mp4",
-                # Add more mappings here
-            }
-
-            filename = video_map.get(video_name)
-            if not filename:
-                print(f"⚠️ Unknown video: '{video_name}'")
-                if on_finish:
-                    on_finish()
-                return
-
-            current_dir = os.path.dirname(os.path.abspath(__file__))
-            video_dir = os.path.normpath(os.path.join(current_dir, "..", "assets", "video"))
-            path = os.path.join(video_dir, filename)
-
-            if not os.path.exists(path):
-                print(f"⚠️ Video file not found: {path}")
-                if on_finish:
-                    on_finish()
-                return
-
-            if self.video_widget:
-                self.parent_layout.remove_widget(self.video_widget)
-
-            print(f"🎬 Loading video from: {path}")
-            self.video_widget = Video(source=path, state='play')
+            self.video_widget = Video(source=path, state='play', volume=0)
             self.video_widget.allow_stretch = True
             self.video_widget.keep_ratio = False
-            self.video_widget.volume = 0
             self.video_widget.options = {'eos': 'loop' if loop else 'stop'}
-            self.parent_layout.add_widget(self.video_widget)
+            self.video_widget.opacity = 0
+
+        self.parent_layout.add_widget(self.video_widget)
+        reveal_and_remove_bg(self.video_widget)
 
         if not loop:
             def check_finished(dt):

@@ -1,0 +1,41 @@
+{
+  "title": "The Number Forest",
+  "pages": [
+    {
+      "text": "Welcome to the Number Forest, where every tree is a puzzle.",
+      "image": "page1mate.png"
+    },
+    {
+      "text": "A squirrel challenges you to a memory game with number tiles.",
+      "image": "page2.png",
+      "mini_game": {
+        "type": "memory_game"
+      }
+    },
+    {
+      "text": "You meet a magical fox who asks for your help choosing a scarf color.",
+      "image": "page3.png",
+      "mini_game": {
+        "type": "color_choice",
+        "options": [
+          "Red",
+          "Blue",
+          "Green"
+        ],
+        "target": "scarf_color"
+      }
+    },
+    {
+      "text": "Now, draw your favorite forest animal to continue the story!",
+      "image": "page4.png",
+      "mini_game": {
+        "type": "drawing_game",
+        "target": "animal_drawing"
+      }
+    },
+    {
+      "text": "Well done! With your help, the forest's magic is restored.",
+      "image": "page5.png"
+    }
+  ]
+}

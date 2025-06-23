@@ -1,0 +1,229 @@
+{
+    "questions": [
+  {
+    "question": "¿Cuál es el sinónimo de 'alegre'?",
+    "correct_answer": "feliz",
+    "options": [
+      "triste",
+      "contento",
+      "furioso",
+      "apagado",
+      "lloroso",
+      "enfadado",
+      "oscuro",
+      "gris",
+      "sombrío"
+    ]
+  },
+  {
+    "question": "¿Cuál es el antónimo de 'frío'?",
+    "correct_answer": "caliente",
+    "options": [
+      "templado",
+      "nevado",
+      "helado",
+      "glacial",
+      "gélido",
+      "fresco",
+      "frígido",
+      "polar",
+      "invernal"
+    ]
+  },
+  {
+    "question": "¿Cuál es el sinónimo de 'rápido'?",
+    "correct_answer": "veloz",
+    "options": [
+      "lento",
+      "torpe",
+      "calmado",
+      "tardío",
+      "sospechoso",
+      "ligero",
+      "andante",
+      "retardado",
+      "inquieto"
+    ]
+  },
+  {
+    "question": "¿Cuál es el antónimo de 'grande'?",
+    "correct_answer": "pequeño",
+    "options": [
+      "gigante",
+      "enorme",
+      "inmenso",
+      "alto",
+      "ancho",
+      "gordo",
+      "largo",
+      "gigantesco",
+      "grandioso"
+    ]
+  },
+  {
+    "question": "¿Cuál es el sinónimo de 'bonito'?",
+    "correct_answer": "hermoso",
+    "options": [
+      "feo",
+      "precioso",
+      "brillante",
+      "horrible",
+      "sucio",
+      "elegante",
+      "siniestro",
+      "apuesto",
+      "lindo"
+    ]
+  },
+  {
+    "question": "¿Cuál es el antónimo de 'oscuro'?",
+    "correct_answer": "claro",
+    "options": [
+      "negro",
+      "gris",
+      "tenebroso",
+      "brillante",
+      "apagado",
+      "sombrío",
+      "opaco",
+      "luminoso",
+      "dorado"
+    ]
+  },
+  {
+    "question": "¿Cuál es el sinónimo de 'inteligente'?",
+    "correct_answer": "listo",
+    "options": [
+      "torpe",
+      "lento",
+      "sabio",
+      "tonto",
+      "brillante",
+      "avispado",
+      "bobo",
+      "rápido",
+      "ingenioso"
+    ]
+  },
+  {
+    "question": "¿Cuál es el antónimo de 'abierto'?",
+    "correct_answer": "cerrado",
+    "options": [
+      "enterrado",
+      "cubierto",
+      "hermético",
+      "vacio",
+      "estrecho",
+      "compacto",
+      "bloqueado",
+      "cerradura",
+      "tapado"
+    ]
+  },
+  {
+    "question": "¿Cuál es el sinónimo de 'hablar'?",
+    "correct_answer": "conversar",
+    "options": [
+      "callar",
+      "charlar",
+      "gritar",
+      "escribir",
+      "susurrar",
+      "leer",
+      "escuchar",
+      "murmurar",
+      "recitar"
+    ]
+  },
+  {
+    "question": "¿Cuál es el antónimo de 'feliz'?",
+    "correct_answer": "triste",
+    "options": [
+      "lloroso",
+      "enojado",
+      "melancólico",
+      "contento",
+      "alegre",
+      "emocionado",
+      "sonriente",
+      "calmado",
+      "despierto"
+    ]
+  },
+  {
+    "question": "¿Cuál es el sinónimo de 'terminar'?",
+    "correct_answer": "finalizar",
+    "options": [
+      "empezar",
+      "parar",
+      "concluir",
+      "iniciar",
+      "abrir",
+      "romper",
+      "seguir",
+      "detener",
+      "reanudar"
+    ]
+  },
+  {
+    "question": "¿Cuál es el antónimo de 'subir'?",
+    "correct_answer": "bajar",
+    "options": [
+      "trepar",
+      "escalar",
+      "caer",
+      "aumentar",
+      "descender",
+      "saltar",
+      "hundir",
+      "levantarse",
+      "ascender"
+    ]
+  },
+  {
+    "question": "¿Cuál es el sinónimo de 'caminar'?",
+    "correct_answer": "andar",
+    "options": [
+      "correr",
+      "saltar",
+      "rodar",
+      "sentarse",
+      "pasear",
+      "deslizar",
+      "reposar",
+      "galopar",
+      "trepar"
+    ]
+  },
+  {
+    "question": "¿Cuál es el antónimo de 'valiente'?",
+    "correct_answer": "cobarde",
+    "options": [
+      "valiente",
+      "atrevido",
+      "audaz",
+      "miedoso",
+      "decidido",
+      "heroico",
+      "fuerte",
+      "bravo",
+      "nervioso"
+    ]
+  },
+  {
+    "question": "¿Cuál es el sinónimo de 'gritar'?",
+    "correct_answer": "chillar",
+    "options": [
+      "susurrar",
+      "callar",
+      "gritar",
+      "hablar",
+      "rezar",
+      "decir",
+      "reír",
+      "cantar",
+      "callarse"
+     ]
+   }
+ ]
+}

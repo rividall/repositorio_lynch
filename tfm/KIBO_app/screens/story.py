@@ -1,10 +1,13 @@
 from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.image import Image
-from screens.utils import make_back_button
+from core.utils import make_back_button, make_forward_button,  fade_in, fade_out
 from core.story_engine import StoryEngine
+from core.audio_manager import AudioManager
+from core.image_manager import ImageManager
 
 class StoryScreen(Screen):
     minigame_type_to_screen = {
@@ -21,49 +24,89 @@ class StoryScreen(Screen):
         self.story_engine = None
         self.story_path = None
         self.page_widgets = []
-        self.start_minigame_btn = None  # Ensure attribute exists
-        self.build_ui()
+        self.start_minigame_btn = None
+
+        self.bg_layout = FloatLayout()
+        self.ui_layout = BoxLayout(orientation='vertical', padding=40, spacing=20)
+
+        self.add_widget(self.bg_layout)
+        self.add_widget(self.ui_layout)
 
     def load_story(self, story_path):
         self.story_path = story_path
         self.story_engine = StoryEngine(story_path)
+        self.subject = getattr(self.manager, "next_subject", None)  # ✅ use manager
+        AudioManager.get_instance().change_background_music(self.subject)
+        self.build_ui()
+        fade_in(self.ui_layout)
+        fade_in(self.bg_layout)
         self.show_page(0)
 
     def build_ui(self):
-        self.clear_widgets()
-        self.root = BoxLayout(orientation='vertical', padding=40, spacing=20)
+        self.ui_layout.clear_widgets()
+        self.content_box = BoxLayout(orientation='vertical', spacing=20)
+
         # Top bar for back button
         top_bar = BoxLayout(orientation='horizontal', size_hint=(1, None), height=60)
         top_bar.add_widget(make_back_button(self.go_level_selection))
-        top_bar.add_widget(Label(size_hint=(1, 1)))  # Spacer
-        self.root.add_widget(top_bar)
-        self.content_box = BoxLayout(orientation='vertical', spacing=20)
-        self.root.add_widget(self.content_box)
+        top_bar.add_widget(Label(size_hint=(1, 1)))
+        self.ui_layout.add_widget(top_bar)
+        self.ui_layout.add_widget(self.content_box)
+
         # Navigation buttons
         nav_box = BoxLayout(orientation='horizontal', size_hint=(1, None), height=60, spacing=20)
         self.prev_btn = Button(text="Previous", size_hint=(0.5, 1), font_size=20)
         self.prev_btn.bind(on_release=self.go_previous)
-        self.next_btn = Button(text="Next", size_hint=(0.5, 1), font_size=20)
-        self.next_btn.bind(on_release=self.go_next)
+        self.next_btn = make_forward_button(self.go_next)
         nav_box.add_widget(self.prev_btn)
         nav_box.add_widget(self.next_btn)
-        self.root.add_widget(nav_box)
-        self.add_widget(self.root)
-        self.nav_box = nav_box  # Ensure nav_box is accessible in show_page
+        self.ui_layout.add_widget(nav_box)
+        self.nav_box = nav_box
 
     def show_page(self, index):
         if not self.story_engine:
             return
         page = self.story_engine.get_page(index)
         self.content_box.clear_widgets()
+        self.bg_layout.clear_widgets()
+
         if not page:
             self.content_box.add_widget(Label(text="No page found.", font_size=24))
             return
-        self.content_box.add_widget(Label(text=page.get("text", ""), font_size=24))
-        if "image" in page:
-            self.content_box.add_widget(Image(source=page["image"], size_hint=(1, 0.5)))
 
-        # Remove any previous minigame button from nav_box
+        # Background image
+        bg_name = f"{self.subject}_story"
+        bg = ImageManager.get_image_widget(bg_name, allow_stretch=True, keep_ratio=False)
+        if bg:
+            self.bg_layout.add_widget(bg)
+
+        # Personalized page image
+        page_img_name = f"{self.subject}page{self.story_engine.current_index + 1}"
+        page_img = ImageManager.get_image_widget(page_img_name, size_hint=(None, None), size=(300, 300), pos=(100, 150))
+        if page_img:
+            self.bg_layout.add_widget(page_img)
+
+        # Story text
+        text_label = Label(
+            text=page.get("text", ""),
+            font_size=64,
+            size_hint=(0.8, 0.8),
+            pos_hint={'x': 0.1, 'y': 0.1},
+            halign="center",
+            valign="middle",
+            text_size=(self.width * 0.8, self.height * 0.8),
+            color=(0, 0, 0, 1)
+        )
+        # Ensure text wraps and fills the area dynamically
+        def update_text_size(instance, value):
+            instance.text_size = (instance.width, instance.height)
+        text_label.bind(size=update_text_size)
+        self.bg_layout.add_widget(text_label)
+
+        # Page image from story (optional)
+        #if "image" in page:
+        #    self.content_box.add_widget(Image(source=page["image"], size_hint=(1, 0.5)))
+
         if self.start_minigame_btn and self.start_minigame_btn in self.nav_box.children:
             self.nav_box.remove_widget(self.start_minigame_btn)
         self.start_minigame_btn = None
@@ -73,7 +116,6 @@ class StoryScreen(Screen):
             minigame_type = mini_game.get("type")
             screen_name = self.minigame_type_to_screen.get(minigame_type)
             if screen_name:
-                # Hide/disable the Next button, show Start Minigame instead
                 self.next_btn.disabled = True
                 self.next_btn.opacity = 0
                 self.start_minigame_btn = Button(text="Start Minigame", size_hint=(0.5, 1), font_size=20)
@@ -84,13 +126,11 @@ class StoryScreen(Screen):
                 self.next_btn.disabled = False
                 self.next_btn.opacity = 1
         else:
-            # No minigame, show Next button as normal
             if self.start_minigame_btn and self.start_minigame_btn in self.nav_box.children:
                 self.nav_box.remove_widget(self.start_minigame_btn)
             self.start_minigame_btn = None
             self.next_btn.opacity = 1
             if self.story_engine and not self.story_engine.has_next():
-                # Last page: Next button becomes "Finish"
                 self.next_btn.text = "Finish"
                 self.next_btn.disabled = False
             else:
@@ -99,23 +139,19 @@ class StoryScreen(Screen):
         self.prev_btn.disabled = not self.story_engine.has_previous()
 
     def start_minigame(self, screen_name):
-        # Set callback for minigame completion
         self.manager.on_minigame_complete = self.on_minigame_complete
         self.manager.current = screen_name
 
     def on_minigame_complete(self):
-        # Advance to next page after minigame and return to story screen
         if self.story_engine and self.story_engine.has_next():
             self.story_engine.next_page()
             self.show_page(self.story_engine.current_index)
             self.manager.current = "story"
         else:
-            # If no next page, go to end screen
             self.manager.current = "end"
 
     def go_next(self, instance):
         if self.story_engine and not self.story_engine.has_next():
-            # Last page, finish story
             self.manager.current = "end"
         elif self.story_engine and self.story_engine.has_next():
             self.story_engine.next_page()

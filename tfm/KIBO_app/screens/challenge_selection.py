@@ -1,8 +1,10 @@
 from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
-from screens.utils import make_back_button
+from core.utils import make_back_button, fade_in, fade_out
+from core.image_manager import ImageManager
 
 MINIGAMES = [
     ("Drawing Game", "drawing_game"),
@@ -16,10 +18,25 @@ MINIGAMES = [
 class ChallengeSelectionScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        self.bg_layout = FloatLayout()
+        self.ui_layout = FloatLayout()
+        self.add_widget(self.bg_layout)
+        self.add_widget(self.ui_layout)
+
+        self.bg = None
+
+    def on_enter(self):
+        self.bg = ImageManager.get_image_widget("challenge_selection", allow_stretch=True, keep_ratio=False)
+        self.bg_layout.clear_widgets()
+        if self.bg:
+            self.bg_layout.add_widget(self.bg)
+
         self.build_ui()
+        fade_in(self.ui_layout)
 
     def build_ui(self):
-        self.clear_widgets()
+        self.ui_layout.clear_widgets()
         root = BoxLayout(orientation='vertical', padding=40, spacing=20)
         # Top bar for back button
         top_bar = BoxLayout(orientation='horizontal', size_hint=(1, None), height=60)
@@ -32,12 +49,14 @@ class ChallengeSelectionScreen(Screen):
             btn = Button(text=label_text, size_hint=(1, 0.2), font_size=22)
             btn.bind(on_release=lambda instance, s=screen_name: self.launch_minigame(s))
             root.add_widget(btn)
-        self.add_widget(root)
+        self.ui_layout.add_widget(root)
 
     def launch_minigame(self, screen_name):
         # Set a flag so the minigame knows to return here
         self.manager.challenge_mode = True
-        self.manager.current = screen_name
+        fade_out(self.ui_layout, on_complete=lambda: setattr(self.manager, "current", screen_name))
 
     def go_home(self, instance):
-        self.manager.current = "home"
+        self.manager.last_screen = "challenge_selection"
+        self.manager.next_screen = "home"
+        fade_out(self.ui_layout, on_complete=lambda: setattr(self.manager, "current", "switch"))

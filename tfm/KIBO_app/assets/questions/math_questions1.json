@@ -1,7 +1,7 @@
 {
     "questions": [
         {
-            "question": "How much is 5 x 5?",
+            "question": "Para abrir el palmera debes encontrar las llaves, cuantas son?  5 x 5?",
             "correct_answer": "25",
             "options": [
                 "25",
@@ -79,7 +79,7 @@
             ]
         },
         {
-            "question": "How much is 3 x 7?",
+            "question": "Para abrir el palmera debes encontrar las llaves, cuantas son?  3 x 7?",
             "correct_answer": "21",
             "options": [
                 "21",
@@ -131,7 +131,7 @@
             ]
         },
         {
-            "question": "How much is 10 \u00f7 2?",
+            "question": "Para abrir el palmera debes encontrar las llaves, cuantas son?  10 \u00f7 2?",
             "correct_answer": "5",
             "options": [
                 "5",
@@ -209,7 +209,7 @@
             ]
         },
         {
-            "question": "How much is 3 x 6?",
+            "question": "Para abrir el palmera debes encontrar las llaves, cuantas son?  3 x 6?",
             "correct_answer": "18",
             "options": [
                 "18",
@@ -261,7 +261,7 @@
             ]
         },
         {
-            "question": "How much is 2 x 9?",
+            "question": "Para abrir el palmera debes encontrar las llaves, cuantas son?  2 x 9?",
             "correct_answer": "18",
             "options": [
                 "18",
@@ -365,7 +365,7 @@
             ]
         },
         {
-            "question": "How much is 6 \u00f7 3?",
+            "question": "Para abrir el palmera debes encontrar las llaves, cuantas son?  6 \u00f7 3?",
             "correct_answer": "2",
             "options": [
                 "2",
@@ -443,7 +443,7 @@
             ]
         },
         {
-            "question": "How much is 18 \u00f7 3?",
+            "question": "Para abrir el palmera debes encontrar las llaves, cuantas son?  18 \u00f7 3?",
             "correct_answer": "6",
             "options": [
                 "6",
@@ -495,7 +495,7 @@
             ]
         },
         {
-            "question": "How much is 9 x 1?",
+            "question": "Para abrir el palmera debes encontrar las llaves, cuantas son?  9 x 1?",
             "correct_answer": "9",
             "options": [
                 "9",
