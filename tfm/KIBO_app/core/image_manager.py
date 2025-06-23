@@ -13,7 +13,7 @@ class ImageManager:
         path = os.path.join(image_dir, filename)
 
         if not os.path.exists(path):
-            print(f"⚠️ Image file not found: {path}")
+            #print(f"⚠️ Image file not found: {path}")
             return None
 
         return Image(source=path, **kwargs)

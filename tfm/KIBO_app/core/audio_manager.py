@@ -31,7 +31,7 @@ class AudioManager:
         path = os.path.abspath(os.path.join(self.base_audio_path, filename))
 
         if not os.path.exists(path):
-            print(f"⚠️ Requested music file not found: {path}")
+            #print(f"⚠️ Requested music file not found: {path}")
             return
 
         if self.current_track == path and self.player and self.player.get_state() == vlc.State.Playing:
@@ -44,7 +44,7 @@ class AudioManager:
             self.current_track = path
             self.started = True
             self._fade_in_new_track()
-            print(f"🎶 Now playing with fade-in: {filename}")
+            #print(f"🎶 Now playing with fade-in: {filename}")
 
         # If there's music playing, fade it out first
         if self.player and self.player.get_state() == vlc.State.Playing:
@@ -87,27 +87,16 @@ class AudioManager:
         threading.Thread(target=fade, daemon=True).start()
 
     def play_sound_effect(self, sound_name):
-        sound_map = {
-            "correct": "correct.mp3",
-            "error": "error.mp3",
-            "click": "click.mp3",
-            "win": "win.mp3",
-            "lose": "lose.mp3"
-        }
-
-        filename = sound_map.get(sound_name)
-        if not filename:
-            print(f"⚠️ Unknown sound effect: '{sound_name}'")
-            return
-
+        # Play any sound by name, just add .mp3 extension
+        filename = f"{sound_name}.mp3"
         effect_path = os.path.abspath(os.path.join(self.base_audio_path, filename))
         if os.path.exists(effect_path):
             p = vlc.MediaPlayer(effect_path)
             p.audio_set_volume(80)
             p.play()
-            print(f"🎵 Sound effect played: {effect_path}")
-        else:
-            print(f"⚠️ Sound effect file not found: {effect_path}")
+            #print(f"🎵 Sound effect played: {effect_path}")
+        #else:
+            #print(f"⚠️ Sound effect file not found: {effect_path}")
 
     @classmethod
     def get_instance(cls):

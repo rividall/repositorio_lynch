@@ -54,13 +54,25 @@ class LevelSelectionScreen(Screen):
         if not stories:
             root.add_widget(Label(text="No stories found.", font_size=20))
         else:
+            from core.utils import home_button
             for story in stories:
-                btn = Button(
+                # Dynamically calculate width based on text
+                from kivy.uix.label import Label as KivyLabel
+                temp_label = KivyLabel(
                     text=story["title"],
-                    size_hint=(1, 0.2),
                     font_size=62
                 )
-                btn.bind(on_release=lambda instance, s=story: self.go_story(s["filename"]))
+                temp_label.texture_update()
+                text_width = temp_label.texture_size[0]
+                btn_width = int(text_width + 180)  # Add padding for aesthetics
+
+                btn = home_button(
+                    f"{self.subject}btn",
+                    0, 0, btn_width, 120,
+                    story["title"],
+                    lambda instance, s=story: self.go_story(s["filename"])
+                )
+                btn.pos_hint = {'center_x': 0.5}
                 root.add_widget(btn)
                 self.story_buttons.append(btn)
 

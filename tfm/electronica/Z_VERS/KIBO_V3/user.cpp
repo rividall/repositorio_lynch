@@ -4,10 +4,10 @@
 
 #define NUM_LEDS 5  // Led 3 always off
 #define DATA_PIN 22
-#define B1_PIN 33   // Button 1 Naranjo
-#define B2_PIN 4  // Button 2 Amarillo
-#define B3_PIN 25  // Button 3 Azul
-#define B4_PIN 32  // Button 4 verde
+#define B1_PIN 33   // Button 1 
+#define B2_PIN 4  // Button 2 
+#define B3_PIN 25  // Button 3
+#define B4_PIN 32  // Button 4
 #define B5_PIN 14  // Start/Confirm Button
 #define B6_PIN 12  // Delete Button
 
@@ -49,7 +49,7 @@ const int breathMax = 255;
 const int breathMin = 0;
 //MIDI
 unsigned long ledOnTimes[GAME_BUTTON_COUNT] = { 0 };
-const unsigned long midiGlowDuration = 100;
+const unsigned long midiGlowDuration = 200;
 // Debounce
 unsigned long lastButtonTimes[GAME_BUTTON_COUNT + 2] = { 0 };
 const unsigned long debounceDelay = 350;
@@ -120,19 +120,6 @@ void user_loop(void) {
     case IDLE:
       // Update breath level every 50ms
       if (millis() - lastBreathUpdate >= breathSpeed) {
-        /*if (breathingUp) { // breathe up and down for bgt breath
-          breathLevel++;
-          if (breathLevel >= breathMax) {
-            breathLevel = breathMax;
-            breathingUp = false;
-          }
-        } else {
-          breathLevel--;
-          if (breathLevel <= breathMin) {
-            breathLevel = breathMin;
-            breathingUp = true;
-          }
-        }*/
         breathLevel++;  // only goes up, for rainbow color wheel
         if (breathLevel >= 255) breathLevel = 0;
         // Update LEDs with new brightness
@@ -142,19 +129,7 @@ void user_loop(void) {
         }
         lastBreathUpdate = millis();
       }
-      /*
-      if (readButton(CONFIRM_BUTTON, GAME_BUTTON_COUNT + 1)) {
-        gameStart = true;
-        clearLeds();
-        FastLED.show();
-      }
-      // Delete button enters MIDI_PAD mode
-      if (readButton(DELETE_BUTTON, GAME_BUTTON_COUNT)) {
-        gameState = MIDI_PAD;
-        clearLeds();
-        FastLED.show();
-      }
-      */
+
       if (gameStart) {
         generateSequence();
         showStep = 0;

@@ -3,7 +3,10 @@ from kivy.animation import Animation
 import os
 from core.audio_manager import AudioManager
 
-def make_back_button(callback):
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.label import Label
+
+def make_back_button(callback, text=""):
     current_dir = os.path.dirname(os.path.abspath(__file__))
     img_path = os.path.normpath(os.path.join(current_dir, "..", "assets", "images", "backArrow.png"))
 
@@ -11,20 +14,25 @@ def make_back_button(callback):
         AudioManager.get_instance().play_sound_effect("click")
         callback(instance)
 
-    back_btn = Button(
+    btn = Button(
         size_hint=(None, None),
-        size=(140, 110),  # Adjust if needed
-        pos_hint={'x': 0.02, 'top': 0.98},  # ✅ Valid top-left positioning
+        size=(140, 110),
+        pos_hint={'x': 0.02, 'top': 0.98},
         background_normal=img_path,
         background_down=img_path,
         border=(0, 0, 0, 0),
-        text='',  # ✅ Image only
-        background_color=(1, 1, 1, 1)
+        background_color=(1, 1, 1, 1),
+        text=text,
+        color=(1, 1, 1, 1),
+        font_size=55,
+        halign="center",
+        valign="bottom"
     )
-    back_btn.bind(on_release=on_press_sound)
-    return back_btn
+    btn.bind(on_release=on_press_sound)
+    btn.bind(size=lambda instance, value: setattr(instance, 'text_size', (instance.width, 40)))
+    return btn
 
-def make_forward_button(callback):
+def make_forward_button(callback, text=""):
     current_dir = os.path.dirname(os.path.abspath(__file__))
     img_path = os.path.normpath(os.path.join(current_dir, "..", "assets", "images", "fwdArrow.png"))
 
@@ -32,20 +40,25 @@ def make_forward_button(callback):
         AudioManager.get_instance().play_sound_effect("click")
         callback(instance)
 
-    fwd_btn = Button(
+    btn = Button(
         size_hint=(None, None),
-        size=(170, 140),  # Adjust if needed
-        pos_hint={'right': 0.98, 'y': 0.02},  # ✅ Bottom-right corner
+        size=(170, 140),
+        pos_hint={'right': 0.98, 'y': 0.02},
         background_normal=img_path,
         background_down=img_path,
         border=(0, 0, 0, 0),
-        text='',  # ✅ Image only
-        background_color=(1, 1, 1, 1)
+        background_color=(1, 1, 1, 1),
+        text=text,
+        color=(1, 1, 1, 1),
+        font_size=55,
+        halign="center",
+        valign="bottom"
     )
-    fwd_btn.bind(on_release=on_press_sound)
-    return fwd_btn
+    btn.bind(on_release=on_press_sound)
+    btn.bind(size=lambda instance, value: setattr(instance, 'text_size', (instance.width, 40)))
+    return btn
 
-def home_button(img_name, x, y, width, height, callback):
+def home_button(img_name, x, y, width, height,btext, callback):
     # Absolute path for image
     current_dir = os.path.dirname(os.path.abspath(__file__))
     img_path = os.path.normpath(os.path.join(current_dir, "..", "assets", "images", img_name + ".png"))
@@ -62,7 +75,7 @@ def home_button(img_name, x, y, width, height, callback):
         background_down=img_path,
         border=(0, 0, 0, 0),
         background_color=(1, 1, 1, 1),
-        text=""
+        text=btext
     )
     btn.bind(on_release=on_press_sound)
     return btn

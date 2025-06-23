@@ -47,18 +47,21 @@ class StoryScreen(Screen):
         self.content_box = BoxLayout(orientation='vertical', spacing=20)
 
         # Top bar for back button
+        from core.utils import home_button
+
         top_bar = BoxLayout(orientation='horizontal', size_hint=(1, None), height=60)
-        top_bar.add_widget(make_back_button(self.go_level_selection))
+        top_bar.add_widget(make_back_button(self.go_level_selection, text="Salir"))
         top_bar.add_widget(Label(size_hint=(1, 1)))
         self.ui_layout.add_widget(top_bar)
         self.ui_layout.add_widget(self.content_box)
 
         # Navigation buttons
         nav_box = BoxLayout(orientation='horizontal', size_hint=(1, None), height=60, spacing=20)
-        self.prev_btn = Button(text="Previous", size_hint=(0.5, 1), font_size=20)
-        self.prev_btn.bind(on_release=self.go_previous)
-        self.next_btn = make_forward_button(self.go_next)
+        self.prev_btn = home_button("backArrow", 0, 0, 170, 140, "Volver", self.go_previous)
+        self.next_btn = make_forward_button(self.go_next, text="Seguir")
         nav_box.add_widget(self.prev_btn)
+        from kivy.uix.label import Label as KivyLabel
+        nav_box.add_widget(KivyLabel(size_hint_x=1))
         nav_box.add_widget(self.next_btn)
         self.ui_layout.add_widget(nav_box)
         self.nav_box = nav_box
@@ -94,14 +97,28 @@ class StoryScreen(Screen):
             pos_hint={'x': 0.1, 'y': 0.1},
             halign="center",
             valign="middle",
-            text_size=(self.width * 0.8, self.height * 0.8),
             color=(0, 0, 0, 1)
         )
-        # Ensure text wraps and fills the area dynamically
-        def update_text_size(instance, value):
-            instance.text_size = (instance.width, instance.height)
-        text_label.bind(size=update_text_size)
+
+        def fit_text(instance, *_):
+            # Dynamically adjust font size so text fits in bounding box
+            max_width = instance.width
+            max_height = instance.height
+            font_size = 64
+            instance.font_size = font_size
+            instance.text_size = (max_width, None)
+            instance.texture_update()
+            while (instance.texture_size[0] > max_width or instance.texture_size[1] > max_height) and font_size > 10:
+                font_size -= 2
+                instance.font_size = font_size
+                instance.text_size = (max_width, None)
+                instance.texture_update()
+            instance.text_size = (max_width, max_height)
+
+        text_label.bind(size=fit_text, text=fit_text)
         self.bg_layout.add_widget(text_label)
+        # Initial fit
+        fit_text(text_label)
 
         # Page image from story (optional)
         #if "image" in page:
@@ -118,8 +135,15 @@ class StoryScreen(Screen):
             if screen_name:
                 self.next_btn.disabled = True
                 self.next_btn.opacity = 0
-                self.start_minigame_btn = Button(text="Start Minigame", size_hint=(0.5, 1), font_size=20)
-                self.start_minigame_btn.bind(on_release=lambda instance: self.start_minigame(screen_name))
+                from core.utils import home_button
+                btn_width = 500
+                self.start_minigame_btn = home_button(
+                    f"{self.subject}btn",
+                    0, 0, btn_width, 120,
+                    "Start Minigame",
+                    lambda instance: self.start_minigame(screen_name)
+                )
+                self.start_minigame_btn.pos_hint = {'center_x': 0.5}
                 self.nav_box.add_widget(self.start_minigame_btn)
             else:
                 self.content_box.add_widget(Label(text=f"Unknown minigame type: {minigame_type}", font_size=18))
@@ -134,12 +158,13 @@ class StoryScreen(Screen):
                 self.next_btn.text = "Finish"
                 self.next_btn.disabled = False
             else:
-                self.next_btn.text = "Next"
+                self.next_btn.text = "Seguir"
                 self.next_btn.disabled = not self.story_engine.has_next()
         self.prev_btn.disabled = not self.story_engine.has_previous()
 
     def start_minigame(self, screen_name):
         self.manager.on_minigame_complete = self.on_minigame_complete
+        self.manager.last_screen = "story"
         self.manager.current = screen_name
 
     def on_minigame_complete(self):

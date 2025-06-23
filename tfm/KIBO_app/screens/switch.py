@@ -21,13 +21,13 @@ class SwitchScreen(Screen):
         self.subject = getattr(self.manager, "next_subject", None)
 
         if not self.from_screen or not self.to_screen:
-            print("❌ Missing 'last_screen' or 'next_screen' in ScreenManager")
+            #print("❌ Missing 'last_screen' or 'next_screen' in ScreenManager")
             return
 
         self.start_transition()
 
     def start_transition(self):
-        print(f"🔄 Switching from {self.from_screen} to {self.to_screen}")
+        #print(f"🔄 Switching from {self.from_screen} to {self.to_screen}")
 
         # Determine background for FROM screen
         if self.from_screen == "level_selection" and self.subject:
@@ -49,7 +49,7 @@ class SwitchScreen(Screen):
         else:
             video_name = f"{self.from_screen}TO{self.to_screen}"
 
-        print(f"🎬 Playing transition video: {video_name}.mp4")
+        #print(f"🎬 Playing transition video: {video_name}.mp4")
         self.video_manager.play_video(
             video_name,
             on_finish=self.after_video,
@@ -57,7 +57,7 @@ class SwitchScreen(Screen):
         )
 
     def after_video(self):
-        print(f"🎯 Transition video complete. Loading {self.to_screen} background.")
+        #print(f"🎯 Transition video complete. Loading {self.to_screen} background.")
         self.layout.clear_widgets()
 
         # Determine background for TO screen
@@ -73,6 +73,6 @@ class SwitchScreen(Screen):
         Clock.schedule_once(self.finish_transition, 0.1)
 
     def finish_transition(self, dt):
-        print(f"✅ Switch complete. Entering {self.to_screen}")
+        #print(f"✅ Switch complete. Entering {self.to_screen}")
         self.manager.last_screen = "switch"
         self.manager.current = self.to_screen

@@ -16,7 +16,7 @@ class VideoManager:
 
         filename = f"{video_name}.mp4"
         if not filename:
-            print(f"⚠️ Unknown video to preload: '{video_name}'")
+            #print(f"⚠️ Unknown video to preload: '{video_name}'")
             return
 
         current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -24,10 +24,10 @@ class VideoManager:
         path = os.path.join(video_dir, filename)
 
         if not os.path.exists(path):
-            print(f"⚠️ Video file not found for preload: {path}")
+            #print(f"⚠️ Video file not found for preload: {path}")
             return
 
-        print(f"📦 Preloading video: {video_name} from {path}")
+        #print(f"📦 Preloading video: {video_name} from {path}")
         video = Video(source=path, state='stop', volume=0)
         video.allow_stretch = True
         video.keep_ratio = False
@@ -49,7 +49,7 @@ class VideoManager:
 
         filename = f"{video_name}.mp4"
         if not filename:
-            print(f"⚠️ Unknown video: '{video_name}'")
+            #print(f"⚠️ Unknown video: '{video_name}'")
             if on_finish:
                 on_finish()
             return
@@ -59,7 +59,7 @@ class VideoManager:
         path = os.path.join(video_dir, filename)
 
         if not os.path.exists(path):
-            print(f"⚠️ Video file not found: {path}")
+            #print(f"⚠️ Video file not found: {path}")
             if on_finish:
                 on_finish()
             return

@@ -24,6 +24,7 @@ from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, NoTransition
 from kivy.core.text import LabelBase
 from kivy.lang import Builder
+import atexit
 
 from screens.splash import SplashScreen
 from screens.home import HomeScreen
@@ -32,6 +33,7 @@ from screens.story import StoryScreen
 from screens.end import EndScreen
 from screens.challenge_selection import ChallengeSelectionScreen
 from screens.switch import SwitchScreen
+from core.serial_manager import SerialManager
 
 from minigames.drawing_game import DrawingGameScreen
 from minigames.memory_game import MemoryGameScreen
@@ -57,6 +59,8 @@ class SacredScreenManager(ScreenManager):
 
 class SacredApp(App):
     def build(self):
+        SerialManager.get_instance().start()
+        atexit.register(SerialManager.get_instance().stop)
         sm = SacredScreenManager()
         sm.add_widget(SplashScreen(name="splash"))
         sm.add_widget(HomeScreen(name="home"))
@@ -71,7 +75,7 @@ class SacredApp(App):
         sm.add_widget(ColorChoiceScreen(name="color_choice"))
         sm.add_widget(MultipleChoiceScreen(name="multiple_choice"))
         sm.add_widget(SwitchScreen(name="switch"))
-        sm.current = "splash" # set to splash to start regular, DEBUG SCREEN by placing it here
+        sm.current = "challenge_selection" # set to splash to start regular, DEBUG SCREEN by placing it here
         return sm
 
 if __name__ == "__main__":

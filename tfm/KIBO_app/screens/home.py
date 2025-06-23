@@ -40,11 +40,11 @@ class HomeScreen(Screen):
         # Back button
         root.add_widget(make_back_button(self.go_splash))
         # Subject buttons
-        root.add_widget(home_button("btnMatemáticas", 0.49, 0.42, 400, 400,
+        root.add_widget(home_button("btnMatemáticas", 0.49, 0.42, 400, 400,"",
                                     lambda instance: self.go_level_selection("matemáticas")))
-        root.add_widget(home_button("btnLenguaje", 0.15, 0.67, 420, 450,
+        root.add_widget(home_button("btnLenguaje", 0.15, 0.67, 420, 450,"",
                                     lambda instance: self.go_level_selection("lenguaje")))
-        root.add_widget(home_button("btnDesafio", 0.52, 0.06, 460, 450,
+        root.add_widget(home_button("btnDesafio", 0.52, 0.06, 460, 450,"",
                                     lambda instance: self.go_challenges(instance)))
 
         self.ui_layout.add_widget(root)

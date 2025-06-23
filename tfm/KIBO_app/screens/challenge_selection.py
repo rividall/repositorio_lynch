@@ -44,16 +44,23 @@ class ChallengeSelectionScreen(Screen):
         top_bar.add_widget(Label(size_hint=(1, 1)))  # Spacer
         root.add_widget(top_bar)
         # Main content
-        root.add_widget(Label(text="Select a Challenge", font_size=28))
+        root.add_widget(Label(text="Select a Challenge"))
+        from core.utils import home_button
         for label_text, screen_name in MINIGAMES:
-            btn = Button(text=label_text, size_hint=(1, 0.2), font_size=22)
-            btn.bind(on_release=lambda instance, s=screen_name: self.launch_minigame(s))
+            btn = home_button(
+                "desafiobtn",
+                0, 0, 600, 120,  # width/height can be adjusted as needed
+                label_text,
+                lambda instance, s=screen_name: self.launch_minigame(s)
+            )
+            btn.pos_hint = {'center_x': 0.5}
             root.add_widget(btn)
         self.ui_layout.add_widget(root)
 
     def launch_minigame(self, screen_name):
         # Set a flag so the minigame knows to return here
         self.manager.challenge_mode = True
+        self.manager.last_screen = "challenge_selection"
         fade_out(self.ui_layout, on_complete=lambda: setattr(self.manager, "current", screen_name))
 
     def go_home(self, instance):
