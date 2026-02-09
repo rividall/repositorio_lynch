@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <defs>
+    <!-- Gradient for accent elements -->
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1"/>
+    </linearGradient>
+    <!-- Glow filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- LED glow -->
+    <filter id="ledGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="400" fill="#0d1321"/>
+
+  <!-- Dot pattern -->
+  <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+    <circle cx="10" cy="10" r="0.5" fill="rgba(148,163,184,0.15)"/>
+  </pattern>
+  <rect width="600" height="400" fill="url(#dots)"/>
+
+  <!-- Title -->
+  <text x="300" y="35" text-anchor="middle" fill="url(#accentGradient)" font-family="Segoe UI, system-ui, sans-serif" font-size="20" font-weight="700">WS2812 LED Strip Wiring</text>
+
+  <!-- Arduino Board -->
+  <g transform="translate(50, 100)">
+    <!-- Board body -->
+    <rect x="0" y="0" width="140" height="200" rx="8" fill="#1a2332" stroke="#38bdf8" stroke-width="2"/>
+    <rect x="0" y="0" width="140" height="200" rx="8" fill="none" stroke="rgba(56,189,248,0.3)" stroke-width="1" filter="url(#glow)"/>
+
+    <!-- USB port -->
+    <rect x="45" y="-15" width="50" height="25" rx="3" fill="#2d3748" stroke="#64748b" stroke-width="1"/>
+    <text x="70" y="2" text-anchor="middle" fill="#64748b" font-family="Segoe UI, system-ui, sans-serif" font-size="8">USB</text>
+
+    <!-- Label -->
+    <text x="70" y="35" text-anchor="middle" fill="#38bdf8" font-family="Segoe UI, system-ui, sans-serif" font-size="14" font-weight="600">ARDUINO</text>
+    <text x="70" y="50" text-anchor="middle" fill="#64748b" font-family="Segoe UI, system-ui, sans-serif" font-size="10">UNO</text>
+
+    <!-- Power pins area -->
+    <text x="20" y="75" fill="#94a3b8" font-family="SF Mono, Consolas, monospace" font-size="9">POWER</text>
+
+    <!-- 5V Pin -->
+    <rect x="15" y="85" width="30" height="18" rx="3" fill="rgba(248,113,113,0.2)" stroke="#f87171" stroke-width="1"/>
+    <text x="30" y="98" text-anchor="middle" fill="#f87171" font-family="SF Mono, Consolas, monospace" font-size="10" font-weight="600">5V</text>
+    <circle cx="55" cy="94" r="5" fill="#f87171" filter="url(#glow)"/>
+
+    <!-- GND Pin -->
+    <rect x="15" y="110" width="30" height="18" rx="3" fill="rgba(148,163,184,0.2)" stroke="#94a3b8" stroke-width="1"/>
+    <text x="30" y="123" text-anchor="middle" fill="#94a3b8" font-family="SF Mono, Consolas, monospace" font-size="10" font-weight="600">GND</text>
+    <circle cx="55" cy="119" r="5" fill="#64748b" filter="url(#glow)"/>
+
+    <!-- Digital pins area -->
+    <text x="20" y="150" fill="#94a3b8" font-family="SF Mono, Consolas, monospace" font-size="9">DIGITAL</text>
+
+    <!-- Pin 6 -->
+    <rect x="15" y="160" width="30" height="18" rx="3" fill="rgba(251,191,36,0.2)" stroke="#fbbf24" stroke-width="1"/>
+    <text x="30" y="173" text-anchor="middle" fill="#fbbf24" font-family="SF Mono, Consolas, monospace" font-size="10" font-weight="600">D6</text>
+    <circle cx="55" cy="169" r="5" fill="#fbbf24" filter="url(#glow)"/>
+  </g>
+
+  <!-- LED Strip - repositioned to align with Arduino pins -->
+  <g transform="translate(350, 84)">
+    <!-- Strip background -->
+    <rect x="0" y="0" width="200" height="200" rx="8" fill="#1a2332" stroke="#a78bfa" stroke-width="2"/>
+
+    <!-- Label -->
+    <text x="100" y="25" text-anchor="middle" fill="#a78bfa" font-family="Segoe UI, system-ui, sans-serif" font-size="12" font-weight="600">WS2812 LED STRIP</text>
+
+    <!-- Direction arrow -->
+    <text x="100" y="42" text-anchor="middle" fill="#64748b" font-family="Segoe UI, system-ui, sans-serif" font-size="10">Data Direction →→→</text>
+
+    <!-- LEDs -->
+    <g transform="translate(20, 55)">
+      <!-- LED 1 -->
+      <rect x="0" y="0" width="30" height="30" rx="4" fill="#2d3748" stroke="#38bdf8" stroke-width="1"/>
+      <circle cx="15" cy="15" r="10" fill="#38bdf8" opacity="0.8" filter="url(#ledGlow)"/>
+      <text x="15" y="45" text-anchor="middle" fill="#64748b" font-family="SF Mono, Consolas, monospace" font-size="8">0</text>
+
+      <!-- LED 2 -->
+      <rect x="40" y="0" width="30" height="30" rx="4" fill="#2d3748" stroke="#a78bfa" stroke-width="1"/>
+      <circle cx="55" cy="15" r="10" fill="#a78bfa" opacity="0.8" filter="url(#ledGlow)"/>
+      <text x="55" y="45" text-anchor="middle" fill="#64748b" font-family="SF Mono, Consolas, monospace" font-size="8">1</text>
+
+      <!-- LED 3 -->
+      <rect x="80" y="0" width="30" height="30" rx="4" fill="#2d3748" stroke="#34d399" stroke-width="1"/>
+      <circle cx="95" cy="15" r="10" fill="#34d399" opacity="0.8" filter="url(#ledGlow)"/>
+      <text x="95" y="45" text-anchor="middle" fill="#64748b" font-family="SF Mono, Consolas, monospace" font-size="8">2</text>
+
+      <!-- LED 4 -->
+      <rect x="120" y="0" width="30" height="30" rx="4" fill="#2d3748" stroke="#f87171" stroke-width="1"/>
+      <circle cx="135" cy="15" r="10" fill="#f87171" opacity="0.8" filter="url(#ledGlow)"/>
+      <text x="135" y="45" text-anchor="middle" fill="#64748b" font-family="SF Mono, Consolas, monospace" font-size="8">3</text>
+    </g>
+
+    <!-- Wire labels on strip -->
+    <text x="12" y="113" fill="#f87171" font-family="SF Mono, Consolas, monospace" font-size="9">+5V</text>
+    <text x="12" y="138" fill="#94a3b8" font-family="SF Mono, Consolas, monospace" font-size="9">GND</text>
+    <text x="12" y="188" fill="#fbbf24" font-family="SF Mono, Consolas, monospace" font-size="9">DIN</text>
+  </g>
+
+  <!-- Wires - drawn LAST so they appear on top -->
+  <!-- Red wire (5V) -->
+  <line x1="105" y1="194" x2="350" y2="194" stroke="#f87171" stroke-width="4" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- Connection dot on LED strip side -->
+  <circle cx="350" cy="194" r="6" fill="#f87171" filter="url(#glow)"/>
+
+  <!-- Black wire (GND) -->
+  <line x1="105" y1="219" x2="350" y2="219" stroke="#64748b" stroke-width="4" stroke-linecap="round"/>
+  <!-- Connection dot on LED strip side -->
+  <circle cx="350" cy="219" r="6" fill="#64748b"/>
+
+  <!-- Yellow wire (Data) -->
+  <line x1="105" y1="269" x2="350" y2="269" stroke="#fbbf24" stroke-width="4" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- Connection dot on LED strip side -->
+  <circle cx="350" cy="269" r="6" fill="#fbbf24" filter="url(#glow)"/>
+
+  <!-- Legend -->
+  <g transform="translate(50, 330)">
+    <text x="0" y="0" fill="#64748b" font-family="Segoe UI, system-ui, sans-serif" font-size="11" font-weight="600">CONNECTIONS:</text>
+
+    <!-- Red -->
+    <line x1="0" y1="20" x2="30" y2="20" stroke="#f87171" stroke-width="4" stroke-linecap="round"/>
+    <text x="40" y="24" fill="#e2e8f0" font-family="Segoe UI, system-ui, sans-serif" font-size="11">Red → 5V (Power)</text>
+
+    <!-- Black -->
+    <line x1="170" y1="20" x2="200" y2="20" stroke="#64748b" stroke-width="4" stroke-linecap="round"/>
+    <text x="210" y="24" fill="#e2e8f0" font-family="Segoe UI, system-ui, sans-serif" font-size="11">Black → GND</text>
+
+    <!-- Yellow -->
+    <line x1="340" y1="20" x2="370" y2="20" stroke="#fbbf24" stroke-width="4" stroke-linecap="round"/>
+    <text x="380" y="24" fill="#e2e8f0" font-family="Segoe UI, system-ui, sans-serif" font-size="11">Yellow → D6 (Data)</text>
+  </g>
+
+  <!-- Warning note -->
+  <g transform="translate(50, 375)">
+    <text x="0" y="0" fill="#f87171" font-family="Segoe UI, system-ui, sans-serif" font-size="10">⚠️ Check arrow direction on strip! Data flows ONE WAY only.</text>
+  </g>
+</svg>
