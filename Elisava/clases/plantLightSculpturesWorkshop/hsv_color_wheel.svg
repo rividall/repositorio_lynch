@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400">
+  <defs>
+    <!-- HSV color wheel gradient using conic gradient simulation -->
+    <linearGradient id="hue0" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff0000"/>
+      <stop offset="100%" stop-color="#ff0000"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="400" fill="#0d1321"/>
+
+  <!-- Title -->
+  <text x="250" y="35" text-anchor="middle" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="22" font-weight="bold">HSV Color Wheel</text>
+  <text x="250" y="55" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12">FastLED uses 0-255 for Hue</text>
+
+  <!-- Color wheel segments (12 segments for main colors) -->
+  <!-- Red (0) -->
+  <path d="M 200 200 L 200 100 A 100 100 0 0 1 286 134 Z" fill="#ff0000"/>
+  <!-- Orange (21) -->
+  <path d="M 200 200 L 286 134 A 100 100 0 0 1 300 200 Z" fill="#ff8000"/>
+  <!-- Yellow (42) -->
+  <path d="M 200 200 L 300 200 A 100 100 0 0 1 286 266 Z" fill="#ffff00"/>
+  <!-- Yellow-Green (64) -->
+  <path d="M 200 200 L 286 266 A 100 100 0 0 1 200 300 Z" fill="#80ff00"/>
+  <!-- Green (85) -->
+  <path d="M 200 200 L 200 300 A 100 100 0 0 1 114 266 Z" fill="#00ff00"/>
+  <!-- Cyan-Green (106) -->
+  <path d="M 200 200 L 114 266 A 100 100 0 0 1 100 200 Z" fill="#00ff80"/>
+  <!-- Cyan (128) -->
+  <path d="M 200 200 L 100 200 A 100 100 0 0 1 114 134 Z" fill="#00ffff"/>
+  <!-- Blue-Cyan (149) -->
+  <path d="M 200 200 L 114 134 A 100 100 0 0 1 200 100 Z" fill="#0080ff"/>
+  
+  <!-- Inner segments for smoother look -->
+  <circle cx="200" cy="200" r="40" fill="#0d1321"/>
+
+  <!-- Hue value labels around the wheel -->
+  <text x="200" y="75" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-size="11" font-weight="bold">0</text>
+  <text x="200" y="68" text-anchor="middle" fill="#ff6b6b" font-family="system-ui, sans-serif" font-size="9">RED</text>
+
+  <text x="310" y="145" text-anchor="start" fill="#e2e8f0" font-family="monospace" font-size="11">32</text>
+  
+  <text x="325" y="205" text-anchor="start" fill="#e2e8f0" font-family="monospace" font-size="11" font-weight="bold">64</text>
+  <text x="325" y="218" text-anchor="start" fill="#fde047" font-family="system-ui, sans-serif" font-size="9">YELLOW</text>
+
+  <text x="310" y="280" text-anchor="start" fill="#e2e8f0" font-family="monospace" font-size="11">96</text>
+
+  <text x="200" y="340" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-size="11" font-weight="bold">128</text>
+  <text x="200" y="353" text-anchor="middle" fill="#34d399" font-family="system-ui, sans-serif" font-size="9">GREEN</text>
+
+  <text x="75" y="280" text-anchor="end" fill="#e2e8f0" font-family="monospace" font-size="11">160</text>
+
+  <text x="60" y="205" text-anchor="end" fill="#e2e8f0" font-family="monospace" font-size="11" font-weight="bold">192</text>
+  <text x="60" y="218" text-anchor="end" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="9">CYAN</text>
+
+  <text x="75" y="145" text-anchor="end" fill="#e2e8f0" font-family="monospace" font-size="11">224</text>
+
+  <!-- Center text -->
+  <text x="200" y="195" text-anchor="middle" fill="#a78bfa" font-family="system-ui, sans-serif" font-size="10" font-weight="bold">HUE</text>
+  <text x="200" y="210" text-anchor="middle" fill="#64748b" font-family="system-ui, sans-serif" font-size="9">0-255</text>
+
+  <!-- Info boxes -->
+  <rect x="340" y="90" width="140" height="70" rx="8" fill="#1a2332" stroke="#374151" stroke-width="1"/>
+  <text x="410" y="112" text-anchor="middle" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">Saturation (S)</text>
+  <text x="410" y="130" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">0 = gray/white</text>
+  <text x="410" y="148" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">255 = full color</text>
+
+  <rect x="340" y="170" width="140" height="70" rx="8" fill="#1a2332" stroke="#374151" stroke-width="1"/>
+  <text x="410" y="192" text-anchor="middle" fill="#a78bfa" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">Value (V)</text>
+  <text x="410" y="210" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">0 = black/off</text>
+  <text x="410" y="228" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">255 = full bright</text>
+
+  <!-- Code example -->
+  <rect x="320" y="270" width="170" height="55" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+  <text x="330" y="290" fill="#64748b" font-family="monospace" font-size="10">// Rainbow cycle:</text>
+  <text x="330" y="308" fill="#38bdf8" font-family="monospace" font-size="11">CHSV(hue++, 255, 255)</text>
+
+  <!-- Arrow showing hue direction -->
+  <path d="M 200 120 A 80 80 0 0 1 270 160" stroke="#38bdf8" stroke-width="2" fill="none" stroke-dasharray="4,2"/>
+  <polygon points="275,155 270,165 265,155" fill="#38bdf8"/>
+</svg>

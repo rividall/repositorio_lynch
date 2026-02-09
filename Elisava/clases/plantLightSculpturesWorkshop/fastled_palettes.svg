@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 350">
+  <defs>
+    <!-- Rainbow palette -->
+    <linearGradient id="rainbowPalette" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff0000"/>
+      <stop offset="16%" stop-color="#ff8000"/>
+      <stop offset="33%" stop-color="#ffff00"/>
+      <stop offset="50%" stop-color="#00ff00"/>
+      <stop offset="66%" stop-color="#00ffff"/>
+      <stop offset="83%" stop-color="#0000ff"/>
+      <stop offset="100%" stop-color="#ff00ff"/>
+    </linearGradient>
+
+    <!-- Lava palette -->
+    <linearGradient id="lavaPalette" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#000000"/>
+      <stop offset="25%" stop-color="#8b0000"/>
+      <stop offset="50%" stop-color="#ff4500"/>
+      <stop offset="75%" stop-color="#ff8c00"/>
+      <stop offset="100%" stop-color="#ffff00"/>
+    </linearGradient>
+
+    <!-- Ocean palette -->
+    <linearGradient id="oceanPalette" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#000033"/>
+      <stop offset="25%" stop-color="#000080"/>
+      <stop offset="50%" stop-color="#0077be"/>
+      <stop offset="75%" stop-color="#00ced1"/>
+      <stop offset="100%" stop-color="#e0ffff"/>
+    </linearGradient>
+
+    <!-- Forest palette -->
+    <linearGradient id="forestPalette" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0a2f0a"/>
+      <stop offset="25%" stop-color="#228b22"/>
+      <stop offset="50%" stop-color="#32cd32"/>
+      <stop offset="75%" stop-color="#556b2f"/>
+      <stop offset="100%" stop-color="#8b4513"/>
+    </linearGradient>
+
+    <!-- Party palette -->
+    <linearGradient id="partyPalette" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff00ff"/>
+      <stop offset="20%" stop-color="#ff1493"/>
+      <stop offset="40%" stop-color="#00ff00"/>
+      <stop offset="60%" stop-color="#ffff00"/>
+      <stop offset="80%" stop-color="#00ffff"/>
+      <stop offset="100%" stop-color="#ff00ff"/>
+    </linearGradient>
+
+    <!-- Heat palette -->
+    <linearGradient id="heatPalette" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#000000"/>
+      <stop offset="33%" stop-color="#ff0000"/>
+      <stop offset="66%" stop-color="#ffff00"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="700" height="350" fill="#0d1321"/>
+
+  <!-- Title -->
+  <text x="350" y="35" text-anchor="middle" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="22" font-weight="bold">FastLED Built-in Palettes</text>
+
+  <!-- Rainbow -->
+  <text x="50" y="80" fill="#e2e8f0" font-family="monospace" font-size="13">RainbowColors_p</text>
+  <rect x="220" y="65" width="430" height="25" rx="4" fill="url(#rainbowPalette)"/>
+
+  <!-- Lava -->
+  <text x="50" y="125" fill="#e2e8f0" font-family="monospace" font-size="13">LavaColors_p</text>
+  <rect x="220" y="110" width="430" height="25" rx="4" fill="url(#lavaPalette)"/>
+
+  <!-- Ocean -->
+  <text x="50" y="170" fill="#e2e8f0" font-family="monospace" font-size="13">OceanColors_p</text>
+  <rect x="220" y="155" width="430" height="25" rx="4" fill="url(#oceanPalette)"/>
+
+  <!-- Forest -->
+  <text x="50" y="215" fill="#e2e8f0" font-family="monospace" font-size="13">ForestColors_p</text>
+  <rect x="220" y="200" width="430" height="25" rx="4" fill="url(#forestPalette)"/>
+
+  <!-- Party -->
+  <text x="50" y="260" fill="#e2e8f0" font-family="monospace" font-size="13">PartyColors_p</text>
+  <rect x="220" y="245" width="430" height="25" rx="4" fill="url(#partyPalette)"/>
+
+  <!-- Heat -->
+  <text x="50" y="305" fill="#e2e8f0" font-family="monospace" font-size="13">HeatColors_p</text>
+  <rect x="220" y="290" width="430" height="25" rx="4" fill="url(#heatPalette)"/>
+
+  <!-- Usage hint -->
+  <rect x="50" y="325" width="600" height="20" rx="4" fill="#1a2332"/>
+  <text x="350" y="340" text-anchor="middle" fill="#64748b" font-family="monospace" font-size="11">ColorFromPalette(OceanColors_p, index);</text>
+</svg>
