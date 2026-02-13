@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 450">
+  <defs>
+    <linearGradient id="pcbGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="transducerGrad" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" style="stop-color:#e5e5e5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a0a0a0;stop-opacity:1" />
+    </radialGradient>
+    <!-- Sound wave pattern -->
+    <pattern id="wavePattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="8" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="700" height="450" fill="#0d1321"/>
+
+  <!-- Title -->
+  <text x="350" y="35" text-anchor="middle" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="24" font-weight="bold">HC-SR04 Ultrasound Sensor</text>
+
+  <!-- Main PCB Board -->
+  <rect x="150" y="100" width="400" height="200" rx="6" fill="url(#pcbGrad)" stroke="#3b82f6" stroke-width="2"/>
+
+  <!-- PCB Text -->
+  <text x="350" y="130" text-anchor="middle" fill="#93c5fd" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">HC-SR04</text>
+
+  <!-- Left Transducer (Transmitter - T) -->
+  <circle cx="250" cy="200" r="55" fill="url(#transducerGrad)" stroke="#888" stroke-width="2"/>
+  <circle cx="250" cy="200" r="45" fill="#c0c0c0" stroke="#999" stroke-width="1"/>
+  <circle cx="250" cy="200" r="35" fill="#b0b0b0"/>
+  <circle cx="250" cy="200" r="15" fill="#888"/>
+  <circle cx="250" cy="200" r="5" fill="#666"/>
+  <!-- Mesh pattern -->
+  <circle cx="250" cy="200" r="40" fill="none" stroke="#999" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <circle cx="250" cy="200" r="30" fill="none" stroke="#999" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <circle cx="250" cy="200" r="20" fill="none" stroke="#999" stroke-width="0.5" stroke-dasharray="2,2"/>
+
+  <!-- T label -->
+  <text x="250" y="275" text-anchor="middle" fill="#fbbf24" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">T</text>
+  <text x="250" y="290" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">Transmitter</text>
+
+  <!-- Right Transducer (Receiver - R) -->
+  <circle cx="450" cy="200" r="55" fill="url(#transducerGrad)" stroke="#888" stroke-width="2"/>
+  <circle cx="450" cy="200" r="45" fill="#c0c0c0" stroke="#999" stroke-width="1"/>
+  <circle cx="450" cy="200" r="35" fill="#b0b0b0"/>
+  <circle cx="450" cy="200" r="15" fill="#888"/>
+  <circle cx="450" cy="200" r="5" fill="#666"/>
+  <!-- Mesh pattern -->
+  <circle cx="450" cy="200" r="40" fill="none" stroke="#999" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <circle cx="450" cy="200" r="30" fill="none" stroke="#999" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <circle cx="450" cy="200" r="20" fill="none" stroke="#999" stroke-width="0.5" stroke-dasharray="2,2"/>
+
+  <!-- R label -->
+  <text x="450" y="275" text-anchor="middle" fill="#34d399" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">R</text>
+  <text x="450" y="290" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">Receiver</text>
+
+  <!-- Crystal/Chip between transducers -->
+  <rect x="330" y="170" width="40" height="25" rx="2" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+  <text x="350" y="186" text-anchor="middle" fill="#555" font-family="monospace" font-size="6">IC</text>
+
+  <!-- Pin Header -->
+  <rect x="280" y="300" width="140" height="25" rx="3" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+
+  <!-- Individual Pins -->
+  <rect x="295" y="305" width="18" height="15" rx="1" fill="#ef4444"/>
+  <rect x="325" y="305" width="18" height="15" rx="1" fill="#fbbf24"/>
+  <rect x="355" y="305" width="18" height="15" rx="1" fill="#34d399"/>
+  <rect x="385" y="305" width="18" height="15" rx="1" fill="#64748b"/>
+
+  <!-- Pin Labels -->
+  <text x="304" y="345" text-anchor="middle" fill="#ef4444" font-family="monospace" font-size="12" font-weight="bold">VCC</text>
+  <text x="304" y="360" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">5V Power</text>
+
+  <text x="334" y="345" text-anchor="middle" fill="#fbbf24" font-family="monospace" font-size="12" font-weight="bold">TRIG</text>
+  <text x="334" y="360" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">Trigger</text>
+
+  <text x="364" y="345" text-anchor="middle" fill="#34d399" font-family="monospace" font-size="12" font-weight="bold">ECHO</text>
+  <text x="364" y="360" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">Response</text>
+
+  <text x="394" y="345" text-anchor="middle" fill="#64748b" font-family="monospace" font-size="12" font-weight="bold">GND</text>
+  <text x="394" y="360" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">Ground</text>
+
+  <!-- How it works annotation - left side -->
+  <rect x="30" y="150" width="100" height="100" rx="6" fill="rgba(251,191,36,0.1)" stroke="#fbbf24" stroke-width="1"/>
+  <text x="80" y="175" text-anchor="middle" fill="#fbbf24" font-family="system-ui, sans-serif" font-size="11" font-weight="bold">1. SEND</text>
+  <text x="80" y="195" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">Trigger pin</text>
+  <text x="80" y="210" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">sends pulse</text>
+  <text x="80" y="230" text-anchor="middle" fill="#fbbf24" font-family="system-ui, sans-serif" font-size="16">📤</text>
+  <!-- Arrow -->
+  <path d="M 130 200 L 190 200" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4,2"/>
+  <polygon points="188,195 198,200 188,205" fill="#fbbf24"/>
+
+  <!-- How it works annotation - right side -->
+  <rect x="570" y="150" width="100" height="100" rx="6" fill="rgba(52,211,153,0.1)" stroke="#34d399" stroke-width="1"/>
+  <text x="620" y="175" text-anchor="middle" fill="#34d399" font-family="system-ui, sans-serif" font-size="11" font-weight="bold">2. RECEIVE</text>
+  <text x="620" y="195" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">Echo pin</text>
+  <text x="620" y="210" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">detects return</text>
+  <text x="620" y="230" text-anchor="middle" fill="#34d399" font-family="system-ui, sans-serif" font-size="16">📥</text>
+  <!-- Arrow -->
+  <path d="M 510 200 L 570 200" stroke="#34d399" stroke-width="2" stroke-dasharray="4,2"/>
+  <polygon points="512,195 502,200 512,205" fill="#34d399"/>
+
+  <!-- Sound waves illustration -->
+  <path d="M 250 145 Q 350 80 450 145" stroke="#38bdf8" stroke-width="1.5" fill="none" opacity="0.4" stroke-dasharray="3,3"/>
+  <path d="M 250 140 Q 350 60 450 140" stroke="#38bdf8" stroke-width="1" fill="none" opacity="0.3" stroke-dasharray="3,3"/>
+  <path d="M 250 135 Q 350 40 450 135" stroke="#38bdf8" stroke-width="0.5" fill="none" opacity="0.2" stroke-dasharray="3,3"/>
+
+  <!-- Formula box -->
+  <rect x="150" y="385" width="400" height="50" rx="8" fill="#1a2332" stroke="#374151" stroke-width="1"/>
+  <text x="350" y="407" text-anchor="middle" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">Distance = (Time × Speed of Sound) ÷ 2</text>
+  <text x="350" y="425" text-anchor="middle" fill="#64748b" font-family="system-ui, sans-serif" font-size="10">Range: 2cm - 400cm | Accuracy: ~3mm</text>
+
+</svg>

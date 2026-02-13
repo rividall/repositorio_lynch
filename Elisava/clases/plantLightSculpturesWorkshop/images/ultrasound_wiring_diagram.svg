@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="boardGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a5f7a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d3d4d;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="sensorGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d5a27;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a3518;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="#0d1321"/>
+
+  <!-- Title -->
+  <text x="400" y="35" text-anchor="middle" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="24" font-weight="bold">HC-SR04 Ultrasound Sensor Wiring</text>
+
+  <!-- Arduino Board -->
+  <rect x="80" y="100" width="180" height="260" rx="8" fill="url(#boardGradient)" stroke="#2d8a9e" stroke-width="2"/>
+  <text x="170" y="130" text-anchor="middle" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="16" font-weight="bold">Arduino Uno</text>
+
+  <!-- Arduino USB Port -->
+  <rect x="140" y="85" width="60" height="20" rx="3" fill="#4a5568"/>
+  <text x="170" y="78" text-anchor="middle" fill="#64748b" font-family="system-ui, sans-serif" font-size="10">USB</text>
+
+  <!-- Arduino Pins -->
+  <!-- 5V Pin -->
+  <rect x="240" y="160" width="20" height="12" fill="#ef4444"/>
+  <text x="235" y="168" text-anchor="end" fill="#e2e8f0" font-family="monospace" font-size="11">5V</text>
+
+  <!-- GND Pin -->
+  <rect x="240" y="195" width="20" height="12" fill="#1f2937"/>
+  <text x="235" y="203" text-anchor="end" fill="#e2e8f0" font-family="monospace" font-size="11">GND</text>
+
+  <!-- Pin 9 (TRIG) -->
+  <rect x="240" y="230" width="20" height="12" fill="#fbbf24"/>
+  <text x="235" y="238" text-anchor="end" fill="#e2e8f0" font-family="monospace" font-size="11">D9</text>
+
+  <!-- Pin 10 (ECHO) -->
+  <rect x="240" y="265" width="20" height="12" fill="#34d399"/>
+  <text x="235" y="273" text-anchor="end" fill="#e2e8f0" font-family="monospace" font-size="11">D10</text>
+
+  <!-- Arduino chip representation -->
+  <rect x="130" y="185" width="80" height="100" rx="4" fill="#1a1a2e" stroke="#374151" stroke-width="1"/>
+  <text x="170" y="240" text-anchor="middle" fill="#64748b" font-family="monospace" font-size="8">ATmega328</text>
+
+  <!-- HC-SR04 Sensor -->
+  <rect x="520" y="120" width="200" height="220" rx="8" fill="url(#sensorGradient)" stroke="#3d7a37" stroke-width="2"/>
+  <text x="620" y="150" text-anchor="middle" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">HC-SR04</text>
+  <text x="620" y="168" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Ultrasound Sensor</text>
+
+  <!-- Ultrasound "eyes" (transducers) -->
+  <circle cx="570" cy="220" r="35" fill="#c0c0c0" stroke="#888" stroke-width="2"/>
+  <circle cx="570" cy="220" r="25" fill="#a0a0a0"/>
+  <circle cx="570" cy="220" r="8" fill="#666"/>
+  <text x="570" y="270" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">TRIG</text>
+
+  <circle cx="670" cy="220" r="35" fill="#c0c0c0" stroke="#888" stroke-width="2"/>
+  <circle cx="670" cy="220" r="25" fill="#a0a0a0"/>
+  <circle cx="670" cy="220" r="8" fill="#666"/>
+  <text x="670" y="270" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">ECHO</text>
+
+  <!-- Sensor Pins -->
+  <rect x="540" y="295" width="12" height="20" fill="#ef4444"/>
+  <text x="546" y="330" text-anchor="middle" fill="#fca5a5" font-family="monospace" font-size="10">VCC</text>
+
+  <rect x="570" y="295" width="12" height="20" fill="#fbbf24"/>
+  <text x="576" y="330" text-anchor="middle" fill="#fde047" font-family="monospace" font-size="10">TRIG</text>
+
+  <rect x="600" y="295" width="12" height="20" fill="#34d399"/>
+  <text x="606" y="330" text-anchor="middle" fill="#6ee7b7" font-family="monospace" font-size="10">ECHO</text>
+
+  <rect x="630" y="295" width="12" height="20" fill="#374151"/>
+  <text x="636" y="330" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="10">GND</text>
+
+  <!-- Wires -->
+  <!-- VCC Wire (Red) - 5V to VCC -->
+  <path d="M 260 166 Q 350 166 350 350 Q 350 380 546 380 L 546 315"
+        stroke="#ef4444" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+  <!-- GND Wire (Gray) - GND to GND -->
+  <path d="M 260 201 Q 380 201 380 365 Q 380 395 636 395 L 636 315"
+        stroke="#4b5563" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+  <!-- TRIG Wire (Yellow) - Pin 9 to TRIG -->
+  <path d="M 260 236 Q 410 236 410 340 Q 410 360 576 360 L 576 315"
+        stroke="#fbbf24" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+  <!-- ECHO Wire (Green) - Pin 10 to ECHO -->
+  <path d="M 260 271 Q 440 271 440 350 Q 440 375 606 375 L 606 315"
+        stroke="#34d399" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+  <!-- Legend -->
+  <rect x="80" y="385" width="640" height="55" rx="6" fill="#1a2332" stroke="#374151" stroke-width="1"/>
+
+  <line x1="100" y1="412" x2="130" y2="412" stroke="#ef4444" stroke-width="4" stroke-linecap="round"/>
+  <text x="140" y="416" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="11">VCC → 5V</text>
+
+  <line x1="240" y1="412" x2="270" y2="412" stroke="#4b5563" stroke-width="4" stroke-linecap="round"/>
+  <text x="280" y="416" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="11">GND → GND</text>
+
+  <line x1="390" y1="412" x2="420" y2="412" stroke="#fbbf24" stroke-width="4" stroke-linecap="round"/>
+  <text x="430" y="416" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="11">TRIG → Pin 9</text>
+
+  <line x1="550" y1="412" x2="580" y2="412" stroke="#34d399" stroke-width="4" stroke-linecap="round"/>
+  <text x="590" y="416" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="11">ECHO → Pin 10</text>
+
+</svg>
