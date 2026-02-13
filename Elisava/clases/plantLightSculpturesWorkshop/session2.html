@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session 2: 3D Customization & Sensors | Plant Light Sculptures Workshop</title>
+
+    <!-- Reveal.js CSS from CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.6.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.6.0/dist/theme/black.css">
+
+    <!-- Syntax highlighting theme -->
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.6.0/plugin/highlight/monokai.css">
+
+    <style>
+        /* =====================================================
+           TRON LEGACY / CIRCUIT BOARD THEME
+           ===================================================== */
+
+        /* ============ CIRCUIT BOARD BACKGROUND ============ */
+
+        .reveal-viewport {
+            background:
+                /* Main dark gradient */
+                linear-gradient(180deg, #050a12 0%, #0a1628 50%, #051018 100%);
+        }
+
+        /* Circuit board grid pattern */
+        .reveal-viewport::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+            background-image:
+                /* Horizontal circuit lines */
+                linear-gradient(0deg, transparent 49px, rgba(56, 189, 248, 0.08) 49px, rgba(56, 189, 248, 0.08) 50px, transparent 50px),
+                /* Vertical circuit lines */
+                linear-gradient(90deg, transparent 49px, rgba(56, 189, 248, 0.08) 49px, rgba(56, 189, 248, 0.08) 50px, transparent 50px),
+                /* Diagonal traces - right */
+                linear-gradient(45deg, transparent 70.5%, rgba(167, 139, 250, 0.05) 70.5%, rgba(167, 139, 250, 0.05) 71%, transparent 71%),
+                /* Diagonal traces - left */
+                linear-gradient(-45deg, transparent 70.5%, rgba(52, 211, 153, 0.05) 70.5%, rgba(52, 211, 153, 0.05) 71%, transparent 71%);
+            background-size: 50px 50px, 50px 50px, 100px 100px, 100px 100px;
+        }
+
+        /* Glowing nodes at grid intersections */
+        .reveal-viewport::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image:
+                /* Corner nodes - bright */
+                radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.4) 0%, transparent 2px),
+                radial-gradient(circle at 100% 0%, rgba(167, 139, 250, 0.4) 0%, transparent 2px),
+                radial-gradient(circle at 0% 100%, rgba(52, 211, 153, 0.4) 0%, transparent 2px),
+                radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.4) 0%, transparent 2px),
+                /* Edge nodes */
+                radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.3) 0%, transparent 3px),
+                radial-gradient(circle at 50% 100%, rgba(56, 189, 248, 0.3) 0%, transparent 3px),
+                radial-gradient(circle at 0% 50%, rgba(167, 139, 250, 0.3) 0%, transparent 3px),
+                radial-gradient(circle at 100% 50%, rgba(52, 211, 153, 0.3) 0%, transparent 3px);
+        }
+
+        /* Bouncing particles - created via JavaScript */
+        .bounce-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: -1;
+            border-radius: 2px;
+            opacity: 0.15;
+        }
+
+        /* Hexagonal corner accents */
+        .reveal .slides::after {
+            content: '';
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: calc(100% - 40px);
+            height: calc(100% - 40px);
+            pointer-events: none;
+            z-index: -1;
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            /* Angled corners - clipped */
+            clip-path: polygon(
+                20px 0%, calc(100% - 20px) 0%,
+                100% 20px, 100% calc(100% - 20px),
+                calc(100% - 20px) 100%, 20px 100%,
+                0% calc(100% - 20px), 0% 20px
+            );
+        }
+
+        /* ============ CONTENT STYLING ============ */
+
+        .reveal {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #e2e8f0;
+        }
+
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+            text-transform: none;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .reveal h1 {
+            font-size: 2.3em;
+            background: linear-gradient(135deg, #38bdf8 0%, #a78bfa 50%, #34d399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(56, 189, 248, 0.5);
+            position: relative;
+        }
+
+        /* Glowing underline for h1 */
+        .reveal h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #38bdf8, #a78bfa, #38bdf8, transparent);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        .reveal h2 {
+            color: #38bdf8;
+            font-size: 1.5em;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+            border-left: 3px solid #38bdf8;
+            padding-left: 0.5em;
+            margin-left: -0.5em;
+        }
+
+        .reveal h3 {
+            color: #a78bfa;
+            font-size: 1em;
+        }
+
+        .reveal p, .reveal li {
+            color: #e2e8f0;
+        }
+
+        .reveal strong {
+            color: #38bdf8;
+            text-shadow: 0 0 8px rgba(56, 189, 248, 0.3);
+        }
+
+        /* Links */
+        .reveal a {
+            color: #38bdf8;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .reveal a:hover {
+            color: #a78bfa;
+            border-bottom-color: #a78bfa;
+            text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+        }
+
+        /* Code styling - circuit board aesthetic */
+        .reveal code {
+            font-size: 0.9em;
+            padding: 0.2em 0.5em;
+            background: rgba(56,189,248,0.1);
+            border: 1px solid rgba(56,189,248,0.3);
+            border-radius: 4px;
+            color: #38bdf8;
+            font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+            box-shadow: 0 0 5px rgba(56, 189, 248, 0.2);
+        }
+
+        .reveal pre {
+            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(56,189,248,0.3);
+            border-radius: 8px;
+            box-shadow:
+                0 0 20px rgba(56,189,248,0.1),
+                inset 0 0 30px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        /* Circuit trace accent on code blocks */
+        .reveal pre::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #38bdf8, #a78bfa, #34d399);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .reveal pre code {
+            max-height: 500px;
+            font-size: 0.7em;
+            line-height: 1.5;
+            padding: 1.2em 1em 1em;
+            background: transparent;
+            border: none;
+            color: #e2e8f0;
+            box-shadow: none;
+        }
+
+        /* ============ TRON SYNTAX HIGHLIGHTING ============ */
+
+        .reveal pre code .hljs-keyword {
+            color: #38bdf8;
+            text-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+            font-weight: 600;
+        }
+
+        .reveal pre code .hljs-type {
+            color: #a78bfa;
+            text-shadow: 0 0 6px rgba(167, 139, 250, 0.4);
+        }
+
+        .reveal pre code .hljs-function {
+            color: #34d399;
+            text-shadow: 0 0 6px rgba(52, 211, 153, 0.4);
+        }
+
+        .reveal pre code .hljs-number {
+            color: #fbbf24;
+            text-shadow: 0 0 5px rgba(251, 191, 36, 0.3);
+        }
+
+        .reveal pre code .hljs-string {
+            color: #f472b6;
+            text-shadow: 0 0 5px rgba(244, 114, 182, 0.3);
+        }
+
+        .reveal pre code .hljs-comment {
+            color: #4a9ead;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        .reveal pre code .hljs-meta {
+            color: #c084fc;
+            text-shadow: 0 0 8px rgba(192, 132, 252, 0.5);
+        }
+
+        .reveal pre code .hljs-variable {
+            color: #67e8f9;
+            text-shadow: 0 0 4px rgba(103, 232, 249, 0.3);
+        }
+
+        .reveal pre code .hljs-literal {
+            color: #fde047;
+            text-shadow: 0 0 5px rgba(253, 224, 71, 0.3);
+        }
+
+        .reveal pre code::selection,
+        .reveal pre code *::selection {
+            background: rgba(56, 189, 248, 0.3);
+        }
+
+        /* Complexity badges */
+        .reveal .complexity-badge {
+            display: inline-block;
+            padding: 0.3em 0.8em;
+            border-radius: 100px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-right: 0.5em;
+            border: 1px solid;
+        }
+
+        .reveal .beginner {
+            background: rgba(52,211,153,0.15);
+            border-color: rgba(52,211,153,0.3);
+            color: #34d399;
+        }
+        .reveal .intermediate {
+            background: rgba(251,191,36,0.15);
+            border-color: rgba(251,191,36,0.3);
+            color: #fbbf24;
+        }
+        .reveal .advanced {
+            background: rgba(248,113,113,0.15);
+            border-color: rgba(248,113,113,0.3);
+            color: #f87171;
+        }
+
+        /* Warning and success boxes - geometric style */
+        .reveal .warning-box {
+            background: linear-gradient(135deg, rgba(248,113,113,0.1) 0%, rgba(0,0,0,0.3) 100%);
+            border: 1px solid rgba(248,113,113,0.4);
+            border-left: 4px solid #f87171;
+            padding: 1em 1.5em;
+            border-radius: 0 8px 8px 0;
+            margin: 1em 0;
+            color: #fca5a5;
+        }
+
+        .reveal .success-box {
+            background: linear-gradient(135deg, rgba(52,211,153,0.1) 0%, rgba(0,0,0,0.3) 100%);
+            border: 1px solid rgba(52,211,153,0.4);
+            border-left: 4px solid #34d399;
+            padding: 1em 1.5em;
+            border-radius: 0 8px 8px 0;
+            margin: 1em 0;
+            color: #6ee7b7;
+        }
+
+        .reveal .success-box h3 {
+            color: #34d399;
+            margin-bottom: 0.5em;
+        }
+
+        .reveal .info-box {
+            background: linear-gradient(135deg, rgba(56,189,248,0.1) 0%, rgba(0,0,0,0.3) 100%);
+            border: 1px solid rgba(56,189,248,0.4);
+            border-left: 4px solid #38bdf8;
+            padding: 1em 1.5em;
+            border-radius: 0 8px 8px 0;
+            margin: 1em 0;
+            color: #7dd3fc;
+        }
+
+        /* Images with tech frame */
+        .reveal img {
+            max-height: 400px;
+            border-radius: 4px;
+            border: 2px solid rgba(56,189,248,0.3);
+            box-shadow:
+                0 0 20px rgba(56,189,248,0.2),
+                0 10px 40px rgba(0,0,0,0.4);
+        }
+
+        /* Lists with circuit markers */
+        .reveal ul, .reveal ol {
+            display: block;
+            margin-left: 1em;
+        }
+
+        .reveal li {
+            margin: 0.5em 0;
+            position: relative;
+        }
+
+        .reveal ul li::marker {
+            color: #38bdf8;
+        }
+
+        .reveal ol li::marker {
+            color: #a78bfa;
+        }
+
+        /* Small text */
+        .reveal .small-text {
+            font-size: 0.8em;
+            color: #64748b;
+        }
+
+        /* Section divider slides */
+        .reveal section[data-background-color] h1 {
+            background: linear-gradient(135deg, #38bdf8 0%, #a78bfa 50%, #34d399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Progress bar - circuit style */
+        .reveal .progress {
+            background: rgba(56,189,248,0.1);
+            height: 3px;
+        }
+
+        .reveal .progress span {
+            background: linear-gradient(90deg, #38bdf8, #a78bfa);
+            box-shadow: 0 0 15px rgba(56,189,248,0.8);
+        }
+
+        /* Slide number - tech display */
+        .reveal .slide-number {
+            background: rgba(0,0,0,0.5);
+            color: #38bdf8;
+            font-size: 12px;
+            font-family: 'SF Mono', 'Consolas', monospace;
+            padding: 8px 12px;
+            border: 1px solid rgba(56,189,248,0.3);
+            border-radius: 4px;
+        }
+
+        /* Controls - glowing */
+        .reveal .controls button {
+            color: #38bdf8;
+        }
+
+        .reveal .controls button:hover {
+            color: #a78bfa;
+        }
+
+        /* Fragment highlights */
+        .reveal .fragment.highlight-current-blue.current-fragment {
+            color: #38bdf8;
+        }
+
+        /* Prompt box for vibe coding */
+        .reveal .prompt-box {
+            background: rgba(167,139,250,0.1);
+            border: 1px solid rgba(167,139,250,0.3);
+            border-left: 4px solid #a78bfa;
+            padding: 1em 1.5em;
+            border-radius: 0 8px 8px 0;
+            margin: 1em 0;
+            text-align: left;
+            font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+            font-size: 0.7em;
+            color: #e2e8f0;
+        }
+
+        /* Speaker notes styling hint */
+        .reveal aside.notes {
+            display: none;
+        }
+
+        /* Allow scrolling on slides with overflow */
+        .reveal .slides section {
+            overflow-y: auto;
+            max-height: 100%;
+        }
+
+        /* Compact slides - reduce spacing */
+        .reveal .compact h2 {
+            margin-bottom: 0.3em;
+        }
+        .reveal .compact pre {
+            margin: 0.5em 0;
+        }
+        .reveal .compact img {
+            max-height: 150px;
+        }
+
+        /* ============ SPECIAL TITLE SLIDE ============ */
+        section[data-background-color="#050a12"] h1::after,
+        section[data-background-color="#0a0f1a"] h1::after {
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- ==================== SLIDE 1: TITLE SLIDE ==================== -->
+            <section data-background-color="#0a0f1a">
+                <h1>🌱 Plant Light Sculptures</h1>
+                <h3>Session 2: Customization & Sensors</h3>
+                <p>3D Design + Interactive Code</p>
+                <p class="small-text">5:00 PM - 9:00 PM</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 2: PRINT REVEAL ==================== -->
+            <section>
+                <h2>🎉 Print Reveal!</h2>
+                <h3>Your parts are ready!</h3>
+                <div class="success-box">
+                    <p><strong>Check the print bin for your name</strong></p>
+                    <ul style="text-align: left;">
+                        <li>Inspect print quality</li>
+                        <li>Check for any defects</li>
+                        <li>Report issues immediately</li>
+                    </ul>
+                </div>
+                <p class="fragment" style="margin-top: 1em;">🔍 Look for: layer lines, stringing, warping</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 3: SESSION 2 GOALS ==================== -->
+            <section>
+                <h2>Today's Goals 🎯</h2>
+                <ul>
+                    <li class="fragment">🖨️ Customize 3D parts in Tinkercad</li>
+                    <li class="fragment">📤 Submit custom designs (before 6:30!)</li>
+                    <li class="fragment">📡 Learn sensors for interaction</li>
+                    <li class="fragment">🌈 Make lights respond to the world!</li>
+                </ul>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SECTION: TINKERCAD ==================== -->
+            <section>
+                <h1>Tinkercad 101 🔧</h1>
+                <p>Browser-based 3D modeling</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 4: TINKERCAD INTRO ==================== -->
+            <section>
+                <h2>Getting Started with Tinkercad</h2>
+                <img src="https://raw.githubusercontent.com/rividall/repositorio_lynch/master/Elisava/clases/plantLightSculpturesWorkshop/images/tinkercad_interface.png" alt="Tinkercad interface overview" style="max-height: 280px;">
+                <p class="fragment" style="margin-top: 1em;">Free, browser-based: <a href="https://www.tinkercad.com" target="_blank">tinkercad.com</a></p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 5: TINKERCAD NAVIGATION ==================== -->
+            <section>
+                <h2>Navigation Basics</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; font-size: 0.9em;">
+                    <div>
+                        <h3>Mouse Controls</h3>
+                        <ul>
+                            <li><strong>Right-click drag:</strong> Rotate view</li>
+                            <li><strong>Scroll:</strong> Zoom in/out</li>
+                            <li><strong>Middle-click:</strong> Pan</li>
+                            <li><strong>Click:</strong> Select object</li>
+                        </ul>
+                    </div>
+                    <div class="fragment">
+                        <h3>Keyboard Shortcuts</h3>
+                        <ul>
+                            <li><code>Ctrl+D</code> Duplicate</li>
+                            <li><code>Ctrl+G</code> Group</li>
+                            <li><code>Ctrl+Z</code> Undo</li>
+                            <li><code>Delete</code> Remove</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 6: TINKERCAD TRANSFORMS ==================== -->
+            <section>
+                <h2>Transform Operations</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1em; font-size: 0.85em;">
+                    <div class="fragment">
+                        <h3>Move</h3>
+                        <p>Drag arrows or type coordinates</p>
+                        <p style="color: #64748b;">Hold Shift for constraint</p>
+                    </div>
+                    <div class="fragment">
+                        <h3>Rotate</h3>
+                        <p>Use curved arrows</p>
+                        <p style="color: #64748b;">15° increments with Shift</p>
+                    </div>
+                    <div class="fragment">
+                        <h3>Scale</h3>
+                        <p>Corner handles</p>
+                        <p style="color: #64748b;">🔒 Lock = proportional</p>
+                    </div>
+                </div>
+                <div class="warning-box fragment" style="margin-top: 1em; padding: 0.7em 1em;">
+                    <p style="margin: 0;"><strong>⚠️ Always GROUP before export!</strong> Select all → Ctrl+G</p>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 7: WHAT TO CUSTOMIZE ==================== -->
+            <section>
+                <h2>What Can You Customize?</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; font-size: 0.9em;">
+                    <div>
+                        <h3>Structural Parts</h3>
+                        <ul>
+                            <li class="fragment">Adjust stem heights</li>
+                            <li class="fragment">Modify connection points</li>
+                            <li class="fragment">Add cable channels</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Decorative Elements</h3>
+                        <ul>
+                            <li class="fragment">Custom leaf shapes</li>
+                            <li class="fragment">Light diffuser designs</li>
+                            <li class="fragment">Thin walls = more glow!</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 8: EXPORT STL ==================== -->
+            <section>
+                <h2>Exporting for 3D Printing</h2>
+                <ol>
+                    <li class="fragment">Select all parts → <strong>Group</strong> (Ctrl+G)</li>
+                    <li class="fragment">Click <strong>Export</strong> (top right)</li>
+                    <li class="fragment">Choose <strong>.STL</strong> format</li>
+                    <li class="fragment">Upload to shared folder</li>
+                </ol>
+                <div class="info-box fragment" style="margin-top: 1em;">
+                    <p><strong>💡 Tip:</strong> Name files clearly: <code>yourname_leafv2.stl</code></p>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 9: DESIGN TIME ==================== -->
+            <section>
+                <h2>⏱️ Design Work Time</h2>
+                <div class="success-box">
+                    <h3>Next 55 minutes:</h3>
+                    <ul style="text-align: left;">
+                        <li>Import and modify library parts</li>
+                        <li>Create your custom elements</li>
+                        <li>Check print time estimates</li>
+                    </ul>
+                </div>
+                <div class="warning-box fragment" style="margin-top: 1em;">
+                    <p><strong>📤 DEADLINE: 6:30 PM for custom designs!</strong></p>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 10: DESIGN REVIEW ==================== -->
+            <section>
+                <h2>Design Review Checkpoints</h2>
+                <p>Before submitting, verify:</p>
+                <ul>
+                    <li class="fragment">✓ All parts grouped properly</li>
+                    <li class="fragment">✓ Print time is reasonable (&lt;2hrs per part)</li>
+                    <li class="fragment">✓ Critical dimensions checked (Arduino fits?)</li>
+                    <li class="fragment">✓ Wall thickness ≥ 1.5mm</li>
+                </ul>
+                <p class="fragment" style="margin-top: 1em;">🙋 Call instructor for quick design review!</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 11: POWER SUPPLY TEST ==================== -->
+            <section>
+                <h2>🔋 Quick Power Test</h2>
+                <h3>Before break, let's verify:</h3>
+                <ol>
+                    <li class="fragment">Connect battery pack to Arduino</li>
+                    <li class="fragment">Upload your LED code from Session 1</li>
+                    <li class="fragment">Disconnect USB, run on battery only</li>
+                    <li class="fragment">✓ LEDs working without computer?</li>
+                </ol>
+                <div class="warning-box fragment" style="margin-top: 1em; padding: 0.7em 1em;">
+                    <p style="margin: 0;">If LEDs are dim → not enough power. Ask for help!</p>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 12: BREAK ==================== -->
+            <section data-background-color="#0d1321">
+                <h1>☕ Break Time!</h1>
+                <h3>15 Minutes</h3>
+                <div style="margin-top: 3em; font-size: 0.9em;">
+                    <p>When we return:</p>
+                    <ul>
+                        <li>Adding sensors to your project!</li>
+                        <li>Making lights react to distance</li>
+                        <li>Creating interactive behaviors</li>
+                    </ul>
+                </div>
+                <p style="margin-top: 2em;" class="small-text">We'll resume at 7:00 PM</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SECTION: SENSORS ==================== -->
+            <section>
+                <h1>Adding Sensors! 📡</h1>
+                <p>Making your plant interactive</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 13: WHY SENSORS ==================== -->
+            <section>
+                <h2>From Static to Interactive</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em;">
+                    <div>
+                        <h3>Session 1:</h3>
+                        <p>Beautiful light patterns</p>
+                        <p style="color: #64748b;">But... always the same</p>
+                    </div>
+                    <div class="fragment">
+                        <h3>Session 2:</h3>
+                        <p>Lights that <strong>respond</strong></p>
+                        <p style="color: #34d399;">Aware of the environment!</p>
+                    </div>
+                </div>
+                <p class="fragment" style="margin-top: 1.5em;">🎯 <strong>Goal:</strong> Your plant reacts when someone approaches</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 14: ULTRASOUND SENSOR ==================== -->
+            <section>
+                <h2>HC-SR04 Ultrasound Sensor</h2>
+                <img src="https://raw.githubusercontent.com/rividall/repositorio_lynch/master/Elisava/clases/plantLightSculpturesWorkshop/images/ultrasound_sensor.svg" alt="HC-SR04 ultrasound distance sensor" style="max-height: 200px;">
+                <div class="fragment" style="margin-top: 1em;">
+                    <p><strong>How it works:</strong></p>
+                    <ul style="font-size: 0.9em;">
+                        <li>Sends ultrasonic pulse (like a bat!)</li>
+                        <li>Measures time for echo to return</li>
+                        <li>Distance = time × speed of sound</li>
+                    </ul>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 15: SENSOR WIRING ==================== -->
+            <section>
+                <h2>Wiring the Sensor</h2>
+                <img src="https://raw.githubusercontent.com/rividall/repositorio_lynch/master/Elisava/clases/plantLightSculpturesWorkshop/images/ultrasound_wiring_diagram.svg" alt="Ultrasound sensor wiring diagram" style="max-height: 280px;">
+                <div class="fragment" style="font-size: 0.85em; margin-top: 0.5em;">
+                    <p>
+                        <strong style="color: #f87171;">VCC</strong> → 5V &nbsp;|&nbsp;
+                        <strong style="color: #94a3b8;">GND</strong> → GND &nbsp;|&nbsp;
+                        <strong style="color: #fbbf24;">TRIG</strong> → Pin 9 &nbsp;|&nbsp;
+                        <strong style="color: #34d399;">ECHO</strong> → Pin 10
+                    </p>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 16: READING DISTANCE ==================== -->
+            <section>
+                <h2>Reading Distance</h2>
+                <pre><code class="language-cpp" data-trim data-line-numbers="1-2|4-8|10-15">
+#define TRIG_PIN 9
+#define ECHO_PIN 10
+
+void setup() {
+    Serial.begin(9600);
+    pinMode(TRIG_PIN, OUTPUT);
+    pinMode(ECHO_PIN, INPUT);
+}
+
+void loop() {
+    long distance = getDistance();
+    Serial.print("Distance: ");
+    Serial.println(distance);
+    delay(100);
+}
+                </code></pre>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 17: DISTANCE FUNCTION ==================== -->
+            <section>
+                <h2>The Distance Function</h2>
+                <pre><code class="language-cpp" data-trim data-line-numbers>
+long getDistance() {
+    // Send pulse
+    digitalWrite(TRIG_PIN, LOW);
+    delayMicroseconds(2);
+    digitalWrite(TRIG_PIN, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(TRIG_PIN, LOW);
+
+    // Measure echo time
+    long duration = pulseIn(ECHO_PIN, HIGH);
+
+    // Convert to centimeters
+    return duration * 0.034 / 2;
+}
+                </code></pre>
+                <p class="fragment">Open <strong>Serial Monitor</strong> to see values!</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 18: SERIAL MONITOR ==================== -->
+            <section>
+                <h2>Debugging with Serial Monitor</h2>
+                <div class="info-box">
+                    <p><strong>Tools → Serial Monitor</strong> (or Ctrl+Shift+M)</p>
+                </div>
+                <ul style="margin-top: 1em;">
+                    <li class="fragment">Set baud rate to <code>9600</code></li>
+                    <li class="fragment">Move hand closer/farther from sensor</li>
+                    <li class="fragment">Watch the numbers change!</li>
+                </ul>
+                <p class="fragment" style="margin-top: 1em;">📝 Note your <strong>min</strong> and <strong>max</strong> values</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 19: MAP FUNCTION ==================== -->
+            <section>
+                <h2>The Magic of <code>map()</code></h2>
+                <pre><code class="language-cpp" data-trim>
+// Convert sensor range to LED range
+int brightness = map(distance, 5, 100, 255, 0);
+//                   value     from   to    output range
+                </code></pre>
+                <div class="fragment" style="margin-top: 1em;">
+                    <p><strong>Translates:</strong></p>
+                    <ul>
+                        <li>Distance 5cm → brightness 255 (bright)</li>
+                        <li>Distance 100cm → brightness 0 (off)</li>
+                    </ul>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SECTION: REACTIVE SYSTEMS ==================== -->
+            <section>
+                <h1>Reactive Light Systems 🌈</h1>
+                <p>Sensor + LEDs = Magic</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 20: BASIC REACTIVE ==================== -->
+            <section>
+                <h2>Basic: Distance → Brightness</h2>
+                <pre><code class="language-cpp" data-trim data-line-numbers>
+void loop() {
+    long distance = getDistance();
+
+    // Map distance to brightness (closer = brighter)
+    int brightness = map(distance, 5, 100, 255, 50);
+    brightness = constrain(brightness, 50, 255);
+
+    // Apply to all LEDs
+    for(int i = 0; i < NUM_LEDS; i++) {
+        leds[i] = CHSV(160, 255, brightness);
+    }
+    FastLED.show();
+}
+                </code></pre>
+                <p class="fragment"><span class="complexity-badge beginner">🟢 Beginner</span> Start here!</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 21: COLOR SHIFT ==================== -->
+            <section>
+                <h2>Intermediate: Distance → Color</h2>
+                <pre><code class="language-cpp" data-trim data-line-numbers>
+void loop() {
+    long distance = getDistance();
+
+    // Map distance to hue (color wheel position)
+    int hue = map(distance, 5, 100, 0, 255);
+    hue = constrain(hue, 0, 255);
+
+    // Rainbow based on distance!
+    fill_solid(leds, NUM_LEDS, CHSV(hue, 255, 200));
+    FastLED.show();
+}
+                </code></pre>
+                <p class="fragment"><span class="complexity-badge intermediate">🟡 Intermediate</span> Smooth color transitions!</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 22: MULTI-ZONE ==================== -->
+            <section>
+                <h2>Expert: Multi-Zone Control</h2>
+                <pre><code class="language-cpp" data-trim data-line-numbers style="font-size: 0.65em;">
+void loop() {
+    long distance = getDistance();
+
+    if(distance < 20) {
+        // Very close: Bright warm white
+        fill_solid(leds, NUM_LEDS, CRGB(255, 200, 150));
+    } else if(distance < 50) {
+        // Medium: Flowing ocean
+        runOceanPattern();
+    } else {
+        // Far: Calm breathing purple
+        uint8_t breath = beatsin8(15, 50, 150);
+        fill_solid(leds, NUM_LEDS, CHSV(200, 255, breath));
+    }
+    FastLED.show();
+}
+                </code></pre>
+                <p class="fragment"><span class="complexity-badge advanced">🔴 Expert</span> Different behaviors per zone!</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 23: SMOOTHING ==================== -->
+            <section>
+                <h2>Pro Tip: Smooth Your Readings</h2>
+                <pre><code class="language-cpp" data-trim data-line-numbers>
+// Global variable to store smoothed value
+int smoothedDistance = 50;
+
+void loop() {
+    long rawDistance = getDistance();
+
+    // Smooth: mix 90% old + 10% new
+    smoothedDistance = (smoothedDistance * 9 + rawDistance) / 10;
+
+    // Use smoothedDistance instead of raw
+    int brightness = map(smoothedDistance, 5, 100, 255, 50);
+    // ...
+}
+                </code></pre>
+                <p class="fragment">Eliminates jittery/noisy readings!</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 24: CHALLENGES ==================== -->
+            <section>
+                <h2>🎯 Interactive Challenges</h2>
+                <div class="success-box">
+                    <h3>Choose your level:</h3>
+                    <ul style="text-align: left; font-size: 0.9em;">
+                        <li><span class="complexity-badge beginner">🟢</span> Brightness responds to hand distance</li>
+                        <li><span class="complexity-badge intermediate">🟡</span> Color shifts as you approach</li>
+                        <li><span class="complexity-badge advanced">🔴</span> Different patterns at different distances</li>
+                    </ul>
+                </div>
+                <p class="fragment" style="margin-top: 1em;">💡 Remember your vibe coding skills!</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SECTION: CODE REFINEMENT ==================== -->
+            <section>
+                <h1>Code Refinement 💎</h1>
+                <p>Polish your creation</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 25: OFFICE HOURS ==================== -->
+            <section>
+                <h2>📚 Mini-Lectures Available</h2>
+                <p>Request any of these 5-10 minute deep dives:</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em; font-size: 0.85em;">
+                    <div class="fragment info-box" style="padding: 0.7em;">
+                        <p style="margin: 0;"><strong>"FastLED Performance"</strong></p>
+                        <p style="margin: 0; color: #64748b;">Achieve 60+ FPS</p>
+                    </div>
+                    <div class="fragment info-box" style="padding: 0.7em;">
+                        <p style="margin: 0;"><strong>"Sensor Calibration"</strong></p>
+                        <p style="margin: 0; color: #64748b;">Auto-adjust to ambient</p>
+                    </div>
+                    <div class="fragment info-box" style="padding: 0.7em;">
+                        <p style="margin: 0;"><strong>"Power Budget"</strong></p>
+                        <p style="margin: 0; color: #64748b;">Battery life tips</p>
+                    </div>
+                    <div class="fragment info-box" style="padding: 0.7em;">
+                        <p style="margin: 0;"><strong>"Pattern Design"</strong></p>
+                        <p style="margin: 0; color: #64748b;">Compelling animations</p>
+                    </div>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 26: CODE CLEANUP ==================== -->
+            <section>
+                <h2>Clean Code Checklist</h2>
+                <ul>
+                    <li class="fragment">✓ Add comments explaining your logic</li>
+                    <li class="fragment">✓ Use meaningful variable names</li>
+                    <li class="fragment">✓ Create functions for repeated code</li>
+                    <li class="fragment">✓ Test all behavior modes work</li>
+                </ul>
+                <div class="info-box fragment" style="margin-top: 1em;">
+                    <p><strong>Naming:</strong> <code>session2_interactive.ino</code></p>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 27: WORK TIME ==================== -->
+            <section>
+                <h2>⏱️ Development Time</h2>
+                <div style="font-size: 0.9em;">
+                    <p><strong>Until 9:00 PM:</strong></p>
+                    <ul>
+                        <li class="fragment">Implement sensor-reactive behavior</li>
+                        <li class="fragment">Create 2-3 distinct interaction modes</li>
+                        <li class="fragment">Polish and document your code</li>
+                    </ul>
+                </div>
+                <p class="fragment" style="margin-top: 1.5em;">🙋 Instructors circulating for help</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 28: EXPECTED OUTCOMES ==================== -->
+            <section>
+                <h2>By 9:00 PM You Should Have:</h2>
+                <div class="success-box">
+                    <ul style="text-align: left;">
+                        <li>✓ Sensor-reactive LED system working</li>
+                        <li>✓ At least 2-3 distinct lighting behaviors</li>
+                        <li>✓ Code saved with descriptive name</li>
+                        <li>✓ Custom 3D designs submitted</li>
+                    </ul>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 29: WRAP UP ==================== -->
+            <section data-background-color="#0a0f1a">
+                <h1>Session 2 Complete! 🎉</h1>
+                <div style="margin-top: 2em; font-size: 0.9em;">
+                    <h3>Before you leave:</h3>
+                    <ul>
+                        <li class="fragment">💾 Save your code: <code>session2_interactive.ino</code></li>
+                        <li class="fragment">🔋 Charge batteries overnight!</li>
+                        <li class="fragment">🖨️ Your custom prints are running overnight!</li>
+                    </ul>
+                </div>
+                <div class="fragment" style="margin-top: 2em;">
+                    <h3>Next Session:</h3>
+                    <p>Assembly! Putting it all together 🔧</p>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+        </div>
+    </div>
+
+    <!-- Reveal.js JavaScript from CDN -->
+    <script src="https://unpkg.com/reveal.js@4.6.0/dist/reveal.js"></script>
+    <script src="https://unpkg.com/reveal.js@4.6.0/plugin/highlight/highlight.js"></script>
+    <script src="https://unpkg.com/reveal.js@4.6.0/plugin/notes/notes.js"></script>
+
+    <script>
+        // Initialize reveal.js
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            showSlideNumber: 'all',
+            progress: true,
+            controls: true,
+            controlsLayout: 'bottom-right',
+            controlsBackArrows: 'faded',
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+
+            // Plugins
+            plugins: [ RevealHighlight, RevealNotes ]
+        });
+
+        // Reset scroll position when changing slides
+        Reveal.on('slidechanged', function(event) {
+            if (event.currentSlide) {
+                event.currentSlide.scrollTop = 0;
+            }
+        });
+
+        // Auto-scroll to show newly revealed fragments
+        Reveal.on('fragmentshown', function(event) {
+            const fragment = event.fragment;
+            const slide = fragment.closest('section');
+            if (slide) {
+                fragment.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest'
+                });
+            }
+        });
+
+        // Log when presentation starts
+        console.log('🌱 Plant Light Sculptures - Session 2 loaded!');
+
+        // ============ BOUNCING PARTICLES ============
+        const particles = [];
+        const PARTICLE_COUNT = 4;
+        const SPEED = 0.2;
+
+        const colors = [
+            'rgba(56, 189, 248, 0.8)',
+            'rgba(167, 139, 250, 0.6)',
+            'rgba(52, 211, 153, 0.5)',
+            'rgba(56, 189, 248, 0.6)'
+        ];
+
+        const shapes = [
+            { width: 150, height: 2 },
+            { width: 2, height: 150 },
+            { width: 100, height: 100 },
+            { width: 80, height: 80 }
+        ];
+
+        function initParticles() {
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                const el = document.createElement('div');
+                el.className = 'bounce-particle';
+                el.style.width = shapes[i].width + 'px';
+                el.style.height = shapes[i].height + 'px';
+                el.style.background = `linear-gradient(${Math.random() * 360}deg, transparent 0%, ${colors[i]} 50%, transparent 100%)`;
+
+                const x = Math.random() * (window.innerWidth - shapes[i].width);
+                const y = Math.random() * (window.innerHeight - shapes[i].height);
+
+                const angle = Math.random() * Math.PI * 2;
+                const vx = Math.cos(angle) * SPEED;
+                const vy = Math.sin(angle) * SPEED;
+
+                el.style.left = x + 'px';
+                el.style.top = y + 'px';
+
+                document.body.appendChild(el);
+
+                particles.push({ el, x, y, vx, vy, width: shapes[i].width, height: shapes[i].height });
+            }
+        }
+
+        function animate() {
+            const W = window.innerWidth;
+            const H = window.innerHeight;
+
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x <= 0 || p.x + p.width >= W) {
+                    p.vx *= -1;
+                    p.x = Math.max(0, Math.min(p.x, W - p.width));
+                }
+                if (p.y <= 0 || p.y + p.height >= H) {
+                    p.vy *= -1;
+                    p.y = Math.max(0, Math.min(p.y, H - p.height));
+                }
+
+                p.el.style.left = p.x + 'px';
+                p.el.style.top = p.y + 'px';
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        initParticles();
+        animate();
+    </script>
+</body>
+</html>

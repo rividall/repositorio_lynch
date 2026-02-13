@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session 4: Showcase & Critique | Plant Light Sculptures Workshop</title>
+
+    <!-- Reveal.js CSS from CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.6.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.6.0/dist/theme/black.css">
+
+    <style>
+        /* =====================================================
+           TRON LEGACY / CIRCUIT BOARD THEME
+           ===================================================== */
+
+        /* ============ CIRCUIT BOARD BACKGROUND ============ */
+
+        .reveal-viewport {
+            background:
+                linear-gradient(180deg, #050a12 0%, #0a1628 50%, #051018 100%);
+        }
+
+        .reveal-viewport::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+            background-image:
+                linear-gradient(0deg, transparent 49px, rgba(56, 189, 248, 0.08) 49px, rgba(56, 189, 248, 0.08) 50px, transparent 50px),
+                linear-gradient(90deg, transparent 49px, rgba(56, 189, 248, 0.08) 49px, rgba(56, 189, 248, 0.08) 50px, transparent 50px),
+                linear-gradient(45deg, transparent 70.5%, rgba(167, 139, 250, 0.05) 70.5%, rgba(167, 139, 250, 0.05) 71%, transparent 71%),
+                linear-gradient(-45deg, transparent 70.5%, rgba(52, 211, 153, 0.05) 70.5%, rgba(52, 211, 153, 0.05) 71%, transparent 71%);
+            background-size: 50px 50px, 50px 50px, 100px 100px, 100px 100px;
+        }
+
+        .reveal-viewport::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image:
+                radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.4) 0%, transparent 2px),
+                radial-gradient(circle at 100% 0%, rgba(167, 139, 250, 0.4) 0%, transparent 2px),
+                radial-gradient(circle at 0% 100%, rgba(52, 211, 153, 0.4) 0%, transparent 2px),
+                radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.4) 0%, transparent 2px),
+                radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.3) 0%, transparent 3px),
+                radial-gradient(circle at 50% 100%, rgba(56, 189, 248, 0.3) 0%, transparent 3px),
+                radial-gradient(circle at 0% 50%, rgba(167, 139, 250, 0.3) 0%, transparent 3px),
+                radial-gradient(circle at 100% 50%, rgba(52, 211, 153, 0.3) 0%, transparent 3px);
+        }
+
+        .bounce-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: -1;
+            border-radius: 2px;
+            opacity: 0.15;
+        }
+
+        .reveal .slides::after {
+            content: '';
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: calc(100% - 40px);
+            height: calc(100% - 40px);
+            pointer-events: none;
+            z-index: -1;
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            clip-path: polygon(
+                20px 0%, calc(100% - 20px) 0%,
+                100% 20px, 100% calc(100% - 20px),
+                calc(100% - 20px) 100%, 20px 100%,
+                0% calc(100% - 20px), 0% 20px
+            );
+        }
+
+        /* ============ CONTENT STYLING ============ */
+
+        .reveal {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #e2e8f0;
+        }
+
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+            text-transform: none;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .reveal h1 {
+            font-size: 2.3em;
+            background: linear-gradient(135deg, #38bdf8 0%, #a78bfa 50%, #34d399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(56, 189, 248, 0.5);
+            position: relative;
+        }
+
+        .reveal h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #38bdf8, #a78bfa, #38bdf8, transparent);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        .reveal h2 {
+            color: #38bdf8;
+            font-size: 1.5em;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+            border-left: 3px solid #38bdf8;
+            padding-left: 0.5em;
+            margin-left: -0.5em;
+        }
+
+        .reveal h3 {
+            color: #a78bfa;
+            font-size: 1em;
+        }
+
+        .reveal p, .reveal li {
+            color: #e2e8f0;
+        }
+
+        .reveal strong {
+            color: #38bdf8;
+            text-shadow: 0 0 8px rgba(56, 189, 248, 0.3);
+        }
+
+        .reveal a {
+            color: #38bdf8;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .reveal a:hover {
+            color: #a78bfa;
+            border-bottom-color: #a78bfa;
+            text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+        }
+
+        /* Boxes - geometric style */
+        .reveal .warning-box {
+            background: linear-gradient(135deg, rgba(248,113,113,0.1) 0%, rgba(0,0,0,0.3) 100%);
+            border: 1px solid rgba(248,113,113,0.4);
+            border-left: 4px solid #f87171;
+            padding: 1em 1.5em;
+            border-radius: 0 8px 8px 0;
+            margin: 1em 0;
+            color: #fca5a5;
+        }
+
+        .reveal .success-box {
+            background: linear-gradient(135deg, rgba(52,211,153,0.1) 0%, rgba(0,0,0,0.3) 100%);
+            border: 1px solid rgba(52,211,153,0.4);
+            border-left: 4px solid #34d399;
+            padding: 1em 1.5em;
+            border-radius: 0 8px 8px 0;
+            margin: 1em 0;
+            color: #6ee7b7;
+        }
+
+        .reveal .success-box h3 { color: #34d399; margin-bottom: 0.5em; }
+
+        .reveal .info-box {
+            background: linear-gradient(135deg, rgba(56,189,248,0.1) 0%, rgba(0,0,0,0.3) 100%);
+            border: 1px solid rgba(56,189,248,0.4);
+            border-left: 4px solid #38bdf8;
+            padding: 1em 1.5em;
+            border-radius: 0 8px 8px 0;
+            margin: 1em 0;
+            color: #7dd3fc;
+        }
+
+        /* Award box - Tron style */
+        .reveal .award-box {
+            background: linear-gradient(135deg, rgba(251,191,36,0.1) 0%, rgba(0,0,0,0.3) 100%);
+            border: 1px solid rgba(251,191,36,0.4);
+            border-left: 4px solid #fbbf24;
+            padding: 0.8em 1.2em;
+            border-radius: 0 8px 8px 0;
+            margin: 0.5em 0;
+            color: #fde047;
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.1);
+        }
+
+        /* Images */
+        .reveal img {
+            max-height: 400px;
+            border-radius: 4px;
+            border: 2px solid rgba(56,189,248,0.3);
+            box-shadow: 0 0 20px rgba(56,189,248,0.2), 0 10px 40px rgba(0,0,0,0.4);
+        }
+
+        /* Lists */
+        .reveal ul, .reveal ol { display: block; margin-left: 1em; }
+        .reveal li { margin: 0.5em 0; position: relative; }
+        .reveal ul li::marker { color: #38bdf8; }
+        .reveal ol li::marker { color: #a78bfa; }
+
+        .reveal .small-text { font-size: 0.8em; color: #64748b; }
+
+        .reveal section[data-background-color] h1 {
+            background: linear-gradient(135deg, #38bdf8 0%, #a78bfa 50%, #34d399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .reveal .progress { background: rgba(56,189,248,0.1); height: 3px; }
+        .reveal .progress span { background: linear-gradient(90deg, #38bdf8, #a78bfa); box-shadow: 0 0 15px rgba(56,189,248,0.8); }
+
+        .reveal .slide-number {
+            background: rgba(0,0,0,0.5);
+            color: #38bdf8;
+            font-size: 12px;
+            font-family: 'SF Mono', 'Consolas', monospace;
+            padding: 8px 12px;
+            border: 1px solid rgba(56,189,248,0.3);
+            border-radius: 4px;
+        }
+
+        .reveal .controls button { color: #38bdf8; }
+        .reveal .controls button:hover { color: #a78bfa; }
+
+        .reveal .slides section { overflow-y: auto; max-height: 100%; }
+
+        /* Time badge - Tron style */
+        .reveal .time-badge {
+            display: inline-block;
+            padding: 0.2em 0.6em;
+            border-radius: 4px;
+            font-size: 0.7em;
+            font-weight: 600;
+            background: rgba(56,189,248,0.2);
+            border: 1px solid rgba(56,189,248,0.4);
+            color: #38bdf8;
+            margin-left: 0.5em;
+            box-shadow: 0 0 8px rgba(56, 189, 248, 0.3);
+        }
+
+        /* Emoji sizing for awards */
+        .reveal .award-emoji {
+            font-size: 1.5em;
+            margin-right: 0.3em;
+        }
+
+        section[data-background-color="#050a12"] h1::after,
+        section[data-background-color="#0a0f1a"] h1::after { width: 80%; }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- ==================== SLIDE 1: TITLE SLIDE ==================== -->
+            <section data-background-color="#0a0f1a">
+                <h1>🌱 Plant Light Sculptures</h1>
+                <h3>Session 4: Showcase & Critique</h3>
+                <p>Celebrating Your Creations!</p>
+                <p class="small-text">5:00 PM - 9:00 PM</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 2: THE FINAL DAY ==================== -->
+            <section>
+                <h2>🎉 The Final Day!</h2>
+                <h3>Today's Flow:</h3>
+                <ul style="font-size: 0.9em;">
+                    <li class="fragment">5:00 - 5:40 → Final polish & setup</li>
+                    <li class="fragment">5:40 - 6:20 → Presentation prep</li>
+                    <li class="fragment">6:20 - 6:35 → Break & tech check</li>
+                    <li class="fragment">6:35 - 8:00 → <strong>SHOWCASE!</strong></li>
+                    <li class="fragment">8:00 - 8:50 → Awards & reflection</li>
+                    <li class="fragment">8:50 - 9:00 → Farewell</li>
+                </ul>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SECTION: FINAL POLISH ==================== -->
+            <section>
+                <h1>Final Polish ✨</h1>
+                <p>Last-minute improvements</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 3: POLISH CHECKLIST ==================== -->
+            <section>
+                <h2>Polish Checklist</h2>
+                <div class="success-box">
+                    <ul style="text-align: left;">
+                        <li>🔧 Minor code tweaks (brightness, timing)</li>
+                        <li>🔥 Glue any loose parts</li>
+                        <li>✨ Clean up appearance (remove glue strings!)</li>
+                        <li>🔋 Fresh batteries / full charge</li>
+                        <li>✅ Test one final time</li>
+                    </ul>
+                </div>
+                <p class="fragment" style="margin-top: 1em;">You have <strong>40 minutes</strong> - use them wisely!</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 4: SHOWCASE SETUP ==================== -->
+            <section>
+                <h2>Showcase Display Setup</h2>
+                <ul>
+                    <li class="fragment">Arrange projects on designated tables</li>
+                    <li class="fragment">Adequate spacing between projects</li>
+                    <li class="fragment">Power strips available for charging</li>
+                    <li class="fragment">Dim lighting (to see LED effects!)</li>
+                </ul>
+                <div class="info-box fragment" style="margin-top: 1em;">
+                    <p>💡 Position your project so the sensor is accessible for demos!</p>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SECTION: PRESENTATION PREP ==================== -->
+            <section>
+                <h1>Presentation Prep 🎤</h1>
+                <p>Structure your 3-minute talk</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 5: PRESENTATION STRUCTURE ==================== -->
+            <section>
+                <h2>Your 3-Minute Presentation</h2>
+                <div style="font-size: 0.85em; text-align: left;">
+                    <div class="fragment">
+                        <h3>1. Concept <span class="time-badge">30 sec</span></h3>
+                        <p style="margin-left: 1em; color: #94a3b8;">What is it? What does it do? <em>Demo it!</em></p>
+                    </div>
+                    <div class="fragment">
+                        <h3>2. Technical <span class="time-badge">30 sec</span></h3>
+                        <p style="margin-left: 1em; color: #94a3b8;">Sensor → Processing → LED output</p>
+                    </div>
+                    <div class="fragment">
+                        <h3>3. Design Decisions <span class="time-badge">90 sec</span></h3>
+                        <p style="margin-left: 1em; color: #94a3b8;">Why these choices? Problems? Solutions?</p>
+                    </div>
+                    <div class="fragment">
+                        <h3>4. Future <span class="time-badge">30 sec</span></h3>
+                        <p style="margin-left: 1em; color: #94a3b8;">What would you add with more time?</p>
+                    </div>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 6: PRESENTATION TIPS ==================== -->
+            <section>
+                <h2>Presentation Tips</h2>
+                <ul>
+                    <li class="fragment"><strong>Start with the demo!</strong> Turn it on first</li>
+                    <li class="fragment">Speak about the <em>experience</em>, not just the code</li>
+                    <li class="fragment">Own your challenges - they're part of the story</li>
+                    <li class="fragment">Keep it conversational</li>
+                </ul>
+                <div class="warning-box fragment" style="margin-top: 1em; padding: 0.7em 1em;">
+                    <p style="margin: 0;">⏱️ <strong>3 minutes is SHORT!</strong> Practice with a timer!</p>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 7: PRACTICE TIME ==================== -->
+            <section>
+                <h2>⏱️ Practice Time</h2>
+                <div class="success-box">
+                    <h3>40 minutes to prepare:</h3>
+                    <ol style="text-align: left;">
+                        <li>Draft your talking points</li>
+                        <li>Practice with a partner</li>
+                        <li>Time yourself (3 min max!)</li>
+                        <li>Get feedback, refine</li>
+                    </ol>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 8: BREAK ==================== -->
+            <section data-background-color="#0d1321">
+                <h1>☕ Final Break</h1>
+                <h3>15 Minutes</h3>
+                <div style="margin-top: 2em;">
+                    <p><strong>While you're away:</strong></p>
+                    <ul>
+                        <li>Turn ON all projects</li>
+                        <li>Final tech check</li>
+                        <li>Dim the lights</li>
+                    </ul>
+                </div>
+                <p style="margin-top: 2em;" class="small-text">Showtime at 6:35 PM! 🌟</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SECTION: SHOWCASE ==================== -->
+            <section data-background-color="#0a0f1a">
+                <h1>🌟 SHOWCASE TIME! 🌟</h1>
+                <p>Let's see what you've created!</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 9: ROUND 1 ==================== -->
+            <section>
+                <h2>Round 1: Lightning Presentations</h2>
+                <h3>35 minutes</h3>
+                <div class="info-box">
+                    <ul style="text-align: left;">
+                        <li>Each group presents at their station</li>
+                        <li><strong>3 minutes max</strong> per presentation</li>
+                        <li>1-2 quick questions after each</li>
+                    </ul>
+                </div>
+                <div class="fragment" style="margin-top: 1em;">
+                    <p><strong>While others present:</strong></p>
+                    <p style="color: #94a3b8;">Listen actively · Take notes · Notice cool techniques</p>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 10: ROUND 2 ==================== -->
+            <section>
+                <h2>Round 2: Gallery Walk</h2>
+                <h3>40 minutes</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em; font-size: 0.85em;">
+                    <div class="fragment">
+                        <h3 style="color: #34d399;">As a Visitor:</h3>
+                        <ul>
+                            <li>Spend 3-5 min at each project</li>
+                            <li>Test the interactions yourself</li>
+                            <li>Ask detailed questions</li>
+                            <li>Take photos (with permission!)</li>
+                        </ul>
+                    </div>
+                    <div class="fragment">
+                        <h3 style="color: #a78bfa;">As a Maker:</h3>
+                        <ul>
+                            <li>Stay at your project</li>
+                            <li>Encourage interaction</li>
+                            <li>Share your process</li>
+                            <li>Show code if asked</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 11: QUESTIONS TO ASK ==================== -->
+            <section>
+                <h2>Great Questions to Ask</h2>
+                <ul style="font-size: 0.9em;">
+                    <li class="fragment">"How did you implement [specific feature]?"</li>
+                    <li class="fragment">"What was the hardest problem to solve?"</li>
+                    <li class="fragment">"Can you show me the code for [behavior]?"</li>
+                    <li class="fragment">"What would you do differently next time?"</li>
+                    <li class="fragment">"What inspired this design?"</li>
+                </ul>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 12: ROUND 3 ==================== -->
+            <section>
+                <h2>Round 3: Group Critique</h2>
+                <h3>10 minutes</h3>
+                <p>Reconvene as a full group to discuss:</p>
+                <ul style="font-size: 0.9em;">
+                    <li class="fragment">Common challenges everyone faced</li>
+                    <li class="fragment">Creative solutions that emerged</li>
+                    <li class="fragment">Technical innovations worth sharing</li>
+                    <li class="fragment">Design patterns that worked well</li>
+                </ul>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SECTION: AWARDS ==================== -->
+            <section data-background-color="#0a0f1a">
+                <h1>🏆 Awards Time!</h1>
+                <p>Celebrating excellence</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 13: AWARD CATEGORIES ==================== -->
+            <section>
+                <h2>Award Categories</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8em; font-size: 0.8em;">
+                    <div class="award-box fragment">
+                        <span class="award-emoji">🎨</span><strong>Most Creative Design</strong>
+                        <p style="color: #94a3b8; margin: 0.3em 0 0 0;">Unique/artistic plant structure</p>
+                    </div>
+                    <div class="award-box fragment">
+                        <span class="award-emoji">🌈</span><strong>Best Light Effects</strong>
+                        <p style="color: #94a3b8; margin: 0.3em 0 0 0;">Coolest patterns/animations</p>
+                    </div>
+                    <div class="award-box fragment">
+                        <span class="award-emoji">🔧</span><strong>Master Troubleshooter</strong>
+                        <p style="color: #94a3b8; margin: 0.3em 0 0 0;">Overcame significant challenges</p>
+                    </div>
+                    <div class="award-box fragment">
+                        <span class="award-emoji">💡</span><strong>Innovation Award</strong>
+                        <p style="color: #94a3b8; margin: 0.3em 0 0 0;">Unique feature or clever solution</p>
+                    </div>
+                    <div class="award-box fragment">
+                        <span class="award-emoji">🤝</span><strong>Best Collaborator</strong>
+                        <p style="color: #94a3b8; margin: 0.3em 0 0 0;">Helped others, shared knowledge</p>
+                    </div>
+                    <div class="award-box fragment">
+                        <span class="award-emoji">📈</span><strong>Most Improved</strong>
+                        <p style="color: #94a3b8; margin: 0.3em 0 0 0;">Biggest growth Day 1 → Day 4</p>
+                    </div>
+                    <div class="award-box fragment">
+                        <span class="award-emoji">⚡</span><strong>Sensor Wizard</strong>
+                        <p style="color: #94a3b8; margin: 0.3em 0 0 0;">Best sensor integration</p>
+                    </div>
+                    <div class="award-box fragment">
+                        <span class="award-emoji">🏆</span><strong>Instructor's Choice</strong>
+                        <p style="color: #94a3b8; margin: 0.3em 0 0 0;">Something special we noticed</p>
+                    </div>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SECTION: REFLECTION ==================== -->
+            <section>
+                <h1>Reflection 💭</h1>
+                <p>What did we learn?</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 14: WHAT DID YOU LEARN ==================== -->
+            <section>
+                <h2>What Did You Learn?</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em; font-size: 0.85em;">
+                    <div class="fragment info-box" style="padding: 0.8em;">
+                        <h3 style="margin-bottom: 0.3em;">About Embedded Systems?</h3>
+                        <p style="color: #94a3b8; margin: 0;">Arduino, sensors, GPIO...</p>
+                    </div>
+                    <div class="fragment info-box" style="padding: 0.8em;">
+                        <h3 style="margin-bottom: 0.3em;">About Interaction Design?</h3>
+                        <p style="color: #94a3b8; margin: 0;">Sensor→Response, user experience...</p>
+                    </div>
+                    <div class="fragment info-box" style="padding: 0.8em;">
+                        <h3 style="margin-bottom: 0.3em;">About Your Own Process?</h3>
+                        <p style="color: #94a3b8; margin: 0;">Problem-solving, debugging...</p>
+                    </div>
+                    <div class="fragment info-box" style="padding: 0.8em;">
+                        <h3 style="margin-bottom: 0.3em;">About HW + SW Integration?</h3>
+                        <p style="color: #94a3b8; margin: 0;">Physical meets digital...</p>
+                    </div>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 15: CONNECTIONS ==================== -->
+            <section>
+                <h2>How Does This Connect to AI?</h2>
+                <ul>
+                    <li class="fragment"><strong>Sensor data pipelines</strong> - Same principles as ML input</li>
+                    <li class="fragment"><strong>Edge computing</strong> - Processing at the device level</li>
+                    <li class="fragment"><strong>TinyML</strong> - ML on microcontrollers</li>
+                    <li class="fragment"><strong>Tangible interfaces</strong> - Physical AI interactions</li>
+                </ul>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 16: WHAT SURPRISED YOU ==================== -->
+            <section>
+                <h2>What Surprised You?</h2>
+                <ul style="font-size: 0.95em;">
+                    <li class="fragment">Challenges you didn't expect?</li>
+                    <li class="fragment">Things that were easier than anticipated?</li>
+                    <li class="fragment">Insights about physical vs digital?</li>
+                    <li class="fragment">Anything that changed your perspective?</li>
+                </ul>
+                <p class="fragment" style="margin-top: 1.5em; color: #a78bfa;"><em>Open floor for sharing...</em></p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 17: WHAT'S NEXT ==================== -->
+            <section>
+                <h2>Want to Go Further?</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em; font-size: 0.85em;">
+                    <div class="fragment">
+                        <h3>Hardware</h3>
+                        <ul>
+                            <li>ESP32/ESP8266 (WiFi!)</li>
+                            <li>More sensors</li>
+                            <li>Motors & actuators</li>
+                            <li>Wearables</li>
+                        </ul>
+                    </div>
+                    <div class="fragment">
+                        <h3>Software</h3>
+                        <ul>
+                            <li>TinyML on Arduino</li>
+                            <li>Computer vision</li>
+                            <li>Audio processing</li>
+                            <li>Wireless protocols</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 18: FEEDBACK ==================== -->
+            <section>
+                <h2>📝 Your Feedback Matters!</h2>
+                <div class="success-box">
+                    <p>Please fill out the feedback form!</p>
+                    <p style="font-size: 0.85em; color: #94a3b8;">It helps us improve future workshops</p>
+                </div>
+                <p class="fragment" style="margin-top: 1.5em;">What worked? What didn't? What would you change?</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 19: GROUP PHOTO ==================== -->
+            <section data-background-color="#0d1321">
+                <h1>📸 Group Photo!</h1>
+                <h3>Everyone with their creations!</h3>
+                <p style="margin-top: 2em;">Turn on all projects for the photo!</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 20: FAREWELL ==================== -->
+            <section data-background-color="#0a0f1a">
+                <h1>Thank You! 🙏</h1>
+                <h3>You did amazing work!</h3>
+                <div style="margin-top: 2em;">
+                    <p>Remember to:</p>
+                    <ul>
+                        <li class="fragment">Take your project home carefully</li>
+                        <li class="fragment">Keep experimenting!</li>
+                        <li class="fragment">Share your work (tag us!)</li>
+                    </ul>
+                </div>
+                <div class="fragment" style="margin-top: 2em;">
+                    <p style="font-size: 1.2em;">🌱 <strong>Keep making things that light up!</strong> 💡</p>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 21: CONTACT ==================== -->
+            <section>
+                <h2>Stay in Touch</h2>
+                <div class="info-box">
+                    <p><strong>Questions after today?</strong></p>
+                    <p style="color: #94a3b8;">Reach out to your instructors</p>
+                </div>
+                <div style="margin-top: 2em;">
+                    <p>Resources shared in the workshop folder</p>
+                    <p style="color: #64748b;">Code examples, library docs, parts list</p>
+                </div>
+                <p class="fragment" style="margin-top: 2em; font-size: 1.3em;">🌱✨💡</p>
+            </section>
+            <!-- ================================================================== -->
+
+        </div>
+    </div>
+
+    <!-- Reveal.js JavaScript from CDN -->
+    <script src="https://unpkg.com/reveal.js@4.6.0/dist/reveal.js"></script>
+
+    <script>
+        // Initialize reveal.js
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            showSlideNumber: 'all',
+            progress: true,
+            controls: true,
+            controlsLayout: 'bottom-right',
+            controlsBackArrows: 'faded',
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade'
+        });
+
+        // Reset scroll position when changing slides
+        Reveal.on('slidechanged', function(event) {
+            if (event.currentSlide) {
+                event.currentSlide.scrollTop = 0;
+            }
+        });
+
+        // Auto-scroll to show newly revealed fragments
+        Reveal.on('fragmentshown', function(event) {
+            const fragment = event.fragment;
+            const slide = fragment.closest('section');
+            if (slide) {
+                fragment.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest'
+                });
+            }
+        });
+
+        // Log when presentation starts
+        console.log('🌱 Plant Light Sculptures - Session 4 loaded!');
+
+        // ============ BOUNCING PARTICLES ============
+        const particles = [];
+        const PARTICLE_COUNT = 4;
+        const SPEED = 0.2;
+
+        const colors = [
+            'rgba(56, 189, 248, 0.8)',
+            'rgba(167, 139, 250, 0.6)',
+            'rgba(52, 211, 153, 0.5)',
+            'rgba(56, 189, 248, 0.6)'
+        ];
+
+        const shapes = [
+            { width: 150, height: 2 },
+            { width: 2, height: 150 },
+            { width: 100, height: 100 },
+            { width: 80, height: 80 }
+        ];
+
+        function initParticles() {
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                const el = document.createElement('div');
+                el.className = 'bounce-particle';
+                el.style.width = shapes[i].width + 'px';
+                el.style.height = shapes[i].height + 'px';
+                el.style.background = `linear-gradient(${Math.random() * 360}deg, transparent 0%, ${colors[i]} 50%, transparent 100%)`;
+
+                const x = Math.random() * (window.innerWidth - shapes[i].width);
+                const y = Math.random() * (window.innerHeight - shapes[i].height);
+
+                const angle = Math.random() * Math.PI * 2;
+                const vx = Math.cos(angle) * SPEED;
+                const vy = Math.sin(angle) * SPEED;
+
+                el.style.left = x + 'px';
+                el.style.top = y + 'px';
+
+                document.body.appendChild(el);
+
+                particles.push({ el, x, y, vx, vy, width: shapes[i].width, height: shapes[i].height });
+            }
+        }
+
+        function animate() {
+            const W = window.innerWidth;
+            const H = window.innerHeight;
+
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x <= 0 || p.x + p.width >= W) {
+                    p.vx *= -1;
+                    p.x = Math.max(0, Math.min(p.x, W - p.width));
+                }
+                if (p.y <= 0 || p.y + p.height >= H) {
+                    p.vy *= -1;
+                    p.y = Math.max(0, Math.min(p.y, H - p.height));
+                }
+
+                p.el.style.left = p.x + 'px';
+                p.el.style.top = p.y + 'px';
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        initParticles();
+        animate();
+    </script>
+</body>
+</html>

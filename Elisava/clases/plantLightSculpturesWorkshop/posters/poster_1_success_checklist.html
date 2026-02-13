@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workshop Reference Guide - Electronics Workshop</title>
+  <style>
+    /* =====================================================
+       COLOR PALETTE
+       -------------
+       BASE COLORS (Deep Navy/Slate):
+         - Darkest:  #0a0f1a (body background)
+         - Dark:     #0d1321 (poster gradient start)
+         - Medium:   #1a2332, #162033 (poster gradient midtones)
+
+       ACCENT COLORS:
+         - Cyan:     #38bdf8 (primary accent)
+         - Purple:   #a78bfa (secondary accent)
+         - Mint:     #34d399 (tertiary accent / success)
+
+       TEXT COLORS:
+         - Primary:  #e2e8f0
+         - Muted:    #64748b
+         - Dim:      #475569
+       ===================================================== */
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #0a0f1a;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem;
+    }
+
+    .poster {
+      position: relative;
+      width: 100%;
+      max-width: 700px;
+      min-height: 900px;
+      background: linear-gradient(145deg, #0d1321 0%, #1a2332 25%, #0f1a2b 50%, #162033 75%, #0d1524 100%);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+    }
+
+    .svg-background {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      opacity: 0.6;
+    }
+
+    .gradient-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background:
+        radial-gradient(ellipse at 20% 0%, rgba(56,189,248,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, rgba(167,139,250,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 0% 60%, rgba(52,211,153,0.04) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      z-index: 10;
+      padding: 2.5rem;
+      color: #e2e8f0;
+    }
+
+    /* ==================== TAB NAVIGATION ==================== */
+    .tab-navigation {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 1rem;
+    }
+
+    .tab-button {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px 8px 0 0;
+      padding: 0.75rem 1rem;
+      color: #94a3b8;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      flex: 1;
+      text-align: center;
+    }
+
+    .tab-button:hover {
+      background: rgba(56,189,248,0.1);
+      color: #e2e8f0;
+    }
+
+    .tab-button.active {
+      background: linear-gradient(135deg, rgba(56,189,248,0.2) 0%, rgba(167,139,250,0.2) 100%);
+      border-color: rgba(56,189,248,0.3);
+      color: #38bdf8;
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    /* ==================== HEADER ==================== */
+    .header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #38bdf8 0%, #a78bfa 50%, #34d399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .header .subtitle {
+      font-size: 1rem;
+      color: #64748b;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(56,189,248,0.1);
+      border: 1px solid rgba(56,189,248,0.2);
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      color: #38bdf8;
+      margin-bottom: 1rem;
+    }
+
+    .badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: #38bdf8;
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+    }
+
+    /* ==================== CHECKLIST STYLES ==================== */
+    .checklist-container {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+
+    .checklist-intro {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .checklist-intro p { color: #94a3b8; font-size: 1rem; transition: all 0.3s ease; }
+    .checklist-intro .emoji { font-size: 1.3rem; margin-left: 0.5rem; }
+
+    .checklist-intro.all-checked {
+      background: linear-gradient(135deg, rgba(239,68,68,0.15) 0%, rgba(251,146,60,0.1) 100%);
+      border-radius: 8px;
+      padding: 0.75rem;
+      margin: -0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .checklist-intro.all-checked p {
+      color: #fca5a5;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.9rem 1rem;
+      margin-bottom: 0.5rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.05);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .checklist-item:hover {
+      background: rgba(56,189,248,0.05);
+      border-color: rgba(56,189,248,0.15);
+    }
+
+    .checklist-item.checked {
+      background: rgba(52,211,153,0.08);
+      border-color: rgba(52,211,153,0.2);
+    }
+
+    .checklist-item.checked .checkbox {
+      background: #34d399;
+      border-color: #34d399;
+    }
+
+    .checklist-item.checked .checkbox svg { opacity: 1; }
+    .checklist-item.checked .item-text { color: #6ee7b7; }
+
+    .checkbox {
+      flex-shrink: 0;
+      width: 24px; height: 24px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      margin-top: 2px;
+    }
+
+    .checkbox svg {
+      width: 14px; height: 14px;
+      stroke: white;
+      stroke-width: 3;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .item-content { flex: 1; }
+
+    .item-text {
+      font-size: 1rem;
+      color: #e2e8f0;
+      line-height: 1.4;
+      transition: color 0.2s ease;
+    }
+
+    .item-hint {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 0.25rem;
+      font-family: 'SF Mono', 'Consolas', monospace;
+    }
+
+    /* ==================== ERROR CARD STYLES ==================== */
+    .error-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .error-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .error-title {
+      color: #f87171;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .error-title::before {
+      content: '⚠️';
+    }
+
+    .fix-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .fix-list li {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      padding: 0.3rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .fix-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #34d399;
+    }
+
+    .fix-list code {
+      background: rgba(56,189,248,0.1);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: #38bdf8;
+    }
+
+    /* ==================== RULE CARD STYLES ==================== */
+    .rule-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .rule-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .rule-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #38bdf8 0%, #a78bfa 100%);
+      border-radius: 50%;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: white;
+      margin-right: 0.75rem;
+    }
+
+    .rule-title {
+      color: #e2e8f0;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .rule-content {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      padding-left: 2.5rem;
+    }
+
+    .rule-content code {
+      background: rgba(56,189,248,0.1);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: #38bdf8;
+    }
+
+    .example-box {
+      background: rgba(0,0,0,0.2);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin-top: 0.75rem;
+      font-family: 'SF Mono', 'Consolas', monospace;
+      font-size: 0.8rem;
+    }
+
+    .example-good { border-left: 3px solid #34d399; }
+    .example-bad { border-left: 3px solid #f87171; }
+
+    /* ==================== CORNER ACCENTS ==================== */
+    .corner-accent {
+      position: absolute;
+      width: 80px; height: 80px;
+      pointer-events: none;
+    }
+    .corner-accent.top-left { top: 0; left: 0; }
+    .corner-accent.bottom-right { bottom: 0; right: 0; transform: rotate(180deg); }
+  </style>
+</head>
+<body>
+  <div class="poster">
+    <svg class="svg-background" viewBox="0 0 800 1000" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="traceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:0.3"/>
+          <stop offset="50%" style="stop-color:#a78bfa;stop-opacity:0.2"/>
+          <stop offset="100%" style="stop-color:#34d399;stop-opacity:0.3"/>
+        </linearGradient>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+          <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+          <circle cx="20" cy="20" r="1" fill="rgba(148,163,184,0.15)"/>
+        </pattern>
+        <symbol id="node" viewBox="0 0 20 20">
+          <circle cx="10" cy="10" r="4" fill="none" stroke="url(#traceGradient)" stroke-width="1.5"/>
+          <circle cx="10" cy="10" r="1.5" fill="#38bdf8" opacity="0.6"/>
+        </symbol>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#dots)"/>
+      <g stroke="url(#traceGradient)" stroke-width="1" fill="none" opacity="0.5">
+        <path d="M 0 150 L 80 150 L 80 80 L 150 80"/><path d="M 150 80 L 150 40"/><path d="M 80 150 L 80 200 L 40 200"/>
+        <path d="M 800 100 L 700 100 L 700 180 L 620 180"/><path d="M 700 100 L 700 50"/><path d="M 620 180 L 620 250 L 580 250"/>
+        <path d="M 0 450 L 60 450 L 60 380 L 120 380 L 120 420"/><path d="M 60 450 L 60 520 L 100 520"/>
+        <path d="M 800 500 L 720 500 L 720 440 L 680 440"/><path d="M 720 500 L 720 580"/>
+        <path d="M 50 900 L 50 850 L 120 850 L 120 800"/><path d="M 120 850 L 180 850 L 180 900 L 180 950"/>
+        <path d="M 750 850 L 750 780 L 680 780 L 680 820"/><path d="M 680 780 L 620 780 L 620 850"/><path d="M 750 850 L 750 920 L 700 920"/>
+      </g>
+      <g filter="url(#glow)">
+        <use href="#node" x="70" y="140" width="20" height="20"/><use href="#node" x="140" y="70" width="20" height="20"/><use href="#node" x="70" y="190" width="20" height="20"/>
+        <use href="#node" x="690" y="90" width="20" height="20"/><use href="#node" x="610" y="170" width="20" height="20"/><use href="#node" x="610" y="240" width="20" height="20"/>
+        <use href="#node" x="50" y="440" width="20" height="20"/><use href="#node" x="110" y="370" width="20" height="20"/><use href="#node" x="710" y="490" width="20" height="20"/><use href="#node" x="670" y="430" width="20" height="20"/>
+        <use href="#node" x="110" y="840" width="20" height="20"/><use href="#node" x="170" y="840" width="20" height="20"/><use href="#node" x="670" y="770" width="20" height="20"/><use href="#node" x="740" y="840" width="20" height="20"/>
+      </g>
+      <g opacity="0.15">
+        <polygon points="400,30 430,47 430,83 400,100 370,83 370,47" fill="none" stroke="#a78bfa" stroke-width="1"/>
+        <rect x="200" y="120" width="12" height="12" rx="2" fill="none" stroke="#38bdf8" stroke-width="1" transform="rotate(45 206 126)"/>
+        <rect x="600" y="300" width="12" height="12" rx="2" fill="none" stroke="#34d399" stroke-width="1" transform="rotate(45 606 306)"/>
+        <polygon points="250,950 265,920 235,920" fill="none" stroke="#34d399" stroke-width="1"/>
+        <polygon points="550,80 565,50 535,50" fill="none" stroke="#38bdf8" stroke-width="1"/>
+      </g>
+      <g fill="#38bdf8">
+        <circle cx="300" cy="200" r="2" opacity="0.3"/><circle cx="500" cy="400" r="1.5" opacity="0.2"/>
+        <circle cx="180" cy="500" r="2" opacity="0.25"/><circle cx="620" cy="550" r="1.5" opacity="0.2"/>
+        <circle cx="350" cy="750" r="2" opacity="0.3"/><circle cx="480" cy="850" r="1.5" opacity="0.25"/>
+      </g>
+    </svg>
+
+    <div class="gradient-overlay"></div>
+
+    <svg class="corner-accent top-left" viewBox="0 0 80 80">
+      <path d="M 0 20 L 20 20 L 20 0" fill="none" stroke="rgba(56,189,248,0.3)" stroke-width="2"/>
+      <circle cx="20" cy="20" r="3" fill="#38bdf8" opacity="0.5"/>
+    </svg>
+    <svg class="corner-accent bottom-right" viewBox="0 0 80 80">
+      <path d="M 0 20 L 20 20 L 20 0" fill="none" stroke="rgba(167,139,250,0.3)" stroke-width="2"/>
+      <circle cx="20" cy="20" r="3" fill="#a78bfa" opacity="0.5"/>
+    </svg>
+
+    <div class="content">
+      <div class="header">
+        <div class="badge">Workshop Reference</div>
+        <h1>📚 Quick Reference Guide</h1>
+        <p class="subtitle">Electronics Workshop</p>
+      </div>
+
+      <!-- TAB NAVIGATION -->
+      <div class="tab-navigation">
+        <button class="tab-button active" data-tab="checklist">✓ Checklist</button>
+        <button class="tab-button" data-tab="errors">🔧 Errors</button>
+        <button class="tab-button" data-tab="practices">💾 Best Practices</button>
+      </div>
+
+      <!-- TAB 1: SUCCESS CHECKLIST -->
+      <div class="tab-panel active" id="tab-checklist">
+        <div class="checklist-container">
+          <div class="checklist-intro" id="checklist-intro">
+            <p id="intro-message">Keep checking for the common issues below!</p>
+          </div>
+
+          <div class="checklist-item">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div class="item-content"><div class="item-text">Arduino plugged into USB</div></div>
+          </div>
+
+          <div class="checklist-item">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div class="item-content"><div class="item-text">Green power LED lit on Arduino</div></div>
+          </div>
+
+          <div class="checklist-item">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div class="item-content">
+              <div class="item-text">Correct board selected</div>
+              <div class="item-hint">Tools → Board → Arduino Uno</div>
+            </div>
+          </div>
+
+          <div class="checklist-item">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div class="item-content">
+              <div class="item-text">Correct port selected</div>
+              <div class="item-hint">Tools → Port → (shows your Arduino)</div>
+            </div>
+          </div>
+
+          <div class="checklist-item">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div class="item-content">
+              <div class="item-text">Code compiled without errors</div>
+              <div class="item-hint">Orange text = errors to fix</div>
+            </div>
+          </div>
+
+          <div class="checklist-item">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div class="item-content">
+              <div class="item-text">Code uploaded successfully</div>
+              <div class="item-hint">"Done uploading" message appears</div>
+            </div>
+          </div>
+
+          <div class="checklist-item">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div class="item-content">
+              <div class="item-text">LED strip has power connected</div>
+              <div class="item-hint">Red to 5V, Black to GND</div>
+            </div>
+          </div>
+
+          <div class="checklist-item">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div class="item-content">
+              <div class="item-text">LED strip data pin connected</div>
+              <div class="item-hint">Yellow to Pin 6 or your DATA_PIN</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: COMMON ERRORS & FIXES -->
+      <div class="tab-panel" id="tab-errors">
+        <div class="error-card">
+          <div class="error-title">"Port not found" or "Upload failed"</div>
+          <ul class="fix-list">
+            <li>Check USB cable is fully plugged in</li>
+            <li>Try a different USB port</li>
+            <li>Press reset button on Arduino</li>
+            <li>Go to <code>Tools → Port</code> and reselect</li>
+          </ul>
+        </div>
+
+        <div class="error-card">
+          <div class="error-title">Orange text in console (compilation error)</div>
+          <ul class="fix-list">
+            <li>Look for red underline in code</li>
+            <li>Check for missing semicolon <code>;</code></li>
+            <li>Check for missing bracket <code>}</code> or <code>)</code></li>
+            <li>Did you close all quotes <code>" "</code> ?</li>
+          </ul>
+        </div>
+
+        <div class="error-card">
+          <div class="error-title">LEDs don't light up</div>
+          <ul class="fix-list">
+            <li>Check power: Red to 5V, Black to GND</li>
+            <li>Check data: Yellow wire to correct pin</li>
+            <li>Is LED strip backwards? Look for arrows →</li>
+            <li>Try <code>FastLED.setBrightness(100);</code></li>
+          </ul>
+        </div>
+
+        <div class="error-card">
+          <div class="error-title">Sensor reads weird numbers</div>
+          <ul class="fix-list">
+            <li>Check sensor wiring (VCC, GND, Signal)</li>
+            <li>Open Serial Monitor: <code>Tools → Serial Monitor</code></li>
+            <li>Print value: <code>Serial.println(value);</code></li>
+            <li>Adjust sensor position/lighting</li>
+          </ul>
+        </div>
+
+        <div class="error-card">
+          <div class="error-title">"I broke it and don't know what I did!"</div>
+          <ul class="fix-list">
+            <li><code>File → Open</code> → Load your last saved version</li>
+            <li>Or re-copy the original snippet from folder</li>
+            <li>THIS IS WHY WE SAVE OFTEN! 💾</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TAB 3: GOOD DEV PRACTICES -->
+      <div class="tab-panel" id="tab-practices">
+        <div class="rule-card">
+          <div class="rule-title"><span class="rule-number">1</span> Save Your Working Code</div>
+          <div class="rule-content">
+            Before making ANY changes: <code>File → Save As</code><br>
+            Give it a descriptive name like <code>rainbow_v1.ino</code>
+            <div class="example-box example-good">
+              ✓ basic_working.ino<br>
+              ✓ sensor_test.ino<br>
+              ✓ final_day2.ino
+            </div>
+          </div>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-title"><span class="rule-number">2</span> Change One Thing at a Time</div>
+          <div class="rule-content">
+            <div class="example-box example-good">✅ Change brightness → Test → Save</div>
+            <div class="example-box example-bad">❌ Change 10 things → Upload → "What broke?"</div>
+          </div>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-title"><span class="rule-number">3</span> Comment Your Code</div>
+          <div class="rule-content">
+            Comments help you remember WHY you did something!
+            <div class="example-box example-good">
+              <code>// Changed from 100 - was too bright</code><br>
+              <code>int brightness = 50;</code>
+            </div>
+          </div>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-title"><span class="rule-number">4</span> Test Frequently</div>
+          <div class="rule-content">
+            After every small change:<br>
+            • Upload code<br>
+            • Watch what happens<br>
+            • If it works: <strong>SAVE IT!</strong><br>
+            • If it breaks: Undo and try again
+          </div>
+        </div>
+
+        <div class="rule-card">
+          <div class="rule-title"><span class="rule-number">5</span> Read Error Messages</div>
+          <div class="rule-content">
+            Orange text tells you WHAT is wrong and WHERE:<br>
+            <div class="example-box example-good">
+              <code>sketch.ino:23:5</code> = Line 23, position 5
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // ==================== TAB SWITCHING ====================
+      var tabButtons = Array.from(document.querySelectorAll('.tab-button'));
+      var tabPanels = Array.from(document.querySelectorAll('.tab-panel'));
+
+      for (var i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].addEventListener('click', function() {
+          var targetTab = this.getAttribute('data-tab');
+
+          // Remove active from all buttons and panels
+          for (var j = 0; j < tabButtons.length; j++) {
+            tabButtons[j].classList.remove('active');
+          }
+          for (var k = 0; k < tabPanels.length; k++) {
+            tabPanels[k].classList.remove('active');
+          }
+
+          // Add active to clicked button and corresponding panel
+          this.classList.add('active');
+          document.getElementById('tab-' + targetTab).classList.add('active');
+        });
+      }
+
+      // ==================== CHECKLIST FUNCTIONALITY ====================
+      var allItems = Array.from(document.querySelectorAll('.checklist-item'));
+      var intro = document.getElementById('checklist-intro');
+      var message = document.getElementById('intro-message');
+
+      function updateMessage() {
+        var checkedCount = document.querySelectorAll('.checklist-item.checked').length;
+
+        if (checkedCount === allItems.length) {
+          message.innerHTML = 'Still stuck? Call the teacher! <span class="emoji">🖐️</span>';
+          intro.classList.add('all-checked');
+        } else {
+          message.textContent = 'Keep checking for the common issues below!';
+          intro.classList.remove('all-checked');
+        }
+      }
+
+      for (var i = 0; i < allItems.length; i++) {
+        allItems[i].addEventListener('click', function() {
+          this.classList.toggle('checked');
+          updateMessage();
+        });
+      }
+
+      updateMessage();
+    });
+  </script>
+</body>
+</html>
