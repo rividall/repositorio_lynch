@@ -141,7 +141,7 @@
             text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
             border-left: 3px solid #38bdf8;
             padding-left: 0.5em;
-            margin-left: -0.5em;
+            display: inline-block;
         }
 
         .reveal h3 {
@@ -435,6 +435,24 @@
         .reveal .slides section {
             overflow-y: auto;
             max-height: 100%;
+            padding-left: 10%;
+            padding-right: 10%;
+            box-sizing: border-box;
+        }
+
+        /* Thin styled scrollbar */
+        .reveal .slides section::-webkit-scrollbar {
+            width: 6px;
+        }
+        .reveal .slides section::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .reveal .slides section::-webkit-scrollbar-thumb {
+            background: rgba(56, 189, 248, 0.3);
+            border-radius: 3px;
+        }
+        .reveal .slides section::-webkit-scrollbar-thumb:hover {
+            background: rgba(56, 189, 248, 0.5);
         }
 
         /* Compact slides - reduce spacing */
@@ -911,6 +929,204 @@ void loop() {
             </section>
             <!-- ================================================================== -->
 
+            <!-- ==================== SECTION: PLANT REACTIONS & SOUND ==================== -->
+            <section>
+                <h1>Plant Reactions & Sound 🎭</h1>
+                <p>Give your plant a voice and behavior</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== CREATIVITY: DEFINE REACTIONS ==================== -->
+            <section>
+                <h2>Define Reactions</h2>
+                <p style="font-size: 0.9em;">Complete this table for your plant:</p>
+                <table style="width: 100%; margin-top: 1em; border-collapse: collapse; font-size: 0.8em;">
+                    <thead>
+                        <tr style="background: rgba(56, 189, 248, 0.15);">
+                            <th style="padding: 0.6em 1em; text-align: left; border-bottom: 2px solid rgba(56, 189, 248, 0.4); color: #38bdf8;">Situation</th>
+                            <th style="padding: 0.6em 1em; text-align: left; border-bottom: 2px solid rgba(167, 139, 250, 0.4); color: #a78bfa;">Emotion</th>
+                            <th style="padding: 0.6em 1em; text-align: left; border-bottom: 2px solid rgba(52, 211, 153, 0.4); color: #34d399;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid rgba(56, 189, 248, 0.1);">
+                            <td style="padding: 0.8em 1em; color: #e2e8f0;">No one nearby</td>
+                            <td style="padding: 0.8em 1em;"><span style="border-bottom: 2px dashed rgba(167, 139, 250, 0.4);">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></td>
+                            <td style="padding: 0.8em 1em;"><span style="border-bottom: 2px dashed rgba(52, 211, 153, 0.4);">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(56, 189, 248, 0.1);">
+                            <td style="padding: 0.8em 1em; color: #e2e8f0;">Someone approaches</td>
+                            <td style="padding: 0.8em 1em;"><span style="border-bottom: 2px dashed rgba(167, 139, 250, 0.4);">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></td>
+                            <td style="padding: 0.8em 1em;"><span style="border-bottom: 2px dashed rgba(52, 211, 153, 0.4);">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.8em 1em; color: #e2e8f0;">Very close</td>
+                            <td style="padding: 0.8em 1em;"><span style="border-bottom: 2px dashed rgba(167, 139, 250, 0.4);">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></td>
+                            <td style="padding: 0.8em 1em;"><span style="border-bottom: 2px dashed rgba(52, 211, 153, 0.4);">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== CREATIVITY: TRANSLATE TO HARDWARE ==================== -->
+            <section>
+                <h2>Translate to Hardware</h2>
+                <p style="font-size: 0.85em;">Map your plant's emotions to output behaviors:</p>
+                <div style="display: flex; gap: 0.8em; margin-top: 1em; font-size: 0.8em;">
+                    <div style="flex: 1; background: rgba(52, 211, 153, 0.08); border: 1px solid rgba(52, 211, 153, 0.3); border-radius: 10px; padding: 1em;">
+                        <h3 style="color: #34d399; font-size: 1em; margin: 0 0 0.6em 0;">Far Away →</h3>
+                        <p style="margin: 0.4em 0;">☐ Soft light</p>
+                        <p style="margin: 0.4em 0;">☐ No movement</p>
+                        <p style="margin: 0.4em 0;">☐ Slow breathing sound</p>
+                    </div>
+                    <div style="flex: 1; background: rgba(251, 191, 36, 0.08); border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 10px; padding: 1em;">
+                        <h3 style="color: #fbbf24; font-size: 1em; margin: 0 0 0.6em 0;">Close →</h3>
+                        <p style="margin: 0.4em 0;">☐ Brighter light</p>
+                        <p style="margin: 0.4em 0;">☐ Small movement</p>
+                        <p style="margin: 0.4em 0;">☐ Heartbeat sound</p>
+                    </div>
+                    <div style="flex: 1; background: rgba(248, 113, 113, 0.08); border: 1px solid rgba(248, 113, 113, 0.3); border-radius: 10px; padding: 1em;">
+                        <h3 style="color: #f87171; font-size: 1em; margin: 0 0 0.6em 0;">Too Close / Threat →</h3>
+                        <p style="margin: 0.4em 0;">☐ Fast blinking</p>
+                        <p style="margin: 0.4em 0;">☐ Sharp sound</p>
+                        <p style="margin: 0.4em 0;">☐ Sudden movement</p>
+                    </div>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== CREATIVITY: SOUND MENU ==================== -->
+            <section>
+                <h2>Sound Menu — Choose Your Plant's Voice</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8em; margin-top: 0.8em; font-size: 0.7em;">
+                    <div style="background: rgba(52, 211, 153, 0.08); border: 1px solid rgba(52, 211, 153, 0.3); border-radius: 10px; padding: 0.8em 1em; text-align: left;">
+                        <h3 style="color: #34d399; font-size: 1.1em; margin: 0 0 0.4em 0;">🌬️ Pattern A — Breath / Wind</h3>
+                        <p style="margin: 0.2em 0;"><strong>Mood:</strong> Calm, friendly, alive</p>
+                        <p style="margin: 0.2em 0;"><strong>Use when:</strong> visitor is far away or moving slowly</p>
+                        <p style="margin: 0.2em 0;"><strong>Pitch:</strong> Low–Medium &nbsp; <strong>Rhythm:</strong> Slow</p>
+                        <p style="margin: 0.2em 0;"><strong>Silence:</strong> Long pauses</p>
+                        <p style="margin: 0.3em 0; color: #94a3b8; font-style: italic;">Feels like: breathing, wind through leaves</p>
+                        <p style="margin: 0.2em 0; color: #34d399;">Good for: peaceful plants</p>
+                    </div>
+                    <div style="background: rgba(244, 114, 182, 0.08); border: 1px solid rgba(244, 114, 182, 0.3); border-radius: 10px; padding: 0.8em 1em; text-align: left;">
+                        <h3 style="color: #f472b6; font-size: 1.1em; margin: 0 0 0.4em 0;">❤️ Pattern B — Heartbeat</h3>
+                        <p style="margin: 0.2em 0;"><strong>Mood:</strong> Organic, emotional</p>
+                        <p style="margin: 0.2em 0;"><strong>Use when:</strong> visitor is close</p>
+                        <p style="margin: 0.2em 0;"><strong>Pitch:</strong> Low &nbsp; <strong>Rhythm:</strong> Double pulse</p>
+                        <p style="margin: 0.2em 0;"><strong>Silence:</strong> Medium pause after pulse</p>
+                        <p style="margin: 0.3em 0; color: #94a3b8; font-style: italic;">Feels like: something alive reacting</p>
+                        <p style="margin: 0.2em 0; color: #f472b6;">Good for: shy or emotional plants</p>
+                    </div>
+                    <div style="background: rgba(251, 191, 36, 0.08); border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 10px; padding: 0.8em 1em; text-align: left;">
+                        <h3 style="color: #fbbf24; font-size: 1.1em; margin: 0 0 0.4em 0;">🐜 Pattern C — Insect / Alert</h3>
+                        <p style="margin: 0.2em 0;"><strong>Mood:</strong> Nervous, defensive</p>
+                        <p style="margin: 0.2em 0;"><strong>Use when:</strong> visitor is too close</p>
+                        <p style="margin: 0.2em 0;"><strong>Pitch:</strong> High &nbsp; <strong>Rhythm:</strong> Fast clicks</p>
+                        <p style="margin: 0.2em 0;"><strong>Silence:</strong> Very short</p>
+                        <p style="margin: 0.3em 0; color: #94a3b8; font-style: italic;">Feels like: warning, tension</p>
+                        <p style="margin: 0.2em 0; color: #fbbf24;">Good for: biting or reactive plants</p>
+                    </div>
+                    <div style="background: rgba(167, 139, 250, 0.08); border: 1px solid rgba(167, 139, 250, 0.3); border-radius: 10px; padding: 0.8em 1em; text-align: left;">
+                        <h3 style="color: #a78bfa; font-size: 1.1em; margin: 0 0 0.4em 0;">✨ Pattern D — Bloom / Reward</h3>
+                        <p style="margin: 0.2em 0;"><strong>Mood:</strong> Magical, joyful</p>
+                        <p style="margin: 0.2em 0;"><strong>Use when:</strong> plant is touched or "happy"</p>
+                        <p style="margin: 0.2em 0;"><strong>Pitch:</strong> Rising (low → high) &nbsp; <strong>Rhythm:</strong> Short melody</p>
+                        <p style="margin: 0.2em 0;"><strong>Silence:</strong> Minimal</p>
+                        <p style="margin: 0.3em 0; color: #94a3b8; font-style: italic;">Feels like: opening, blooming</p>
+                        <p style="margin: 0.2em 0; color: #a78bfa;">Good for: interaction reward</p>
+                    </div>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== CREATIVITY: SOUND RULES INTRO ==================== -->
+            <section>
+                <h2>Sound Rules</h2>
+                <p style="font-size: 0.95em;">For the garden to work as one, we need 2 rules:</p>
+                <div style="display: flex; gap: 1.2em; margin-top: 1.5em;">
+                    <div class="fragment" style="flex: 1; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 1.2em; text-align: center;">
+                        <h3 style="color: #38bdf8; font-size: 1.2em; margin: 0 0 0.4em 0;">Rule 1</h3>
+                        <p style="font-size: 1.1em; margin: 0;">Garden Sound Hierarchy</p>
+                    </div>
+                    <div class="fragment" style="flex: 1; background: rgba(167, 139, 250, 0.08); border: 1px solid rgba(167, 139, 250, 0.3); border-radius: 10px; padding: 1.2em; text-align: center;">
+                        <h3 style="color: #a78bfa; font-size: 1.2em; margin: 0 0 0.4em 0;">Rule 2</h3>
+                        <p style="font-size: 1.1em; margin: 0;">Each Plant Has ONE Main Sound</p>
+                    </div>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== CREATIVITY: RULE 1 ==================== -->
+            <section>
+                <h2>Rule 1 — Garden Sound Hierarchy</h2>
+                <p style="font-size: 0.85em;">3 sound layers for the whole garden:</p>
+                <div style="margin-top: 0.8em; font-size: 0.8em;">
+                    <div class="fragment" style="background: rgba(52, 211, 153, 0.08); border: 1px solid rgba(52, 211, 153, 0.3); border-radius: 10px; padding: 0.8em 1.2em; margin-bottom: 0.6em; text-align: left;">
+                        <h3 style="color: #34d399; font-size: 1.1em; margin: 0 0 0.3em 0;">Layer 1 — Ambient (always soft)</h3>
+                        <p style="margin: 0.2em 0;">Only 1–2 plants active at a time</p>
+                        <p style="margin: 0.2em 0;">Use Pattern A or B</p>
+                        <p style="margin: 0.2em 0;">Low volume (short, slow buzzer sounds)</p>
+                        <p style="margin: 0.3em 0; color: #34d399;">👉 This creates atmosphere.</p>
+                    </div>
+                    <div class="fragment" style="background: rgba(251, 191, 36, 0.08); border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 10px; padding: 0.8em 1.2em; margin-bottom: 0.6em; text-align: left;">
+                        <h3 style="color: #fbbf24; font-size: 1.1em; margin: 0 0 0.3em 0;">Layer 2 — Interaction (momentary)</h3>
+                        <p style="margin: 0.2em 0;">When someone interacts with ONE plant</p>
+                        <p style="margin: 0.2em 0;">Use Pattern C or D</p>
+                        <p style="margin: 0.2em 0;">Lasts maximum 2–3 seconds</p>
+                        <p style="margin: 0.3em 0; color: #fbbf24;">👉 The sound appears and disappears quickly.</p>
+                    </div>
+                    <div class="fragment" style="background: rgba(167, 139, 250, 0.08); border: 1px solid rgba(167, 139, 250, 0.3); border-radius: 10px; padding: 0.8em 1.2em; text-align: left;">
+                        <h3 style="color: #a78bfa; font-size: 1.1em; margin: 0 0 0.3em 0;">Layer 3 — Silence (very important)</h3>
+                        <p style="margin: 0.2em 0;">If nothing happens → silence</p>
+                        <p style="margin: 0.3em 0; color: #a78bfa;">👉 Silence gives the next sound impact.</p>
+                    </div>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== CREATIVITY: RULE 2 ==================== -->
+            <section>
+                <h2>Rule 2 — Each Plant Has ONE Main Sound</h2>
+                <div style="display: flex; gap: 1.5em; margin-top: 1.5em; font-size: 0.9em;">
+                    <div style="flex: 1; background: rgba(248, 113, 113, 0.08); border: 1px solid rgba(248, 113, 113, 0.3); border-radius: 10px; padding: 1.2em; text-align: left;">
+                        <h3 style="color: #f87171; font-size: 1.1em; margin: 0 0 0.6em 0;">❌ No:</h3>
+                        <p style="margin: 0;">One plant running 5 patterns all the time</p>
+                    </div>
+                    <div style="flex: 1; background: rgba(52, 211, 153, 0.08); border: 1px solid rgba(52, 211, 153, 0.3); border-radius: 10px; padding: 1.2em; text-align: left;">
+                        <h3 style="color: #34d399; font-size: 1.1em; margin: 0 0 0.6em 0;">✅ Yes:</h3>
+                        <p style="margin: 0.3em 0;">1 dominant pattern</p>
+                        <p style="margin: 0.3em 0;">1 special pattern (touch / bite / bloom)</p>
+                    </div>
+                </div>
+                <div class="fragment" style="margin-top: 1.5em; background: rgba(56, 189, 248, 0.1); border-left: 4px solid #38bdf8; padding: 0.8em 1.2em; border-radius: 0 8px 8px 0; text-align: left; font-size: 0.95em;">
+                    This keeps the plant's identity clear.
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== CREATIVITY: SOUND MOTIF PROMPT ==================== -->
+            <section>
+                <h2>Sound Motif Prompt</h2>
+                <p style="font-size: 0.85em;">Generate short sonic ideas that your plant can "interpret" through sound.</p>
+                <div style="background: rgba(167, 139, 250, 0.08); border: 1px solid rgba(167, 139, 250, 0.3); border-radius: 8px; padding: 0.8em 1em; text-align: left; font-size: 0.65em; font-family: monospace; line-height: 1.7; margin: 0.8em 0;">
+                    Suggest 3 short sound motifs or descriptions<br>
+                    (like "soft chime like wind through leaves"<br>
+                    or "deep pulsating heartbeat")<br>
+                    that reflect our plant's mood and personality.<br>
+                    Keep them short and poetic.
+                </div>
+                <div class="fragment" style="margin-top: 1em; text-align: left; font-size: 0.85em;">
+                    <h3 style="color: #34d399; font-size: 1em;">Outcome</h3>
+                    <p style="margin: 0.3em 0;">You will receive short descriptive sound phrases. As a group:</p>
+                    <div style="background: rgba(52, 211, 153, 0.06); border: 1px solid rgba(52, 211, 153, 0.2); border-radius: 8px; padding: 0.8em 1em; margin-top: 0.5em;">
+                        <p style="margin: 0.3em 0;">1. <strong style="color: #38bdf8;">Choose one motif</strong> as your plant's main sound identity</p>
+                        <p style="margin: 0.3em 0;">2. <strong style="color: #a78bfa;">Translate</strong> that description into a simple buzzer pattern (pitch, rhythm, pauses)</p>
+                    </div>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
             <!-- ==================== SECTION: CODE REFINEMENT ==================== -->
             <section>
                 <h1>Code Refinement 💎</h1>
@@ -1026,6 +1242,11 @@ void loop() {
             transition: 'slide',
             transitionSpeed: 'default',
             backgroundTransition: 'fade',
+            width: '100%',
+            height: '100%',
+            margin: 0,
+            minScale: 1,
+            maxScale: 1,
 
             // Plugins
             plugins: [ RevealHighlight, RevealNotes ]

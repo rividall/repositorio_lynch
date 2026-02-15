@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Test - Tron / Circuit Board</title>
+
+    <!-- Reveal.js CSS from CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.6.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.6.0/dist/theme/black.css">
+
+    <style>
+        /* =====================================================
+           TRON LEGACY / CIRCUIT BOARD THEME
+           ===================================================== */
+
+        /* ============ CIRCUIT BOARD BACKGROUND ============ */
+
+        .reveal-viewport {
+            background:
+                /* Main dark gradient */
+                linear-gradient(180deg, #050a12 0%, #0a1628 50%, #051018 100%);
+        }
+
+        /* Circuit board grid pattern */
+        .reveal-viewport::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+            background-image:
+                /* Horizontal circuit lines */
+                linear-gradient(0deg, transparent 49px, rgba(56, 189, 248, 0.08) 49px, rgba(56, 189, 248, 0.08) 50px, transparent 50px),
+                /* Vertical circuit lines */
+                linear-gradient(90deg, transparent 49px, rgba(56, 189, 248, 0.08) 49px, rgba(56, 189, 248, 0.08) 50px, transparent 50px),
+                /* Diagonal traces - right */
+                linear-gradient(45deg, transparent 70.5%, rgba(167, 139, 250, 0.05) 70.5%, rgba(167, 139, 250, 0.05) 71%, transparent 71%),
+                /* Diagonal traces - left */
+                linear-gradient(-45deg, transparent 70.5%, rgba(52, 211, 153, 0.05) 70.5%, rgba(52, 211, 153, 0.05) 71%, transparent 71%);
+            background-size: 50px 50px, 50px 50px, 100px 100px, 100px 100px;
+        }
+
+        /* Glowing nodes at grid intersections */
+        .reveal-viewport::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image:
+                /* Corner nodes - bright */
+                radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.4) 0%, transparent 2px),
+                radial-gradient(circle at 100% 0%, rgba(167, 139, 250, 0.4) 0%, transparent 2px),
+                radial-gradient(circle at 0% 100%, rgba(52, 211, 153, 0.4) 0%, transparent 2px),
+                radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.4) 0%, transparent 2px),
+                /* Edge nodes */
+                radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.3) 0%, transparent 3px),
+                radial-gradient(circle at 50% 100%, rgba(56, 189, 248, 0.3) 0%, transparent 3px),
+                radial-gradient(circle at 0% 50%, rgba(167, 139, 250, 0.3) 0%, transparent 3px),
+                radial-gradient(circle at 100% 50%, rgba(52, 211, 153, 0.3) 0%, transparent 3px);
+        }
+
+        /* Bouncing particles - created via JavaScript */
+        .bounce-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: -1;
+            border-radius: 2px;
+            opacity: 0.15;
+        }
+
+        /* Hexagonal corner accents */
+        .reveal .slides::after {
+            content: '';
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: calc(100% - 40px);
+            height: calc(100% - 40px);
+            pointer-events: none;
+            z-index: -1;
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            /* Angled corners - clipped */
+            clip-path: polygon(
+                20px 0%, calc(100% - 20px) 0%,
+                100% 20px, 100% calc(100% - 20px),
+                calc(100% - 20px) 100%, 20px 100%,
+                0% calc(100% - 20px), 0% 20px
+            );
+        }
+
+        /* ============ CONTENT STYLING ============ */
+
+        .reveal {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #e2e8f0;
+        }
+
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+            text-transform: none;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .reveal h1 {
+            font-size: 2.3em;
+            background: linear-gradient(135deg, #38bdf8 0%, #a78bfa 50%, #34d399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(56, 189, 248, 0.5);
+            position: relative;
+        }
+
+        /* Glowing underline for h1 */
+        .reveal h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #38bdf8, #a78bfa, #38bdf8, transparent);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        .reveal h2 {
+            color: #38bdf8;
+            font-size: 1.5em;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+            border-left: 3px solid #38bdf8;
+            padding-left: 0.5em;
+            margin-left: -0.5em;
+        }
+
+        .reveal h3 {
+            color: #a78bfa;
+            font-size: 1em;
+        }
+
+        .reveal p, .reveal li {
+            color: #e2e8f0;
+        }
+
+        .reveal strong {
+            color: #38bdf8;
+            text-shadow: 0 0 8px rgba(56, 189, 248, 0.3);
+        }
+
+        /* Links */
+        .reveal a {
+            color: #38bdf8;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .reveal a:hover {
+            color: #a78bfa;
+            border-bottom-color: #a78bfa;
+            text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+        }
+
+        /* Code styling - circuit board aesthetic */
+        .reveal code {
+            font-size: 0.9em;
+            padding: 0.2em 0.5em;
+            background: rgba(56,189,248,0.1);
+            border: 1px solid rgba(56,189,248,0.3);
+            border-radius: 4px;
+            color: #38bdf8;
+            font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+            box-shadow: 0 0 5px rgba(56, 189, 248, 0.2);
+        }
+
+        .reveal pre {
+            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(56,189,248,0.3);
+            border-radius: 8px;
+            box-shadow:
+                0 0 20px rgba(56,189,248,0.1),
+                inset 0 0 30px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        /* Circuit trace accent on code blocks */
+        .reveal pre::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #38bdf8, #a78bfa, #34d399);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .reveal pre code {
+            max-height: 500px;
+            font-size: 0.7em;
+            line-height: 1.5;
+            padding: 1.2em 1em 1em;
+            background: transparent;
+            border: none;
+            color: #e2e8f0;
+            box-shadow: none;
+        }
+
+        /* ============ TRON SYNTAX HIGHLIGHTING ============ */
+
+        /* Keywords (void, int, return, for, if, const) - Bright Cyan */
+        .reveal pre code .hljs-keyword {
+            color: #38bdf8;
+            text-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+            font-weight: 600;
+        }
+
+        /* Types (CRGB, int, float, long) - Purple */
+        .reveal pre code .hljs-type {
+            color: #a78bfa;
+            text-shadow: 0 0 6px rgba(167, 139, 250, 0.4);
+        }
+
+        /* Functions - Mint Green */
+        .reveal pre code .hljs-function {
+            color: #34d399;
+            text-shadow: 0 0 6px rgba(52, 211, 153, 0.4);
+        }
+
+        /* Numbers - Orange/Gold */
+        .reveal pre code .hljs-number {
+            color: #fbbf24;
+            text-shadow: 0 0 5px rgba(251, 191, 36, 0.3);
+        }
+
+        /* Strings - Soft Pink */
+        .reveal pre code .hljs-string {
+            color: #f472b6;
+            text-shadow: 0 0 5px rgba(244, 114, 182, 0.3);
+        }
+
+        /* Comments - Dim cyan, italic */
+        .reveal pre code .hljs-comment {
+            color: #4a9ead;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        /* Preprocessor/Meta (#include, #define) - Bright Purple */
+        .reveal pre code .hljs-meta {
+            color: #c084fc;
+            text-shadow: 0 0 8px rgba(192, 132, 252, 0.5);
+        }
+
+        /* Variables/Constants (ALL_CAPS) - Cyan-white */
+        .reveal pre code .hljs-variable {
+            color: #67e8f9;
+            text-shadow: 0 0 4px rgba(103, 232, 249, 0.3);
+        }
+
+        /* Built-in values (HIGH, LOW, true, false) - Gold */
+        .reveal pre code .hljs-literal {
+            color: #fde047;
+            text-shadow: 0 0 5px rgba(253, 224, 71, 0.3);
+        }
+
+        /* Operators - White with slight glow */
+        .reveal pre code .hljs-operator {
+            color: #f1f5f9;
+            text-shadow: 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Line numbers gutter effect */
+        .reveal pre code .hljs-ln-numbers {
+            color: #475569;
+            border-right: 1px solid rgba(56, 189, 248, 0.2);
+            padding-right: 1em;
+            margin-right: 1em;
+        }
+
+        /* Selection highlight */
+        .reveal pre code::selection,
+        .reveal pre code *::selection {
+            background: rgba(56, 189, 248, 0.3);
+        }
+
+        /* Info/Warning/Success boxes - geometric style */
+        .reveal .warning-box {
+            background: linear-gradient(135deg, rgba(248,113,113,0.1) 0%, rgba(0,0,0,0.3) 100%);
+            border: 1px solid rgba(248,113,113,0.4);
+            border-left: 4px solid #f87171;
+            padding: 1em 1.5em;
+            border-radius: 0 8px 8px 0;
+            margin: 1em 0;
+            color: #fca5a5;
+            position: relative;
+        }
+
+        .reveal .success-box {
+            background: linear-gradient(135deg, rgba(52,211,153,0.1) 0%, rgba(0,0,0,0.3) 100%);
+            border: 1px solid rgba(52,211,153,0.4);
+            border-left: 4px solid #34d399;
+            padding: 1em 1.5em;
+            border-radius: 0 8px 8px 0;
+            margin: 1em 0;
+            color: #6ee7b7;
+        }
+
+        .reveal .success-box h3 {
+            color: #34d399;
+            margin-bottom: 0.5em;
+        }
+
+        .reveal .info-box {
+            background: linear-gradient(135deg, rgba(56,189,248,0.1) 0%, rgba(0,0,0,0.3) 100%);
+            border: 1px solid rgba(56,189,248,0.4);
+            border-left: 4px solid #38bdf8;
+            padding: 1em 1.5em;
+            border-radius: 0 8px 8px 0;
+            margin: 1em 0;
+            color: #7dd3fc;
+        }
+
+        /* Images with tech frame */
+        .reveal img {
+            max-height: 400px;
+            border-radius: 4px;
+            border: 2px solid rgba(56,189,248,0.3);
+            box-shadow:
+                0 0 20px rgba(56,189,248,0.2),
+                0 10px 40px rgba(0,0,0,0.4);
+        }
+
+        /* Lists with circuit markers */
+        .reveal ul, .reveal ol {
+            display: block;
+            margin-left: 1em;
+        }
+
+        .reveal li {
+            margin: 0.5em 0;
+            position: relative;
+        }
+
+        .reveal ul li::marker {
+            color: #38bdf8;
+        }
+
+        .reveal ol li::marker {
+            color: #a78bfa;
+        }
+
+        /* Small text */
+        .reveal .small-text {
+            font-size: 0.8em;
+            color: #64748b;
+        }
+
+        /* Progress bar - circuit style */
+        .reveal .progress {
+            background: rgba(56,189,248,0.1);
+            height: 3px;
+        }
+
+        .reveal .progress span {
+            background: linear-gradient(90deg, #38bdf8, #a78bfa);
+            box-shadow: 0 0 15px rgba(56,189,248,0.8);
+        }
+
+        /* Slide number - tech display */
+        .reveal .slide-number {
+            background: rgba(0,0,0,0.5);
+            color: #38bdf8;
+            font-size: 12px;
+            font-family: 'SF Mono', 'Consolas', monospace;
+            padding: 8px 12px;
+            border: 1px solid rgba(56,189,248,0.3);
+            border-radius: 4px;
+        }
+
+        /* Controls - glowing */
+        .reveal .controls button {
+            color: #38bdf8;
+        }
+
+        .reveal .controls button:hover {
+            color: #a78bfa;
+        }
+
+        /* Allow scrolling on slides with overflow */
+        .reveal .slides section {
+            overflow-y: auto;
+            max-height: 100%;
+        }
+
+        /* ============ SPECIAL TITLE SLIDE ============ */
+        section[data-background-color="#050a12"] h1::after {
+            width: 80%;
+        }
+
+        /* Tech corner brackets for title slides */
+        .tech-frame {
+            position: relative;
+            padding: 2em;
+        }
+
+        .tech-frame::before,
+        .tech-frame::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #38bdf8;
+        }
+
+        .tech-frame::before {
+            top: 0;
+            left: 0;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .tech-frame::after {
+            bottom: 0;
+            right: 0;
+            border-left: none;
+            border-top: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- ==================== SLIDE 1: TITLE SLIDE ==================== -->
+            <section data-background-color="#050a12">
+                <h1>⚡ Tron Style Test</h1>
+                <h3>Circuit Board Aesthetics</h3>
+                <p>Testing geometric lines and data pulses</p>
+                <p class="small-text">Notice the grid, corner accents, and flowing pulses</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 2: CONTENT SLIDE ==================== -->
+            <section>
+                <h2>Regular Content Slide</h2>
+                <p>This is how regular content looks with the circuit board background.</p>
+                <ul>
+                    <li class="fragment">First bullet point with fragment</li>
+                    <li class="fragment">Second bullet point</li>
+                    <li class="fragment">Third bullet point</li>
+                </ul>
+                <p class="fragment">Notice the geometric grid pattern and glowing nodes.</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 3: BOXES ==================== -->
+            <section>
+                <h2>Box Styles - Tech Aesthetic</h2>
+                <div class="success-box">
+                    <h3>Success Box</h3>
+                    <p>Now with sharp left border accent!</p>
+                </div>
+                <div class="warning-box">
+                    <p><strong>Warning Box</strong> - geometric style</p>
+                </div>
+                <div class="info-box">
+                    <p><strong>Info Box</strong> - circuit board feel</p>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 4: CODE BASIC ==================== -->
+            <section>
+                <h2>Code Block - Basic</h2>
+                <pre><code class="language-cpp" data-trim>
+void setup() {
+    FastLED.addLeds<WS2812, 6, GRB>(leds, NUM_LEDS);
+}
+
+void loop() {
+    leds[0] = CRGB::Cyan;
+    FastLED.show();
+}
+                </code></pre>
+                <p>Code blocks have a gradient top accent bar.</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 4B: CODE HIGHLIGHTED ==================== -->
+            <section>
+                <h2>Syntax Highlighting - Arduino</h2>
+                <pre><code class="language-cpp" data-trim>
+<span class="hljs-meta">#include</span> <span class="hljs-string">&lt;FastLED.h&gt;</span>
+
+<span class="hljs-meta">#define</span> <span class="hljs-variable">NUM_LEDS</span> <span class="hljs-number">30</span>
+<span class="hljs-meta">#define</span> <span class="hljs-variable">DATA_PIN</span> <span class="hljs-number">6</span>
+
+<span class="hljs-type">CRGB</span> leds[<span class="hljs-variable">NUM_LEDS</span>];
+
+<span class="hljs-keyword">void</span> <span class="hljs-function">setup</span>() {
+    FastLED.<span class="hljs-function">addLeds</span>&lt;WS2812, <span class="hljs-variable">DATA_PIN</span>, GRB&gt;(leds, <span class="hljs-variable">NUM_LEDS</span>);
+    FastLED.<span class="hljs-function">setBrightness</span>(<span class="hljs-number">50</span>);
+}
+
+<span class="hljs-keyword">void</span> <span class="hljs-function">loop</span>() {
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-variable">NUM_LEDS</span>; i++) {
+        leds[i] = <span class="hljs-type">CHSV</span>(<span class="hljs-number">160</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>); <span class="hljs-comment">// Cyan</span>
+    }
+    FastLED.<span class="hljs-function">show</span>();
+}
+                </code></pre>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 4C: MORE CODE ==================== -->
+            <section>
+                <h2>Syntax Highlighting - Variables</h2>
+                <pre><code class="language-cpp" data-trim>
+<span class="hljs-comment">// Sensor configuration</span>
+<span class="hljs-keyword">const</span> <span class="hljs-type">int</span> <span class="hljs-variable">TRIG_PIN</span> = <span class="hljs-number">9</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-type">int</span> <span class="hljs-variable">ECHO_PIN</span> = <span class="hljs-number">10</span>;
+<span class="hljs-type">float</span> distance = <span class="hljs-number">0.0</span>;
+
+<span class="hljs-type">long</span> <span class="hljs-function">measureDistance</span>() {
+    <span class="hljs-function">digitalWrite</span>(<span class="hljs-variable">TRIG_PIN</span>, <span class="hljs-keyword">LOW</span>);
+    <span class="hljs-function">delayMicroseconds</span>(<span class="hljs-number">2</span>);
+    <span class="hljs-function">digitalWrite</span>(<span class="hljs-variable">TRIG_PIN</span>, <span class="hljs-keyword">HIGH</span>);
+    <span class="hljs-function">delayMicroseconds</span>(<span class="hljs-number">10</span>);
+
+    <span class="hljs-type">long</span> duration = <span class="hljs-function">pulseIn</span>(<span class="hljs-variable">ECHO_PIN</span>, <span class="hljs-keyword">HIGH</span>);
+    <span class="hljs-keyword">return</span> duration * <span class="hljs-number">0.034</span> / <span class="hljs-number">2</span>;
+}
+                </code></pre>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 4D: INLINE CODE ==================== -->
+            <section>
+                <h2>Inline Code Examples</h2>
+                <p>Use <code>FastLED.show()</code> to push data to LEDs.</p>
+                <p class="fragment">The <code>CRGB</code> type holds RGB values.</p>
+                <p class="fragment">Set brightness with <code>FastLED.setBrightness(50)</code></p>
+                <p class="fragment">Pin constants like <code>DATA_PIN</code> should be defined.</p>
+                <div class="info-box fragment">
+                    <p>💡 Tip: Use <code>#define</code> for constants to save memory!</p>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 4E: SYNTAX LEGEND ==================== -->
+            <section>
+                <h2>Syntax Highlighting Legend</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em; font-size: 0.85em; text-align: left;">
+                    <div>
+                        <p><span style="color: #38bdf8; text-shadow: 0 0 8px rgba(56,189,248,0.5); font-weight: 600;">■ Keywords</span> — void, int, return, for</p>
+                        <p><span style="color: #a78bfa; text-shadow: 0 0 6px rgba(167,139,250,0.4);">■ Types</span> — CRGB, float, long</p>
+                        <p><span style="color: #34d399; text-shadow: 0 0 6px rgba(52,211,153,0.4);">■ Functions</span> — setup(), show()</p>
+                        <p><span style="color: #fbbf24; text-shadow: 0 0 5px rgba(251,191,36,0.3);">■ Numbers</span> — 30, 0.034, 255</p>
+                    </div>
+                    <div>
+                        <p><span style="color: #f472b6; text-shadow: 0 0 5px rgba(244,114,182,0.3);">■ Strings</span> — "text", &lt;lib.h&gt;</p>
+                        <p><span style="color: #c084fc; text-shadow: 0 0 8px rgba(192,132,252,0.5);">■ Preprocessor</span> — #include, #define</p>
+                        <p><span style="color: #67e8f9; text-shadow: 0 0 4px rgba(103,232,249,0.3);">■ Constants</span> — NUM_LEDS, DATA_PIN</p>
+                        <p><span style="color: #4a9ead; font-style: italic; opacity: 0.8;">■ Comments</span> — // note</p>
+                    </div>
+                </div>
+                <p class="small-text" style="margin-top: 1em;">All colors have subtle glow effects for that Tron aesthetic ✨</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 5: GRID LAYOUT ==================== -->
+            <section>
+                <h2>Grid Layout Test</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em;">
+                    <div class="info-box" style="padding: 1em;">
+                        <h3>Left Column</h3>
+                        <p>Some content here</p>
+                    </div>
+                    <div class="info-box" style="padding: 1em;">
+                        <h3>Right Column</h3>
+                        <p>More content here</p>
+                    </div>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 6: SECTION DIVIDER ==================== -->
+            <section data-background-color="#050a12">
+                <h1>Section Divider ⚡</h1>
+                <p>The animated pulses flow across the grid</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 7: DENSE CONTENT ==================== -->
+            <section>
+                <h2>Dense Content Test</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1em; font-size: 0.85em;">
+                    <div class="fragment">
+                        <h3>Column 1</h3>
+                        <ul>
+                            <li>Item A</li>
+                            <li>Item B</li>
+                            <li>Item C</li>
+                        </ul>
+                    </div>
+                    <div class="fragment">
+                        <h3>Column 2</h3>
+                        <ul>
+                            <li>Item D</li>
+                            <li>Item E</li>
+                            <li>Item F</li>
+                        </ul>
+                    </div>
+                    <div class="fragment">
+                        <h3>Column 3</h3>
+                        <ul>
+                            <li>Item G</li>
+                            <li>Item H</li>
+                            <li>Item I</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SLIDE 8: END ==================== -->
+            <section data-background-color="#050a12">
+                <h1>✨ End of Test ✨</h1>
+                <h3>Tron Legacy Aesthetic</h3>
+                <p>The background features:</p>
+                <ul>
+                    <li>Geometric circuit grid pattern</li>
+                    <li>Glowing nodes at corners/edges</li>
+                    <li>Animated data pulse lines</li>
+                    <li>Sharp angular borders</li>
+                    <li>Tech-style accent bars</li>
+                </ul>
+            </section>
+            <!-- ================================================================== -->
+
+        </div>
+    </div>
+
+    <!-- Reveal.js JavaScript from CDN -->
+    <script src="https://unpkg.com/reveal.js@4.6.0/dist/reveal.js"></script>
+    <script src="https://unpkg.com/reveal.js@4.6.0/plugin/highlight/highlight.js"></script>
+
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            showSlideNumber: 'all',
+            progress: true,
+            controls: true,
+            controlsLayout: 'bottom-right',
+            controlsBackArrows: 'faded',
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            plugins: [ RevealHighlight ]
+        });
+
+        // Reset scroll position when changing slides
+        Reveal.on('slidechanged', function(event) {
+            if (event.currentSlide) {
+                event.currentSlide.scrollTop = 0;
+            }
+        });
+
+        // Auto-scroll to show newly revealed fragments
+        Reveal.on('fragmentshown', function(event) {
+            const fragment = event.fragment;
+            const slide = fragment.closest('section');
+            if (slide) {
+                fragment.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest'
+                });
+            }
+        });
+
+        console.log('⚡ Tron Style Test loaded!');
+
+        // ============ BOUNCING PARTICLES ============
+        const particles = [];
+        const PARTICLE_COUNT = 4;
+        const SPEED = 0.2; // pixels per frame - constant speed
+
+        // Particle colors
+        const colors = [
+            'rgba(56, 189, 248, 0.8)',   // cyan
+            'rgba(167, 139, 250, 0.6)',  // purple
+            'rgba(52, 211, 153, 0.5)',   // mint
+            'rgba(56, 189, 248, 0.6)'    // cyan again
+        ];
+
+        // Particle shapes
+        const shapes = [
+            { width: 150, height: 2 },   // horizontal line
+            { width: 2, height: 150 },   // vertical line
+            { width: 100, height: 100 }, // square (will be rotated)
+            { width: 80, height: 80 }    // smaller square
+        ];
+
+        // Initialize particles
+        function initParticles() {
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                const el = document.createElement('div');
+                el.className = 'bounce-particle';
+                el.style.width = shapes[i].width + 'px';
+                el.style.height = shapes[i].height + 'px';
+                el.style.background = `linear-gradient(${Math.random() * 360}deg, transparent 0%, ${colors[i]} 50%, transparent 100%)`;
+
+                // Random starting position
+                const x = Math.random() * (window.innerWidth - shapes[i].width);
+                const y = Math.random() * (window.innerHeight - shapes[i].height);
+
+                // Random direction (normalized for constant speed)
+                const angle = Math.random() * Math.PI * 2;
+                const vx = Math.cos(angle) * SPEED;
+                const vy = Math.sin(angle) * SPEED;
+
+                el.style.left = x + 'px';
+                el.style.top = y + 'px';
+
+                document.body.appendChild(el);
+
+                particles.push({
+                    el: el,
+                    x: x,
+                    y: y,
+                    vx: vx,
+                    vy: vy,
+                    width: shapes[i].width,
+                    height: shapes[i].height
+                });
+            }
+        }
+
+        // Animation loop
+        function animate() {
+            const W = window.innerWidth;
+            const H = window.innerHeight;
+
+            particles.forEach(p => {
+                // Move
+                p.x += p.vx;
+                p.y += p.vy;
+
+                // Bounce off edges
+                if (p.x <= 0 || p.x + p.width >= W) {
+                    p.vx *= -1;
+                    p.x = Math.max(0, Math.min(p.x, W - p.width));
+                }
+                if (p.y <= 0 || p.y + p.height >= H) {
+                    p.vy *= -1;
+                    p.y = Math.max(0, Math.min(p.y, H - p.height));
+                }
+
+                // Update position
+                p.el.style.left = p.x + 'px';
+                p.el.style.top = p.y + 'px';
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        // Start
+        initParticles();
+        animate();
+    </script>
+</body>
+</html>

@@ -451,6 +451,24 @@
         .reveal .slides section {
             overflow-y: auto;
             max-height: 100%;
+            padding-left: 10%;
+            padding-right: 10%;
+            box-sizing: border-box;
+        }
+
+        /* Hide the mid-screen scrollbar: use custom thin scrollbar that blends in */
+        .reveal .slides section::-webkit-scrollbar {
+            width: 6px;
+        }
+        .reveal .slides section::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .reveal .slides section::-webkit-scrollbar-thumb {
+            background: rgba(56, 189, 248, 0.3);
+            border-radius: 3px;
+        }
+        .reveal .slides section::-webkit-scrollbar-thumb:hover {
+            background: rgba(56, 189, 248, 0.5);
         }
 
         /* Compact slides - reduce spacing */
@@ -558,6 +576,148 @@
                     </ul>
                 </div>
                 <p class="fragment">🙋 Raise hand if you need help with any of these!</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SECTION: IDEATION ==================== -->
+            <section>
+                <h1>Ideation</h1>
+                <p>Co-create your own Plant using AI… or not</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== IDEATION SLIDE 2: WHAT ARE WE CREATING ==================== -->
+            <section>
+                <h2>What Are We Going to Create?</h2>
+                <p>A plant that will have:</p>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 0.5em; font-size: 1.3em; margin: 1.5em 0; flex-wrap: wrap;">
+                    <span class="fragment" style="background: rgba(167, 139, 250, 0.2); border: 1px solid rgba(167, 139, 250, 0.5); padding: 0.3em 0.7em; border-radius: 8px;">Narrative</span>
+                    <span class="fragment" style="color: rgba(56, 189, 248, 0.6);">→</span>
+                    <span class="fragment" style="background: rgba(56, 189, 248, 0.2); border: 1px solid rgba(56, 189, 248, 0.5); padding: 0.3em 0.7em; border-radius: 8px;">Design</span>
+                    <span class="fragment" style="color: rgba(56, 189, 248, 0.6);">→</span>
+                    <span class="fragment" style="background: rgba(52, 211, 153, 0.2); border: 1px solid rgba(52, 211, 153, 0.5); padding: 0.3em 0.7em; border-radius: 8px;">Behavior</span>
+                    <span class="fragment" style="color: rgba(56, 189, 248, 0.6);">→</span>
+                    <span class="fragment" style="background: rgba(251, 191, 36, 0.2); border: 1px solid rgba(251, 191, 36, 0.5); padding: 0.3em 0.7em; border-radius: 8px;">Light</span>
+                    <span class="fragment" style="color: rgba(56, 189, 248, 0.6);">→</span>
+                    <span class="fragment" style="background: rgba(244, 114, 182, 0.2); border: 1px solid rgba(244, 114, 182, 0.5); padding: 0.3em 0.7em; border-radius: 8px;">Sound</span>
+                </div>
+                <div class="fragment" style="margin-top: 1.5em; background: rgba(167, 139, 250, 0.1); border-left: 4px solid #a78bfa; padding: 0.8em 1.2em; border-radius: 0 8px 8px 0; text-align: left;">
+                    <p style="margin: 0;">At the end, each plant will have its own <strong style="color: #a78bfa;">"Plant Soul Profile"</strong></p>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== IDEATION SLIDE 3: PLANT IDENTITY GENERATOR ==================== -->
+            <section>
+                <h2>Step 1: Plant Identity Generator</h2>
+                <p style="font-size: 0.9em; margin-bottom: 0.8em;">Use one of these prompts with your AI tool of choice:</p>
+                <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; padding: 0.8em 1em; text-align: left; font-size: 0.55em; font-family: monospace; margin-bottom: 0.8em; line-height: 1.6;">
+                    <span style="color: #a78bfa;">Option A:</span><br>
+                    "We are building an interactive plant that reacts to presence. Give us a short narrative (~50–80 words) describing the plant's personality, its emotions when visitors approach, and a name."
+                </div>
+                <div style="background: rgba(167, 139, 250, 0.08); border: 1px solid rgba(167, 139, 250, 0.3); border-radius: 8px; padding: 0.8em 1em; text-align: left; font-size: 0.55em; font-family: monospace; line-height: 1.6;">
+                    <span style="color: #38bdf8;">Option B:</span><br>
+                    "You are a speculative botanical designer.<br>
+                    Generate a fictional interactive plant for an art installation.<br>
+                    The plant should:<br>
+                    - Have a personality<br>
+                    - React emotionally to human proximity<br>
+                    - Have one defensive behavior<br>
+                    - Have one rewarding behavior<br>
+                    - Have a color palette (3–4 colors)<br>
+                    - Have a short sound personality description<br>
+                    Tone: poetic but clear. Keep it under 200 words."
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== IDEATION SLIDE 4: EXTRACT KEY TRAITS ==================== -->
+            <section>
+                <h2>Step 2: Extract Key Traits</h2>
+                <p style="font-size: 0.9em;">From your discussion and the AI response, fill in:</p>
+                <div style="background: rgba(56, 189, 248, 0.06); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 10px; padding: 1.2em 1.5em; text-align: left; font-size: 0.85em; margin-top: 1em;">
+                    <p style="margin: 0.6em 0;"><strong style="color: #38bdf8;">Plant Name:</strong> <span style="border-bottom: 2px dashed rgba(56, 189, 248, 0.4); padding-bottom: 2px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+                    <p style="margin: 0.6em 0;"><strong style="color: #a78bfa;">Personality</strong> (3 words): <span style="border-bottom: 2px dashed rgba(167, 139, 250, 0.4); padding-bottom: 2px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+                    <p style="margin: 0.6em 0;"><strong style="color: #34d399;">When someone is FAR away,</strong> the plant feels: <span style="border-bottom: 2px dashed rgba(52, 211, 153, 0.4); padding-bottom: 2px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+                    <p style="margin: 0.6em 0;"><strong style="color: #fbbf24;">When someone is CLOSE,</strong> the plant feels: <span style="border-bottom: 2px dashed rgba(251, 191, 36, 0.4); padding-bottom: 2px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== IDEATION SLIDE 5: COLOR PALETTE ==================== -->
+            <section>
+                <h2>Step 3: Color Palette</h2>
+                <p style="font-size: 0.9em;">From the AI description:</p>
+                <div style="background: rgba(56, 189, 248, 0.06); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 10px; padding: 1.2em 1.5em; text-align: left; font-size: 0.85em; margin-top: 0.8em;">
+                    <p style="margin: 0.6em 0;"><strong style="color: #38bdf8;">Primary color:</strong> <span style="border-bottom: 2px dashed rgba(56, 189, 248, 0.4); padding-bottom: 2px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+                    <p style="margin: 0.6em 0;"><strong style="color: #a78bfa;">Secondary color:</strong> <span style="border-bottom: 2px dashed rgba(167, 139, 250, 0.4); padding-bottom: 2px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+                    <p style="margin: 0.6em 0;"><strong style="color: #34d399;">Accent color:</strong> <span style="border-bottom: 2px dashed rgba(52, 211, 153, 0.4); padding-bottom: 2px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+                </div>
+                <div style="margin-top: 1.2em; text-align: left; font-size: 0.9em;">
+                    <p><strong>Mood of the palette:</strong></p>
+                    <div style="display: flex; gap: 0.8em; flex-wrap: wrap; margin-top: 0.5em;">
+                        <span style="background: rgba(52, 211, 153, 0.15); border: 1px solid rgba(52, 211, 153, 0.4); padding: 0.3em 0.8em; border-radius: 20px; font-size: 0.85em;">☐ Calm</span>
+                        <span style="background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.4); padding: 0.3em 0.8em; border-radius: 20px; font-size: 0.85em;">☐ Vibrant</span>
+                        <span style="background: rgba(167, 139, 250, 0.15); border: 1px solid rgba(167, 139, 250, 0.4); padding: 0.3em 0.8em; border-radius: 20px; font-size: 0.85em;">☐ Dark</span>
+                        <span style="background: rgba(52, 211, 153, 0.15); border: 1px solid rgba(52, 211, 153, 0.4); padding: 0.3em 0.8em; border-radius: 20px; font-size: 0.85em;">☐ Organic</span>
+                        <span style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.4); padding: 0.3em 0.8em; border-radius: 20px; font-size: 0.85em;">☐ Futuristic</span>
+                    </div>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== IDEATION SLIDE 6: PHYSICAL CONSTRAINTS ==================== -->
+            <section>
+                <h2>Step 4: Define Physical Constraints</h2>
+                <div style="background: rgba(56, 189, 248, 0.06); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 10px; padding: 1.2em 1.5em; text-align: left; font-size: 0.85em; margin-top: 1em;">
+                    <p style="margin: 0.5em 0;"><strong style="color: #fbbf24;">Max height:</strong> 30 cm</p>
+                    <p style="margin: 0.5em 0;"><strong style="color: #fbbf24;">Base diameter:</strong> 10–15 cm</p>
+                    <hr style="border: none; border-top: 1px solid rgba(56, 189, 248, 0.2); margin: 1em 0;">
+                    <p style="margin: 0.6em 0;"><strong style="color: #38bdf8;">Servo location:</strong> <span style="border-bottom: 2px dashed rgba(56, 189, 248, 0.4); padding-bottom: 2px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+                    <p style="margin: 0.6em 0;"><strong style="color: #a78bfa;">LED location:</strong> <span style="border-bottom: 2px dashed rgba(167, 139, 250, 0.4); padding-bottom: 2px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+                    <p style="margin: 0.6em 0;"><strong style="color: #34d399;">Sensor location:</strong> <span style="border-bottom: 2px dashed rgba(52, 211, 153, 0.4); padding-bottom: 2px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== IDEATION SLIDE 7: SKETCH ==================== -->
+            <section>
+                <h2>Step 5: Sketch</h2>
+                <p style="font-size: 0.9em;">Draw a simple sketch of your idea:</p>
+                <div style="display: flex; gap: 1em; justify-content: center; margin-top: 1em;">
+                    <div style="background: rgba(56, 189, 248, 0.04); border: 2px dashed rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 1em; width: 200px; min-height: 220px; text-align: center;">
+                        <p style="color: #38bdf8; font-size: 0.8em; margin: 0 0 0.5em 0;"><strong>Front view</strong></p>
+                        <div style="min-height: 180px;"></div>
+                    </div>
+                    <div style="background: rgba(167, 139, 250, 0.04); border: 2px dashed rgba(167, 139, 250, 0.3); border-radius: 10px; padding: 1em; width: 200px; min-height: 220px; text-align: center;">
+                        <p style="color: #a78bfa; font-size: 0.8em; margin: 0 0 0.5em 0;"><strong>Side view</strong></p>
+                        <div style="min-height: 180px;"></div>
+                    </div>
+                    <div style="background: rgba(52, 211, 153, 0.04); border: 2px dashed rgba(52, 211, 153, 0.3); border-radius: 10px; padding: 1em; width: 200px; min-height: 220px; text-align: center;">
+                        <p style="color: #34d399; font-size: 0.8em; margin: 0 0 0.5em 0;"><strong>Cavity for electronics</strong></p>
+                        <div style="min-height: 180px;"></div>
+                    </div>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== IDEATION SLIDE 8: WRAP UP ==================== -->
+            <section>
+                <h2>Ideation Phase Wrap-Up</h2>
+                <p style="font-size: 0.85em;">Based on our plant personality, ask the AI:</p>
+                <div style="background: rgba(167, 139, 250, 0.08); border: 1px solid rgba(167, 139, 250, 0.3); border-radius: 8px; padding: 0.8em 1em; text-align: left; font-size: 0.6em; font-family: monospace; line-height: 1.6; margin: 0.8em 0;">
+                    Based on our plant personality:<br>
+                    Name: ______<br>
+                    Personality: ______<br>
+                    Color palette: ______<br><br>
+                    Suggest:<br>
+                    - A short exhibition label (max 60 words)<br>
+                    - A poetic description of its sound<br>
+                    - A one-sentence interaction instruction for visitors
+                </div>
+                <div class="fragment" style="margin-top: 1em; background: rgba(52, 211, 153, 0.1); border-left: 4px solid #34d399; padding: 0.6em 1em; border-radius: 0 8px 8px 0; text-align: left; font-size: 0.9em;">
+                    This can change and evolve during the coming sessions ;)
+                </div>
             </section>
             <!-- ================================================================== -->
 
@@ -1168,6 +1328,11 @@ fadeToBlackBy(leds, NUM_LEDS, 10);</code></pre>
             transition: 'slide',
             transitionSpeed: 'default',
             backgroundTransition: 'fade',
+            width: '100%',
+            height: '100%',
+            margin: 0,
+            minScale: 1,
+            maxScale: 1,
 
             // Plugins
             plugins: [ RevealHighlight, RevealNotes ]
