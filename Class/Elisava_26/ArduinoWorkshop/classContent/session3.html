@@ -128,7 +128,7 @@
             text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
             border-left: 3px solid #38bdf8;
             padding-left: 0.5em;
-            margin-left: -0.5em;
+            display: inline-block;
         }
 
         .reveal h3 {
@@ -301,7 +301,27 @@
         .reveal .controls button { color: #38bdf8; }
         .reveal .controls button:hover { color: #a78bfa; }
 
-        .reveal .slides section { overflow-y: auto; max-height: 100%; }
+        .reveal .slides section {
+            overflow-y: auto;
+            max-height: 100%;
+            padding-left: 10%;
+            padding-right: 10%;
+            box-sizing: border-box;
+        }
+
+        .reveal .slides section::-webkit-scrollbar {
+            width: 6px;
+        }
+        .reveal .slides section::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .reveal .slides section::-webkit-scrollbar-thumb {
+            background: rgba(56, 189, 248, 0.3);
+            border-radius: 3px;
+        }
+        .reveal .slides section::-webkit-scrollbar-thumb:hover {
+            background: rgba(56, 189, 248, 0.5);
+        }
 
         .reveal .compact h2 { margin-bottom: 0.3em; }
         .reveal .compact pre { margin: 0.5em 0; }
@@ -421,7 +441,7 @@
             <!-- ==================== SLIDE 6: DRY FIT IMAGE ==================== -->
             <section>
                 <h2>Lay It All Out</h2>
-                <img src="https://raw.githubusercontent.com/rividall/repositorio_lynch/master/Elisava/clases/plantLightSculpturesWorkshop/images/dry_fit_example.png" alt="Parts laid out for dry fitting" style="max-height: 320px;">
+                <img src="https://raw.githubusercontent.com/rividall/repositorio_lynch/master/Class/Elisava_26/ArduinoWorkshop/images/dry_fit_example.png" alt="Parts laid out for dry fitting" style="max-height: 320px;">
                 <p class="fragment" style="margin-top: 0.5em;">👆 This is how it should look before ANY glue!</p>
             </section>
             <!-- ================================================================== -->
@@ -535,7 +555,7 @@
             <!-- ==================== SLIDE 13: WIRE MANAGEMENT ==================== -->
             <section>
                 <h2>Cable Management 🔌</h2>
-                <img src="https://raw.githubusercontent.com/rividall/repositorio_lynch/master/Elisava/clases/plantLightSculpturesWorkshop/images/wire_management.png" alt="Good cable management with zip ties" style="max-height: 220px;">
+                <img src="https://raw.githubusercontent.com/rividall/repositorio_lynch/master/Class/Elisava_26/ArduinoWorkshop/images/wire_management.png" alt="Good cable management with zip ties" style="max-height: 220px;">
                 <ul style="margin-top: 0.5em; font-size: 0.9em;">
                     <li class="fragment">Use zip ties to bundle wires</li>
                     <li class="fragment">Leave some slack (stress relief!)</li>
@@ -555,7 +575,7 @@
             <!-- ==================== SLIDE 14: HOT GLUE STATION ==================== -->
             <section>
                 <h2>🔥 Hot Glue Station Protocol</h2>
-                <img src="https://raw.githubusercontent.com/rividall/repositorio_lynch/master/Elisava/clases/plantLightSculpturesWorkshop/images/hot_glue_station.png" alt="Hot glue station setup" style="max-height: 180px;">
+                <img src="https://raw.githubusercontent.com/rividall/repositorio_lynch/master/Class/Elisava_26/ArduinoWorkshop/images/hot_glue_station.png" alt="Hot glue station setup" style="max-height: 180px;">
                 <div class="warning-box fragment" style="padding: 0.8em 1em; margin-top: 0.5em;">
                     <ul style="font-size: 0.85em; margin: 0;">
                         <li>Only at designated <strong>supervised station</strong></li>
@@ -794,6 +814,11 @@
             transition: 'slide',
             transitionSpeed: 'default',
             backgroundTransition: 'fade',
+            width: '100%',
+            height: '100%',
+            margin: 0,
+            minScale: 1,
+            maxScale: 1,
 
             // Plugins
             plugins: [ RevealHighlight, RevealNotes ]
