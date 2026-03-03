@@ -47,7 +47,25 @@
 
 ---
 
-### **5:10 - 5:30 PM: 3D Printing Overview** (20 minutes)
+### **5:10 - 5:30 PM: Ideation** (20 minutes)
+
+**Co-create your plant using AI (or not):**
+
+**What are we creating?** A plant with:
+- Narrative → Design → Behavior → Light → Sound
+- Each plant will have its own "Plant Soul Profile"
+
+**Activities:**
+1. **Plant Identity Generator** - Use AI prompts to generate your plant's personality, emotions, and name
+2. **Extract Key Traits** - Plant name, personality (3 words), behavior when far/close
+3. **Color Palette** - Primary, secondary, accent colors + mood
+4. **Define Physical Constraints** - Max height 30cm, base 10-15cm, servo/LED/sensor locations
+5. **Sketch** - Front view, side view, cavity for electronics
+6. **Wrap-up prompt** - Generate exhibition label, sound description, interaction instruction
+
+---
+
+### **5:30 - 5:50 PM: 3D Printing Overview** (20 minutes)
 
 **Quick primer (you know modeling, here's the hardware):**
 - How FDM printing works (layer by layer)
@@ -60,7 +78,7 @@
 
 ---
 
-### **5:30 - 6:30 PM: Part Selection & Design** (60 minutes)
+### **5:50 - 6:30 PM: Part Selection & Design** (40 minutes)
 
 **Curated plant parts library:**
 
@@ -156,8 +174,8 @@ If you're unsure about something, check FastLED forums and GitHub issues for com
 
 **Basic wiring:**
 - Red → 5V (power)
-- Black → GND (ground)
-- Yellow/White → Pin 6 (data)
+- White → GND (ground)
+- Green → Pin 6 (data)
 - **Arrow direction matters!** Data flows one way →
 
 **First LED code: Turn LEDs on**
@@ -289,7 +307,7 @@ If you're unsure about something, check FastLED forums and GitHub issues for com
 
 ---
 
-### **7:00 - 7:45 PM: Adding Sensors!** (45 minutes)
+### **7:00 - 7:30 PM: Adding Sensors!** (30 minutes)
 
 **Now we make it interactive!**
 
@@ -307,7 +325,7 @@ If you're unsure about something, check FastLED forums and GitHub issues for com
 
 ---
 
-### **7:45 - 8:30 PM: Reactive Light Systems** (45 minutes)
+### **7:30 - 8:00 PM: Reactive Light Systems** (30 minutes)
 
 **Combining sensor + LEDs:**
 
@@ -328,6 +346,34 @@ If you're unsure about something, check FastLED forums and GitHub issues for com
 **🔴 Expert: Multi-zone control**
 - Different LED sections respond to different sensor ranges
 - Create spatial patterns based on input
+
+---
+
+### **8:00 - 8:30 PM: Plant Reactions & Sound** (30 minutes)
+
+**Give your plant a voice and behavior:**
+
+**Define Reactions:** Complete a reaction table:
+- No one nearby → Emotion → Action
+- Someone approaches → Emotion → Action
+- Very close → Emotion → Action
+
+**Translate to Hardware:**
+- Far away → soft light, no movement, slow breathing sound
+- Close → brighter light, small movement, heartbeat sound
+- Too close/threat → fast blinking, sharp sound, sudden movement
+
+**Sound Menu - Choose Your Plant's Voice:**
+- Pattern A: Breath/Wind (calm, friendly)
+- Pattern B: Heartbeat (organic, emotional)
+- Pattern C: Insect/Alert (nervous, defensive)
+- Pattern D: Bloom/Reward (magical, joyful)
+
+**Sound Rules:**
+1. Garden Sound Hierarchy: 3 layers (Ambient, Interaction, Silence)
+2. Each Plant Has ONE Main Sound: 1 dominant pattern + 1 special pattern
+
+**Sound Motif Prompt:** Use AI to generate 3 short sound motifs, choose one as main identity
 
 ---
 

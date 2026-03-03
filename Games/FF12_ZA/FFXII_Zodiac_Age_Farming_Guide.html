@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FFXII: The Zodiac Age — Farming Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2333;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --accent: #c9a84c;
+    --accent-dim: #8b7332;
+    --steal-color: #e06c60;
+    --chest-color: #58a6ff;
+    --trial-color: #a371f7;
+    --tip-color: #3fb950;
+    --tag-steal: #3d1f1d;
+    --tag-chest: #162640;
+    --tag-trial: #271546;
+    --tag-tip: #1a3524;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    padding: 0;
+  }
+
+  /* ---- HEADER ---- */
+  .hero {
+    background: linear-gradient(135deg, #12151c 0%, #1a1e2e 50%, #12151c 100%);
+    border-bottom: 2px solid var(--accent-dim);
+    padding: 2.5rem 1.5rem 2rem;
+    text-align: center;
+  }
+  .hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .hero .subtitle {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+  }
+
+  /* ---- TAB BAR ---- */
+  .tab-bar {
+    display: flex;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 0.85rem 0.5rem;
+    text-align: center;
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover { color: var(--text); background: var(--surface2); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-btn .tab-icon { display: block; font-size: 1.2rem; margin-bottom: 2px; }
+
+  .tab-panel { display: none; padding: 1.2rem; max-width: 960px; margin: 0 auto; }
+  .tab-panel.active { display: block; }
+
+  /* ---- TAGS ---- */
+  .tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+  .tag-steal { background: var(--tag-steal); color: var(--steal-color); }
+  .tag-chest { background: var(--tag-chest); color: var(--chest-color); }
+  .tag-both  { background: linear-gradient(90deg, var(--tag-steal), var(--tag-chest)); color: #ccc; }
+  .tag-missable { background: #3d2a00; color: #f0b040; }
+  .tag-onetime { background: #1a3524; color: var(--tip-color); }
+
+  /* ---- COLLAPSIBLE SECTIONS ---- */
+  .location-group {
+    margin-bottom: 0.75rem;
+  }
+  .location-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .location-header:hover { background: var(--surface2); }
+  .location-header .arrow {
+    color: var(--accent);
+    font-size: 0.8rem;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+    width: 1rem;
+    text-align: center;
+  }
+  .location-group.open > .location-header .arrow { transform: rotate(90deg); }
+  .location-header .loc-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    flex: 1;
+  }
+  .location-header .loc-phase {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    background: var(--surface2);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .location-body {
+    display: none;
+    padding: 0.6rem 0 0.6rem 1.5rem;
+  }
+  .location-group.open > .location-body { display: block; }
+
+  /* ---- ITEM CARDS ---- */
+  .item-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.5rem;
+    border-left: 3px solid var(--border);
+  }
+  .item-card.steal-card { border-left-color: var(--steal-color); }
+  .item-card.chest-card { border-left-color: var(--chest-color); }
+  .item-card.trial-card { border-left-color: var(--trial-color); }
+  .item-card .item-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+  }
+  .item-card .item-name .highlight { color: var(--accent); }
+  .item-card .item-detail {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-bottom: 0.15rem;
+  }
+  .item-card .item-detail strong { color: var(--text); font-weight: 500; }
+  .item-card .item-tip {
+    font-size: 0.8rem;
+    color: var(--tip-color);
+    margin-top: 0.35rem;
+    padding-left: 0.6rem;
+    border-left: 2px solid var(--tip-color);
+  }
+  .item-card .item-warn {
+    font-size: 0.8rem;
+    color: #f0b040;
+    margin-top: 0.35rem;
+    padding-left: 0.6rem;
+    border-left: 2px solid #f0b040;
+  }
+
+  /* ---- INFO BOX ---- */
+  .info-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.2rem;
+    font-size: 0.88rem;
+  }
+  .info-box h3 {
+    color: var(--accent);
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .info-box ul { padding-left: 1.2rem; }
+  .info-box li { margin-bottom: 0.3rem; color: var(--text-dim); }
+  .info-box li strong { color: var(--text); }
+
+  /* ---- TRIAL MODE TABLE ---- */
+  .trial-tier {
+    margin-bottom: 0.75rem;
+  }
+  .tier-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.7rem 1rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .tier-header:hover { background: var(--surface2); }
+  .tier-header .arrow {
+    color: var(--trial-color);
+    font-size: 0.8rem;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+    width: 1rem;
+    text-align: center;
+  }
+  .trial-tier.open > .tier-header .arrow { transform: rotate(90deg); }
+  .tier-header .tier-name { font-weight: 600; font-size: 0.95rem; flex: 1; }
+  .tier-body { display: none; padding: 0.5rem 0; }
+  .trial-tier.open > .tier-body { display: block; }
+
+  table.steal-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    margin-top: 0.3rem;
+  }
+  table.steal-table th {
+    text-align: left;
+    padding: 0.5rem 0.6rem;
+    background: var(--surface2);
+    color: var(--trial-color);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+  }
+  table.steal-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+  table.steal-table tr:hover td { background: var(--surface); }
+  table.steal-table td.rare-item { color: var(--accent); font-weight: 600; }
+
+  /* ---- CEROBI TABLE ---- */
+  table.cerobi-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    margin-top: 0.3rem;
+  }
+  table.cerobi-table th {
+    text-align: left;
+    padding: 0.5rem 0.6rem;
+    background: var(--surface2);
+    color: var(--chest-color);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+  }
+  table.cerobi-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+  table.cerobi-table tr:hover td { background: var(--surface); }
+
+  /* ---- SECTION TITLES ---- */
+  .section-title {
+    font-family: 'Cinzel', serif;
+    color: var(--accent);
+    font-size: 1.15rem;
+    margin: 1.5rem 0 0.8rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--accent-dim);
+  }
+
+  /* ---- EXPAND ALL ---- */
+  .controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
+  }
+  .ctrl-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+  .ctrl-btn:hover { color: var(--text); background: var(--surface2); }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 1.5rem; }
+    .tab-btn { font-size: 0.72rem; padding: 0.7rem 0.3rem; }
+    .location-body { padding-left: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Final Fantasy XII: The Zodiac Age</h1>
+  <div class="subtitle">Farming Guide &mdash; Steals, Chests &amp; Trial Mode (Steam / PC)</div>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="locations">
+    <span class="tab-icon">&#9872;</span>Locations
+  </button>
+  <button class="tab-btn" data-tab="trial">
+    <span class="tab-icon">&#9876;</span>Trial Mode
+  </button>
+  <button class="tab-btn" data-tab="epic">
+    <span class="tab-icon">&#10038;</span>Epic Items
+  </button>
+  <button class="tab-btn" data-tab="tips">
+    <span class="tab-icon">&#9881;</span>Tips
+  </button>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- TAB: LOCATIONS                                  -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="tab-locations" class="tab-panel active">
+
+  <div class="controls">
+    <button class="ctrl-btn" onclick="toggleAll(this, 'tab-locations', true)">Expand All</button>
+    <button class="ctrl-btn" onclick="toggleAll(this, 'tab-locations', false)">Collapse All</button>
+  </div>
+
+  <!-- GARAMSYTHE WATERWAY -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Garamsythe Waterway</span>
+      <span class="loc-phase">Early</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Oak Staff / Mage Masher</span></div>
+        <div class="item-detail"><strong>Zone:</strong> North Spur Sluiceway (first visit as Vaan)</div>
+        <div class="item-detail"><strong>Spawn:</strong> 65% each</div>
+        <div class="item-detail">Oak Staff is mid-area; Mage Masher is before the stairs to the palace. Free weapons during the very first dungeon if the chests cooperate.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Achilles</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> No. 4 Cloaca Spur (return visit)</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Technick that gives an enemy vulnerability to a random element. Useful for exploiting elemental weaknesses on bosses.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GIZA PLAINS -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Giza Plains</span>
+      <span class="loc-phase">Early / Mid</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Blind</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Throne Road (Dry season)</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Basic but useful Black Magick. Reduces enemy physical hit rate significantly.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Regen</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Nomad Village (during the Rains)</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Gradually restores HP over time. One of the most useful White Magick spells for sustained dungeon crawling. Also found at Tchita Uplands, The Lost Way.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DALMASCA ESTERSAND -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Dalmasca Estersand</span>
+      <span class="loc-phase">Mid</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Demonsbane</span></div>
+        <div class="item-detail"><strong>Zone:</strong> The Yoma / North Bank Village area</div>
+        <div class="item-detail"><strong>Spawn:</strong> RNG chest (respawns)</div>
+        <div class="item-detail">Was famously in Raithwall's Tomb in the original, but <strong>removed in The Zodiac Age</strong>. Now found in Estersand chests post-Raithwall, or bought from shops after Judge Bergan. Strong mid-game sword.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DALMASCA WESTERSAND -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Dalmasca Westersand</span>
+      <span class="loc-phase">Early</span>
+      <span class="tag tag-steal">Steal</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card steal-card">
+        <div class="item-name"><span class="highlight">Gladius</span> &mdash; from Lindbur Wolf <span class="tag tag-steal">Rare Game</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Shimmering Horizons (isolated NE section via Galatea Downs)</div>
+        <div class="item-detail"><strong>How to spawn:</strong> Kill 20 wolves anywhere in the Westersand. Chaining not required.</div>
+        <div class="item-detail"><strong>Steal:</strong> Gladius (rare steal, only item in pool)</div>
+        <div class="item-detail">Strongest dagger available at this stage. Ideal for Shikari.</div>
+        <div class="item-tip">Cast Sleep or Blind on the wolf to steal in peace. Zone-out trick lets you respawn and steal multiple copies.</div>
+      </div>
+
+      <div class="item-card steal-card">
+        <div class="item-name"><span class="highlight">Heavy Lance</span> &mdash; from Fideliant <span class="tag tag-steal">Rare Game</span></div>
+        <div class="item-detail"><strong>Zone:</strong> The Midfault</div>
+        <div class="item-detail"><strong>How to spawn:</strong> 20% chance each time you enter the zone. Available as solo Vaan before Penelo leaves.</div>
+        <div class="item-detail"><strong>Steal:</strong> Heavy Lance</div>
+        <div class="item-detail">Solid early spear for Uhlan. Way ahead of the curve.</div>
+        <div class="item-tip">Grab Phoenix Downs from Nalbina Fortress first to survive the trip.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BARHEIM PASSAGE -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Barheim Passage</span>
+      <span class="loc-phase">Early / Mid</span>
+      <span class="tag tag-steal">Steal</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <p style="font-size:0.82rem; color:var(--text-dim); margin-bottom:0.5rem;">First visit is during the story escape. Return visit requires the <strong>Barheim Key</strong> (available post-Raithwall).</p>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Mage Masher</span> <span class="tag tag-chest">Chest</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Op Sector 37 (first visit)</div>
+        <div class="item-detail"><strong>Spawn:</strong> 60% chest, 75% item chance</div>
+        <div class="item-detail">Strong early dagger with silence-on-hit effect.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Oaken Pole</span> <span class="tag tag-chest">Chest</span></div>
+        <div class="item-detail"><strong>Zone:</strong> The Zeviah Subterrane (first visit)</div>
+        <div class="item-detail"><strong>Spawn:</strong> RNG chest at the far end on a small "island" (walk off the visible path)</div>
+        <div class="item-detail">Solid early pole. In Zodiac versions, up to four weapons can appear here depending on License Boards.</div>
+      </div>
+
+      <div class="item-card steal-card">
+        <div class="item-name"><span class="highlight">Deathbringer</span> &mdash; from Ithuno <span class="tag tag-steal">Rare Game</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Special Op Sector 5 (return visit, Barheim Key required)</div>
+        <div class="item-detail"><strong>How to spawn:</strong> 20% chance each time you enter. Zone in and out repeatedly.</div>
+        <div class="item-detail"><strong>How to identify:</strong> Ithuno disguises as a chest with a <strong>purple bottom and silver body</strong> (normal chests are green). Interact and it comes alive.</div>
+        <div class="item-detail"><strong>Steal:</strong> Deathbringer (rare) &mdash; 83 ATK, 12% instant KO</div>
+        <div class="item-detail">One of the strongest one-handed swords at this point. Farm multiples via zone-resetting.</div>
+        <div class="item-tip">Ithuno has 23,341 HP, weak to Holy. Equip Thief's Cuffs and steal before killing.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Bubble Belt</span> <span class="tag tag-chest">Chest</span></div>
+        <div class="item-detail"><strong>Zone:</strong> East-West Bypass (return visit)</div>
+        <div class="item-detail"><strong>Spawn:</strong> RNG chest in the dead-end. Bubble Belt with Diamond Armlet; Turtleshell Choker without.</div>
+        <div class="item-detail">Doubles max HP permanently while equipped. Can't be Dispelled since it's from the accessory.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Toxify</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> East-West Bypass (return visit, Zodiac versions only)</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Inflicts Poison, Sap, and Oil simultaneously. Powerful debuff technick.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Shear</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> The Zeviah Span (return visit, Zodiac versions only)</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Reduces enemy Magick Power. Very useful against magick-heavy bosses.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DREADNOUGHT LEVIATHAN -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Dreadnought Leviathan</span>
+      <span class="loc-phase">Early</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <p style="font-size:0.82rem; color:var(--text-dim); margin-bottom:0.5rem;">You cannot return here. However, all one-time spell/technick chests in this area have <strong>linked chests</strong> elsewhere, so nothing is truly missable.</p>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Infuse</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Sub-Control Room</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Linked chest: also at Ogir-Yensa Sandsea, Platform 1 East Tanks. If you miss it here, you get it there.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Sleep</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Starboard Section</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Linked chest: also at Ogir-Yensa Sandsea, Platform 1 East Tanks.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OGIR-YENSA SANDSEA -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Ogir-Yensa Sandsea</span>
+      <span class="loc-phase">Early</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Golden Amulet</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Platform 1 Refinery</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100% (does not respawn)</div>
+        <div class="item-detail"><strong>Effect:</strong> Doubles LP gained by the wearer</div>
+        <div class="item-detail">Top of the stairs on the large structure, near the crates to the north. Grab on your first visit.</div>
+        <div class="item-warn">Does not respawn. Miss it and it's gone until you find the second copy in Henne Mines.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Infuse</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Platform 1, ground level</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Sacrifices caster's HP to boost an ally. Niche but powerful for certain setups.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Reflect</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Northwest section</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Enables the "Reflect-bounce" strategy for hitting enemies with spells that can't target them directly.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAM-YENSA SANDSEA -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Nam-Yensa Sandsea</span>
+      <span class="loc-phase">Early</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Embroidered Tippet</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Simoon Bluff</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100% (does not respawn)</div>
+        <div class="item-detail"><strong>Effect:</strong> Doubles EXP gained by the wearer</div>
+        <div class="item-detail">Top of the tower on the platform with the Bagolys. It's the middle chest. This is the earliest guaranteed source in the game.</div>
+        <div class="item-tip">Pair with Golden Amulet (doubles LP) for massively accelerated growth. Additional copies: Feywood Antiquity's End (25% spawn), Pharos Subterra, or poach from Coeurls in Tchita Uplands (5%).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOMB OF RAITHWALL -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Tomb of Raithwall</span>
+      <span class="loc-phase">Early</span>
+      <span class="tag tag-steal">Steal</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <p style="font-size:0.82rem; color:var(--text-dim); margin-bottom:0.5rem;">Story dungeon. Most chests here respawn except the four in the Cloister of Flame. The Demonsbane secret room from the original game was <strong>removed</strong> in The Zodiac Age.</p>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Dispel</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Royal Passage</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Removes positive status effects from enemies. Essential for boss fights throughout the game. Don't miss this.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Vanish</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Royal Passage</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Makes a target invisible (immune to physical attacks). Useful for protecting squishy mages or setting up Vanishga strategies.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Shades of Black</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Cloister of Flame (lower floor)</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Technick that casts a random Black Magick spell without consuming MP. Lets non-mage jobs contribute magical damage for free.</div>
+      </div>
+
+      <div class="item-card steal-card">
+        <div class="item-name"><span class="highlight">Lamia's Tiara</span> &mdash; from Barmuu <span class="tag tag-steal">Rare Game</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Royal Passage (waystone platform)</div>
+        <div class="item-detail"><strong>How to spawn:</strong> Kill Seekers in the Royal Passage until you reach a battle chain of 12+, then return to the waystone platform.</div>
+        <div class="item-detail"><strong>Steal:</strong> Lamia's Tiara (Mystic Armor 5)</div>
+        <div class="item-detail">Decent mystic armor upgrade for this point in the game.</div>
+        <div class="item-tip">Steal first before killing Barmuu. Equip Thief's Cuffs for better odds.</div>
+      </div>
+
+      <div class="item-card steal-card">
+        <div class="item-name"><span class="highlight">Blood Sword</span> &mdash; from Seekers</div>
+        <div class="item-detail"><strong>Zone:</strong> Royal Passage (regular enemies)</div>
+        <div class="item-detail"><strong>Steal:</strong> Blood Sword (rare steal from Seekers)</div>
+        <div class="item-detail">Drains HP on hit. A rare steal from common enemies, so set your party to steal from Seekers while chaining them for the Barmuu spawn. Two birds, one stone.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Other Chests</span></div>
+        <div class="item-detail"><strong>Cloister of Flame:</strong> 4 non-respawning chests including Elixirs</div>
+        <div class="item-detail"><strong>Southfall Passage:</strong> Iron Hammer (RNG, respawns)</div>
+        <div class="item-detail"><strong>Northfall Passage:</strong> Longbow (RNG, respawns), Gillie Boots near central device</div>
+        <div class="item-detail"><strong>Royal Passage:</strong> Scathe Mote (one-time, does not respawn)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARAMINA RIFT -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Paramina Rift</span>
+      <span class="loc-phase">Mid</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Revive</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Spine of the Icewyrm</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Technick that revives a KO'd ally with full HP. No MP cost. Extremely useful as a gambit-friendly resurrection.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Death</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Karydine Glacier</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Arcane Magick with a chance to instantly KO an enemy. Works on many regular enemies and some marks.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STILSHRINE OF MIRIAM -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Stilshrine of Miriam</span>
+      <span class="loc-phase">Mid</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Countdown</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Ward of Velitation</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Time Magick that applies Doom to a target. When the counter reaches zero, the target dies. Works on many enemies.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Ice Shield</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Central area</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Absorbs Ice damage. Useful for fights against ice-element enemies and bosses.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LHUSU MINES -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Lhusu Mines</span>
+      <span class="loc-phase">Mid / Late</span>
+      <span class="tag tag-steal">Steal</span>
+      <span class="tag tag-chest">Chest</span>
+      <span class="tag tag-missable">Missable</span>
+    </div>
+    <div class="location-body">
+      <p style="font-size:0.82rem; color:var(--text-dim); margin-bottom:0.5rem;">The deep sections (Sites 5-11) become accessible after the Antlion Hunt. Pick up the Site 11 Key at the Hunter's Camp on the Phon Coast. <strong>Access before reaching Archades</strong> or Gilgamesh will block the path.</p>
+
+      <div class="item-card steal-card">
+        <div class="item-name"><span class="highlight">Genji Equipment</span> &mdash; from Gilgamesh <span class="tag tag-missable">Missable</span></div>
+        <div class="item-detail">Gilgamesh swaps weapons mid-fight. After each swap, a new Genji piece becomes stealable. <strong>Miss the window and it's gone forever in the main story.</strong></div>
+        <div class="item-detail" style="margin-top:0.4rem;"><strong>First Encounter (Bridge):</strong></div>
+        <div class="item-detail">After he draws the imitation Orichalcum: steal <strong>Genji Shield</strong> and <strong>Genji Gloves</strong></div>
+        <div class="item-detail" style="margin-top:0.3rem;"><strong>Second Encounter (Site 7):</strong></div>
+        <div class="item-detail">After Tournesol replica: steal <strong>Genji Helm</strong></div>
+        <div class="item-detail">After three weapon swaps total: steal <strong>Genji Armor</strong></div>
+        <div class="item-tip">Set everyone's top gambit to Foe: Steal after each cutscene. Turn off once someone succeeds. Thief's Cuffs strongly recommended.</div>
+        <div class="item-warn">These are permanently missable in the main story. You can get duplicates in Trial Mode (Stage 94) but don't skip these.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Masamune</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Site 7 (southern wall, center)</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">One of the best katanas in the game. Available before Archades if you access deep Lhusu early via the Site 11 Key.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Dragon Whisker</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Lasche Span (middle of the bridge, surrounded by traps)</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Powerful spear. Watch out for the traps and the two Avions guarding it.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Byblos's Bone</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Site 5 (hit the switch, go north/east/north to an alcove, southern wall)</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Best mace in the game.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Scathe</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Staging Area (northern wall)</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Strongest multi-target Black Magick in the game. Huge AoE damage.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Expose</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Site 9</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Technick that reduces enemy Defense. Pairs well with physical DPS setups.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Numerology</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Transitway 1</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Technick that deals damage based on the number of successive hits. Damage increases the longer you chain it.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Germinas Boots</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Site 5 (eastern wall before the south exit)</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Accessory that increases movement speed.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HENNE MINES -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Henne Mines</span>
+      <span class="loc-phase">Mid / Late</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <p style="font-size:0.82rem; color:var(--text-dim); margin-bottom:0.5rem;">Phase 1 Dig is story-accessible. Deep Henne Mines (Phase 2 / Special Charter Shaft) requires <strong>10 Espers</strong>.</p>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Golden Amulet (2nd copy)</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Phase 1 Dig, southeastern dead-end</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Two party members can now double LP simultaneously.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Nihopalaoa</span> <span class="tag tag-chest">Chest</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Phase 2 Dig (Deep Henne, requires 10 Espers)</div>
+        <div class="item-detail">Also from Bazaar ("Cursed Necklace"): sell 3x Blood-stained Necklace + 2x Death's-Head + 3x Leo Gem. Or steal from Carrot in Trial Mode Stage 70.</div>
+        <div class="item-detail">Reverses restorative items. Remedy inflicts every ailment the enemy isn't immune to. Phoenix Down = instant kill.</div>
+        <div class="item-tip">Swap on, use item, swap off. One of the most broken accessories in the game.</div>
+      </div>
+
+      <div class="item-card chest-card" style="margin-top:0.8rem;">
+        <div class="item-name"><span class="highlight">Special Charter Shaft</span> (Deep Henne, 10 Espers)</div>
+        <table class="cerobi-table" style="margin-top:0.4rem;">
+          <tr><th>Item</th><th>Spawn</th><th>Notes</th></tr>
+          <tr><td>Renew (spell)</td><td>100%</td><td>Full HP heal. Top-tier White Magick.</td></tr>
+          <tr><td>Lordly Robes</td><td>100%</td><td>Top-tier mystic armor.</td></tr>
+          <tr><td>Brave Suit</td><td>25%</td><td>Excellent light armor with Bravery.</td></tr>
+          <tr><td>Grand Armor</td><td>25%</td><td>Best heavy armor in the game.</td></tr>
+          <tr><td>Ribbon</td><td>15%</td><td>Blocks nearly all status effects.</td></tr>
+          <tr><td>Addle (technick)</td><td>10%</td><td>Reduces enemy Magick Power.</td></tr>
+          <tr><td style="color:var(--accent); font-weight:600;">Zodiac Spear</td><td>1%</td><td>If chest appears, always contains the spear. Respawns.</td></tr>
+        </table>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Crossover C</span> (Deep Henne)</div>
+        <div class="item-detail"><strong>Bubble Belt</strong> &mdash; 25% spawn chance</div>
+        <div class="item-detail"><strong>Germinas Boots</strong> &mdash; Increases movement speed</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOSPHORAN HIGHWASTE -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Mosphoran Highwaste</span>
+      <span class="loc-phase">Mid</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Stamp</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Rays of Ashen Light</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Technick that inflicts a random debuff on a target. Low cost, occasionally useful.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Thief's Cuffs</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Babbling Vale (vendor)</div>
+        <div class="item-detail">Not a chest, but this is where you can first buy the Thief's Cuffs from the vendor. Essential for all stealing in this guide.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SALIKAWOOD -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Salikawood</span>
+      <span class="loc-phase">Mid</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Charm</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Quietened Trace</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Technick that charms an enemy, turning it into a temporary ally. Works on many normal enemies.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ZERTINAN CAVERNS -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Zertinan Caverns</span>
+      <span class="loc-phase">Mid</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Sight Unseeing</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Canopy of Clay</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Technick that deals damage when the user is Blind. Pairs with the Blind status for a surprisingly powerful combo on certain builds.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOCHEN CAVE PALACE -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Sochen Cave Palace</span>
+      <span class="loc-phase">Mid</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">1000 Needles</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Pilgrim's Door puzzle reward</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Deals exactly 1,000 damage regardless of defense. Useful against high-defense enemies.</div>
+        <div class="item-warn">Do NOT equip the Diamond Armlet when opening chests in Sochen Cave. Many chests default to Knot of Rust with it equipped.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DRAKLOR LABORATORY -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Draklor Laboratory</span>
+      <span class="loc-phase">Mid</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Gil Toss</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> 68th Floor, Room 601 West</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Technick that throws gil at enemies for damage. Damage scales with amount thrown. Also found at Pharos, Station of Ascension.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Claymore</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> 67th Floor, Room 6711 East</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Linked chest: also at Cerobi Steppe, South Liavell Hills. Opening one removes the other.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHON COAST -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Phon Coast</span>
+      <span class="loc-phase">Mid</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Kiku-Ichimonji</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Summit Path, northeastern alcove</div>
+        <div class="item-detail"><strong>Spawn:</strong> RNG chest</div>
+        <div class="item-detail">Strong katana for mid-game. Worth checking on your way through.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ASPIDOCHELON -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Cerobi Steppe (Rare Game)</span>
+      <span class="loc-phase">Mid / Late</span>
+      <span class="tag tag-steal">Steal</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card steal-card">
+        <div class="item-name"><span class="highlight">Scarletite</span> &mdash; from Aspidochelon <span class="tag tag-steal">Rare Game</span></div>
+        <div class="item-detail"><strong>How to spawn:</strong> 40% chance the rare game spawns. Look for the blue Protect status icon.</div>
+        <div class="item-detail">Not a weapon directly, but a key ingredient for Gemsteel at the Bazaar. Gemsteel feeds into endgame weapons including the Tournesol.</div>
+        <div class="item-tip">Steal until you get Scarletite, then zone out to reset.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TCHITA UPLANDS -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Tchita Uplands</span>
+      <span class="loc-phase">Mid / Late</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Regen</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> The Lost Way</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Alternative location for Regen (also at Giza Plains during the Rains). If you already have it, this chest won't appear.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NECROHOL OF NABUDIS -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Necrohol of Nabudis</span>
+      <span class="loc-phase">Late</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <p style="font-size:0.82rem; color:var(--text-dim); margin-bottom:0.5rem;">Accessed from Salikawood (defeat King Bomb) or Nabreus Deadlands. <strong>No save crystals inside.</strong> Float is practically mandatory due to traps. Chest spawn rates here are around 30%, but when they appear the contents are guaranteed.</p>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Bravery</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Cloister of the Highborn</div>
+        <div class="item-detail"><strong>Spawn:</strong> ~30% (guaranteed contents when it appears)</div>
+        <div class="item-detail">White Magick that increases a target's physical attack damage. One of the most important buff spells in the game.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Faith</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Hall of the Ivory Covenant</div>
+        <div class="item-detail"><strong>Spawn:</strong> ~30% (guaranteed contents when it appears)</div>
+        <div class="item-detail">White Magick that increases a target's magick damage. Essential for mage builds. Bravery's magick counterpart.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Protectga</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Cloister of Distant Song</div>
+        <div class="item-detail"><strong>Spawn:</strong> ~30% (guaranteed contents when it appears)</div>
+        <div class="item-detail">AoE Protect. Halves physical damage for the entire party. Huge time saver vs. casting Protect on each member individually.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Silencega</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Hall of Effulgent Light (northernmost room, hidden passage not shown on map)</div>
+        <div class="item-detail"><strong>Spawn:</strong> ~30% (guaranteed contents when it appears)</div>
+        <div class="item-detail">AoE Silence. Shuts down groups of magick-using enemies.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NABREUS DEADLANDS -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Nabreus Deadlands</span>
+      <span class="loc-phase">Late</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Warp</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Lifeless Strand (hidden area north, off the visible map)</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Time Magick that instantly removes a regular enemy from battle (chance-based on stronger enemies). Also useful for escaping dungeons.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEYWOOD -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Feywood</span>
+      <span class="loc-phase">Late</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Dispelga</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> White Magick's Embrace</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">AoE version of Dispel. Strips buffs from all enemies at once. Huge upgrade over single-target Dispel for group fights.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Embroidered Tippet</span> (additional copy)</div>
+        <div class="item-detail"><strong>Zone:</strong> Antiquity's End</div>
+        <div class="item-detail"><strong>Spawn:</strong> 25% chance to appear. Always contains the Tippet when it does.</div>
+        <div class="item-detail">If you want additional Tippets so the whole active party doubles EXP simultaneously.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHAROS & SUBTERRA -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Pharos &amp; Subterra</span>
+      <span class="loc-phase">Late</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Flare</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Spire Ravel, 1st Flight</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Strongest single-target Black Magick. Essential for endgame Black Mage builds.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Holy</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Wellspring Ravel, 3rd Flight</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Strongest single-target White Magick. Deals massive Holy damage. Essential for White Mage DPS builds.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Holy Rod</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Wellspring Ravel, 2nd Flight</div>
+        <div class="item-detail"><strong>Spawn:</strong> ~91% chance to appear, guaranteed Holy Rod when it does</div>
+        <div class="item-detail">Boosts Holy damage. Pair with the Holy spell for devastating White Mage damage.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Gastrophetes</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Second Ascent, Station of Suffering</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">One of the best crossbows in the game.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Wither</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Subterra, Abyssal North</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Technick that reduces enemy Attack power. The physical counterpart to Addle. Very effective on hard-hitting bosses.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Ribbon</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Subterra, Abyssal North</div>
+        <div class="item-detail"><strong>Spawn:</strong> 10% chance. When it appears, always contains a Ribbon.</div>
+        <div class="item-detail">Alternative to the 15% Henne Mines Ribbon. Both respawn, farm whichever you prefer.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Embroidered Tippet</span> (additional copy)</div>
+        <div class="item-detail"><strong>Zone:</strong> Subterra, Penumbra South</div>
+        <div class="item-detail"><strong>Spawn:</strong> 70% appear, 80% gil, 50% the item is a Tippet (without Diamond Armlet)</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Nihopalaoa</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Subterra, Umbra South (southwest chamber)</div>
+        <div class="item-detail"><strong>Spawn:</strong> 5% chest spawn chance</div>
+        <div class="item-detail">Alternative to the Bazaar recipe if you're already in the Pharos.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GREAT CRYSTAL -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Great Crystal</span>
+      <span class="loc-phase">Late</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <p style="font-size:0.82rem; color:var(--text-dim); margin-bottom:0.5rem;">Accessed via Giruvegan. Notoriously confusing layout with no map. Use Way Stones to navigate between sections.</p>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Excalibur</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Crystal Peak</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">One of the strongest greatswords. Holy-elemental. Excellent for Knight builds.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Shellga</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Sirhru Phullam Pratii'vaa</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">AoE Shell. Halves magick damage for the entire party. The magick counterpart to Protectga.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Cloud Staff</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Kabonii Jilaam Pratii'vaa</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Boosts Black Mage damage. Also available via Cerobi Steppe Diamond Armlet farming.</div>
+      </div>
+
+      <div class="item-card chest-card">
+        <div class="item-name"><span class="highlight">Staff of the Magi</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Sirhru Phullam Praa'vaa (two zones NW of Way Stone XIII)</div>
+        <div class="item-detail"><strong>Spawn:</strong> 25% (one-time when it appears)</div>
+        <div class="item-detail">Boosts Ice, Wind, and Holy spells. One of the best staves for mage builds.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CEROBI STEPPE (CHESTS) -->
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Cerobi Steppe (Diamond Armlet Zone)</span>
+      <span class="loc-phase">Late</span>
+      <span class="tag tag-chest">Chest</span>
+    </div>
+    <div class="location-body">
+      <div class="info-box">
+        <h3>Diamond Armlet Required</h3>
+        <p>Cerobi Steppe is the <strong>only area</strong> in Zodiac Age where the Diamond Armlet matters for equipment drops. Every chest here has a special loot table. The catch: odds are brutal.</p>
+        <ul>
+          <li>Chest spawn: 10-50% per zone-in</li>
+          <li>Gil chance: ~80%</li>
+          <li>Item chance: ~20%</li>
+          <li>Rare item (Diamond Armlet): ~5% of item pool</li>
+          <li><strong>Effective rate per attempt: 0.1% to 0.5%</strong></li>
+        </ul>
+        <p style="margin-top:0.4rem;">Use x4 speed. Clear enemies, equip Diamond Armlet on leader, farm chest routes.</p>
+      </div>
+
+      <div class="item-card chest-card" style="margin-bottom:0.6rem;">
+        <div class="item-name"><span class="highlight">Cleanse</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> The Terraced Bank</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">White Magick that cures Disease. Disease prevents HP recovery, so Cleanse is the only way to remove it. Easy to miss but critical for late-game bosses that inflict Disease.</div>
+      </div>
+
+      <div class="item-card chest-card" style="margin-bottom:0.6rem;">
+        <div class="item-name"><span class="highlight">Telekinesis</span> <span class="tag tag-onetime">One-Time</span></div>
+        <div class="item-detail"><strong>Zone:</strong> Old Elanise Road</div>
+        <div class="item-detail"><strong>Spawn:</strong> 100%</div>
+        <div class="item-detail">Technick that lets melee weapons deal ranged damage. Very useful for flying enemies or maintaining distance during tough fights.</div>
+      </div>
+
+      <table class="cerobi-table">
+        <tr><th>Item</th><th>Zone</th><th>Notes</th></tr>
+        <tr><td>Fomalhaut (gun)</td><td>Northsward</td><td>50% chest spawn. One of the best guns.</td></tr>
+        <tr><td>Dragon Whisker</td><td>N. Liavell Hills</td><td>50% spawn, 5% rare item chance</td></tr>
+        <tr><td>Holy Rod</td><td>Feddik River</td><td>50% spawn, 5% rare. Boosts holy damage.</td></tr>
+        <tr><td>Zeus Mace</td><td>Various</td><td>Boosts dark-elemental attacks</td></tr>
+        <tr><td>Rod of Faith</td><td>Various</td><td>Applies Faith status for free</td></tr>
+        <tr><td>Cloud Staff</td><td>Various</td><td>Boosts Black Mage damage</td></tr>
+        <tr><td>Staff of the Magi</td><td>Various</td><td>Boosts Black Mage damage</td></tr>
+        <tr><td>Minerva Bustier</td><td>Various</td><td>50 DEF, +610 HP light armor</td></tr>
+        <tr><td>Rubber Suit</td><td>Various</td><td>53 DEF, +700 HP, Lightning immune</td></tr>
+        <tr><td>White Mask</td><td>Various</td><td>56 M.RES, +8 MAG, absorbs Holy</td></tr>
+        <tr><td style="color:var(--accent);">Dark Energy</td><td>Various</td><td>Deals 50,000 AoE damage. Extremely rare.</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- TAB: TRIAL MODE                                 -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="tab-trial" class="tab-panel">
+
+  <div class="info-box">
+    <h3>How Trial Mode Farming Works</h3>
+    <p>Enter Trial Mode, steal from enemies or open chests, then quit back to the main game &mdash; you keep everything. The game auto-saves at the start of every stage (up to 99), so you can reload to retry steals.</p>
+    <ul>
+      <li><strong>With Thief's Cuffs:</strong> Common = 80%, Uncommon = 30%, Rare = 6%</li>
+      <li><strong>Without Cuffs:</strong> Common = 55%, Uncommon = 10%, Rare = 3%</li>
+    </ul>
+    <p style="margin-top:0.4rem;">Always equip Thief's Cuffs when farming Trial Mode.</p>
+  </div>
+
+  <div class="controls">
+    <button class="ctrl-btn" onclick="toggleAll(this, 'tab-trial', true)">Expand All</button>
+    <button class="ctrl-btn" onclick="toggleAll(this, 'tab-trial', false)">Collapse All</button>
+  </div>
+
+  <!-- EARLY (1-10) -->
+  <div class="trial-tier open">
+    <div class="tier-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="tier-name">Stages 1 &ndash; 10 (Early / Game-Breaking)</span>
+    </div>
+    <div class="tier-body">
+      <div class="item-card trial-card">
+        <div class="item-name"><span class="highlight">Diamond Armlet</span> &mdash; Stage 1 Chest</div>
+        <div class="item-detail">Changes chest loot tables in Cerobi Steppe and for Epic invisible items. Grab on your first Trial Mode run.</div>
+      </div>
+
+      <div class="item-card trial-card">
+        <div class="item-name"><span class="highlight">Karkata</span> &mdash; Stage 3, Flowering Cactoid</div>
+        <div class="item-detail"><strong>Steal:</strong> Rare (3% base / 6% with Cuffs)</div>
+        <div class="item-detail"><strong>Stats:</strong> 97 ATK, <strong>100% confuse on hit</strong></div>
+        <div class="item-detail">Trivializes roughly the first 60% of the main game.</div>
+        <div class="item-tip">Set gambits to "Foe: status = Haste -> Steal" (Flowering Cactoid has Haste). Quit and reload Stage 3 auto-save until it drops.</div>
+      </div>
+
+      <table class="steal-table">
+        <tr><th>Stage</th><th>Enemy</th><th>Common</th><th>Uncommon</th><th>Rare</th></tr>
+        <tr><td>3</td><td>Flowering Cactoid</td><td>Longsword</td><td>Mythril Blade</td><td class="rare-item">Karkata</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- MID (29-53) -->
+  <div class="trial-tier">
+    <div class="tier-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="tier-name">Stages 29 &ndash; 53 (Mid-Tier)</span>
+    </div>
+    <div class="tier-body">
+      <table class="steal-table">
+        <tr><th>Stage</th><th>Enemy</th><th>Common</th><th>Uncommon</th><th>Rare</th></tr>
+        <tr><td>29</td><td>Ahriman</td><td>&mdash;</td><td>&mdash;</td><td class="rare-item">Black Robes</td></tr>
+        <tr><td>34</td><td>Marilith</td><td>&mdash;</td><td>Platinum Helm</td><td class="rare-item">Platinum Armor</td></tr>
+        <tr><td>38</td><td>Mythril Golem</td><td>&mdash;</td><td>&mdash;</td><td class="rare-item">Gold Hairpin</td></tr>
+        <tr><td>45</td><td>Vishno</td><td>&mdash;</td><td>&mdash;</td><td class="rare-item">Maximillian</td></tr>
+        <tr><td>49</td><td>Hashmal</td><td>&mdash;</td><td>&mdash;</td><td class="rare-item">Ribbon</td></tr>
+        <tr><td>50</td><td>Famfrit</td><td>&mdash;</td><td>&mdash;</td><td class="rare-item">Wyrmhero Blade</td></tr>
+        <tr><td>52</td><td>Catoblepas</td><td>&mdash;</td><td>&mdash;</td><td class="rare-item">Golden Axe</td></tr>
+        <tr><td>53</td><td>War-Chief Supinelu</td><td>&mdash;</td><td>&mdash;</td><td class="rare-item">Dragon Whisker</td></tr>
+      </table>
+
+      <div class="item-card trial-card" style="margin-top:0.6rem;">
+        <div class="item-name">Key Highlights</div>
+        <div class="item-detail"><strong>Stage 49 (Hashmal):</strong> Ribbon &mdash; best accessory in the game. Farmable by reloading auto-save.</div>
+        <div class="item-detail"><strong>Stage 50 (Famfrit):</strong> Wyrmhero Blade &mdash; normally requires beating both Yiazmat AND Omega Mark XII.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LATE (59-72) -->
+  <div class="trial-tier">
+    <div class="tier-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="tier-name">Stages 59 &ndash; 72 (Late-Tier)</span>
+    </div>
+    <div class="tier-body">
+      <table class="steal-table">
+        <tr><th>Stage</th><th>Enemy</th><th>Common</th><th>Uncommon</th><th>Rare</th></tr>
+        <tr><td>59</td><td>Ba'Gamnan</td><td>&mdash;</td><td>&mdash;</td><td class="rare-item">Bone of Byblos</td></tr>
+        <tr><td>60</td><td>Monid</td><td>&mdash;</td><td>&mdash;</td><td class="rare-item">Brave Suit</td></tr>
+        <tr><td>62</td><td>Biding Mantis</td><td>&mdash;</td><td>Orochi</td><td class="rare-item">Zodiac Spear</td></tr>
+        <tr><td>64</td><td>Humbaba Mistant</td><td>&mdash;</td><td>Excalibur</td><td class="rare-item">Ultima Blade</td></tr>
+        <tr><td>65</td><td>Deathgaze</td><td>&mdash;</td><td>Aegis Shield</td><td class="rare-item">Genji Shield</td></tr>
+        <tr><td>66</td><td>Saloon Steward</td><td>&mdash;</td><td>&mdash;</td><td class="rare-item">Whale Whisker</td></tr>
+        <tr><td>72</td><td>Avenger</td><td>&mdash;</td><td>Muramasa</td><td class="rare-item">Masamune</td></tr>
+        <tr><td>72</td><td>Overlord</td><td>&mdash;</td><td>Shikari Nagasa</td><td class="rare-item">Zwill Crossblade</td></tr>
+      </table>
+
+      <div class="item-card trial-card" style="margin-top:0.6rem;">
+        <div class="item-name">Key Highlight</div>
+        <div class="item-detail"><strong>Stage 62 (Biding Mantis):</strong> Zodiac Spear &mdash; far easier to get here than from the 1% Henne Mines chest.</div>
+        <div class="item-detail"><strong>Stages 73-78:</strong> Entites drop Elixirs as rare steals. Worth farming if you need them.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENDGAME (81-100) -->
+  <div class="trial-tier">
+    <div class="tier-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="tier-name">Stages 81 &ndash; 100 (Endgame)</span>
+    </div>
+    <div class="tier-body">
+      <table class="steal-table">
+        <tr><th>Stage</th><th>Enemy</th><th>Common</th><th>Uncommon</th><th>Rare</th></tr>
+        <tr><td>81</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td class="rare-item">Circlet</td></tr>
+        <tr><td>86</td><td>Rikken</td><td>&mdash;</td><td>Durandal</td><td class="rare-item">Simha</td></tr>
+        <tr><td>86</td><td>Elza</td><td>&mdash;</td><td>Fomalhaut</td><td class="rare-item">Mithuna</td></tr>
+        <tr><td>87</td><td>Hell Wyrm</td><td>&mdash;</td><td>&mdash;</td><td class="rare-item">Excalibur</td></tr>
+        <tr><td>88</td><td>Disma</td><td>&mdash;</td><td>&mdash;</td><td class="rare-item">Ensanguined Shield</td></tr>
+        <tr><td>89</td><td>Fafnir</td><td>&mdash;</td><td>&mdash;</td><td class="rare-item">Grand Helm</td></tr>
+        <tr><td>90</td><td>Behemoth King</td><td>&mdash;</td><td>&mdash;</td><td class="rare-item">Grand Helm / Grand Armor</td></tr>
+        <tr><td>93</td><td>Lv.99 Red Chocobo</td><td>&mdash;</td><td>&mdash;</td><td class="rare-item">Ribbon</td></tr>
+        <tr><td>94</td><td>Enkidu</td><td>Genji Helm</td><td>Genji Shield</td><td class="rare-item">Genji Armor</td></tr>
+        <tr><td>94</td><td>Gilgamesh</td><td>Masamune</td><td>Kumbha</td><td class="rare-item">Wyrmhero Blade</td></tr>
+        <tr><td>95</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td class="rare-item">Lordly Robes</td></tr>
+        <tr><td>97</td><td>Zodiark</td><td>&mdash;</td><td>&mdash;</td><td class="rare-item">Lordly Robes</td></tr>
+        <tr><td>98</td><td>Yiazmat</td><td>&mdash;</td><td>Yagyu Darkblade</td><td class="rare-item">Mesa</td></tr>
+        <tr><td>99</td><td>Omega Mark XII</td><td>Excalibur</td><td>Ribbon (10%)</td><td>&mdash;</td></tr>
+        <tr><td>100</td><td>Judge Bergan</td><td>&mdash;</td><td>Genji Gloves</td><td>&mdash;</td></tr>
+      </table>
+
+      <div class="item-card trial-card" style="margin-top:0.6rem;">
+        <div class="item-name">Key Highlight</div>
+        <div class="item-detail"><strong>Stage 94 (Gilgamesh + Enkidu):</strong> The single most valuable stage. Full Genji set from Enkidu + Masamune/Kumbha/Wyrmhero Blade from Gilgamesh.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- TAB: EPIC ITEMS                                 -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="tab-epic" class="tab-panel">
+
+  <div class="info-box">
+    <h3>The Four Epic Invisible Items</h3>
+    <p>Secret items added in the Zodiac versions. Their chests are invisible, have absurdly low spawn rates, and require the Diamond Armlet. They respawn, so you can keep trying.</p>
+  </div>
+
+  <div class="controls">
+    <button class="ctrl-btn" onclick="toggleAll(this, 'tab-epic', true)">Expand All</button>
+    <button class="ctrl-btn" onclick="toggleAll(this, 'tab-epic', false)">Collapse All</button>
+  </div>
+
+  <div class="location-group open">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Seitengrat (Invisible Bow)</span>
+      <span class="loc-phase">Skyferry</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card" style="border-left-color: var(--accent);">
+        <div class="item-name"><span class="highlight">Seitengrat</span> &mdash; THE strongest weapon in the game</div>
+        <div class="item-detail"><strong>Stats:</strong> 224 ATK, 75 Evasion. Requires no license to equip.</div>
+        <div class="item-detail" style="margin-top:0.4rem;"><strong>Spawn odds breakdown:</strong></div>
+        <div class="item-detail">Chest spawns on Air Deck: <strong>1%</strong></div>
+        <div class="item-detail">Chest contains an item (not gil): <strong>20%</strong></div>
+        <div class="item-detail">Item is Seitengrat (Diamond Armlet): <strong>5%</strong></div>
+        <div class="item-detail" style="color:var(--accent); font-weight:600;">Overall per attempt: 1 in 10,000 (0.01%)</div>
+        <div class="item-detail" style="margin-top:0.4rem;"><strong>How to find:</strong> Board the Skyferry, go to the Air Deck, walk to the top platform. If you hit an invisible wall, the chest spawned. Zone in and out at x4 speed.</div>
+        <div class="item-warn">RNG manipulation (PS4 only) does NOT work on Steam/PC. The RNG seed behaves differently on PC.</div>
+        <div class="item-tip"><strong>Steam/PC:</strong> Brute force at x4 speed, or install the Seitengrat mod from Nexus Mods (forces 100% spawn + 100% bow).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Great Trango</span>
+      <span class="loc-phase">Henne Mines</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card" style="border-left-color: var(--accent);">
+        <div class="item-name"><span class="highlight">Great Trango</span></div>
+        <div class="item-detail"><strong>Location:</strong> Henne Mines, Zodiark's Lair</div>
+        <div class="item-detail">Ultimate one-handed sword. Can be rarely stolen from Zodiark.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Gendarme</span>
+      <span class="loc-phase">Various</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card" style="border-left-color: var(--accent);">
+        <div class="item-name"><span class="highlight">Gendarme</span></div>
+        <div class="item-detail">High evasion shield that absorbs all elements. Ultra-low spawn invisible chest.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="location-group">
+    <div class="location-header" onclick="toggleGroup(this)">
+      <span class="arrow">&#9654;</span>
+      <span class="loc-name">Trango Tower / Bonebreaker</span>
+      <span class="loc-phase">Various</span>
+    </div>
+    <div class="location-body">
+      <div class="item-card" style="border-left-color: var(--accent);">
+        <div class="item-name"><span class="highlight">Trango Tower / Bonebreaker</span></div>
+        <div class="item-detail">Additional invisible epic weapons with similar ultra-low spawn mechanics.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- TAB: TIPS                                       -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="tab-tips" class="tab-panel">
+
+  <h2 class="section-title">General Stealing Tips</h2>
+  <div class="info-box">
+    <ul>
+      <li>Only <strong>Vaan</strong>, <strong>Balthier</strong>, and <strong>Fran</strong> can learn the Steal technick.</li>
+      <li>Equip <strong>Thief's Cuffs</strong> on your stealer to boost rare steal chance.</li>
+      <li>Set your entire active party's top gambit to <strong>Foe: Steal</strong> when farming, so all three attempt it before attacking.</li>
+      <li>Save scum Trial Mode: save before entering, steal, quit out &mdash; main save keeps the loot.</li>
+    </ul>
+  </div>
+
+  <h2 class="section-title">Chest Hunting Tips</h2>
+  <div class="info-box">
+    <ul>
+      <li><strong>x4 speed</strong> is your best friend. Always use it when zone-grinding.</li>
+      <li><strong>Diamond Armlet on party leader</strong> for Cerobi Steppe and Epic items. Remove it everywhere else (it makes loot worse outside Cerobi).</li>
+      <li><strong>Save before opening</strong> guaranteed one-time chests if they can contain multiple items.</li>
+      <li><strong>Zone-out and back</strong> is the standard respawn method for RNG chests. One screen away and return.</li>
+      <li><strong>Spells and technicks from chests</strong> are unique: once you pick one up, duplicates elsewhere disappear.</li>
+      <li><strong>Post-Raithwall</strong> is the big unlock point. Many areas and chests become accessible. Prioritize exploring after this story beat.</li>
+    </ul>
+  </div>
+
+  <h2 class="section-title">How Chests Work</h2>
+  <div class="info-box">
+    <ul>
+      <li><strong>Spawn rate</strong> varies per chest (10% to 100%). Respawning chests reroll every time you zone out.</li>
+      <li><strong>Gil vs. Item</strong> split: many chests have an 80% gil chance.</li>
+      <li><strong>Common vs. Rare item:</strong> typically 95/5 split. Common is usually a Knot of Rust.</li>
+      <li><strong>Diamond Armlet</strong> changes the rare item pool. In Zodiac Age, only matters for Cerobi Steppe and the four Epic invisible items.</li>
+      <li><strong>Non-respawning chests</strong> always contain their item but can only be opened once. Don't walk past these.</li>
+    </ul>
+  </div>
+
+  <h2 class="section-title">No More Forbidden Chests</h2>
+  <div class="info-box">
+    <p>The original PS2 game required skipping certain chests to get the Zodiac Spear. This restriction is <strong>completely removed</strong> in The Zodiac Age. Open everything.</p>
+  </div>
+
+</div>
+
+<script>
+function toggleGroup(header) {
+  const group = header.parentElement;
+  group.classList.toggle('open');
+}
+
+function toggleAll(btn, panelId, open) {
+  const panel = document.getElementById(panelId);
+  const groups = panel.querySelectorAll('.location-group, .trial-tier');
+  groups.forEach(g => {
+    if (open) g.classList.add('open');
+    else g.classList.remove('open');
+  });
+}
+
+// Tab switching
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>

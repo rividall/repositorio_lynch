@@ -3,32 +3,37 @@
 
 ---
 
-## **SESSION 1: Arduino & Sensors**
+## **SESSION 1: 3D Printing & Arduino**
 
 **Main Activities:**
-- Arduino basics: Programming fundamentals, upload first program (Blink), understand setup() and loop()
-- Wire up ultrasound sensor, read values via Serial Monitor
-- Connect WS2812 LED strip, control colors, experiment with different effects
-- Quick intro to combining sensor + LEDs for reactive brightness/color
-- Explore advanced LED animations: rainbow, color palettes, temporal effects, spatial patterns
+- Ideation: Co-create plant personality using AI prompts (identity, traits, color palette, physical constraints, sketch)
 - Browse 3D plant parts library, select pieces for overnight printing
+- Arduino basics: Programming fundamentals, upload first program (Blink), understand setup() and loop()
+- Vibe Coding 101: AI-assisted coding with LLMs, starter prompts for FastLED
+- Connect WS2812 LED strip, control colors with FastLED
+- Explore LED animations: rainbow, color palettes, temporal effects (breathing, fading), spatial effects (waves, sparkles)
+- Create 2-3 distinct "moods" for your plant
 
-**Deliverable:** Sensor-reactive LED code saved
+**Deliverable:** LED mood library code saved + 3D print queue submitted
 
 ---
 
-## **SESSION 2: Code Polish & 3D Design**
+## **SESSION 2: 3D Customization & Sensors**
 
 **Main Activities:**
-- Collect overnight prints
-- Code workshop: refine behaviors, optimize performance, add multiple modes
-- Instructor mini-lectures: FastLED optimization, sensor calibration, power budgets
-- Tinkercad tutorial: import, scale, modify 3D models
+- Collect overnight prints, inspect quality
+- Tinkercad tutorial: navigation, transforms, export STL
 - Customize plant parts: bases, stems, leaves, decorative elements
-- Submit final 3D designs for overnight printing
+- Submit custom 3D designs for overnight printing
 - Test power supply (battery or wall adapter)
+- Wire up HC-SR04 ultrasound sensor, read distance values via Serial Monitor
+- Reactive light systems: map sensor to brightness, color shift, multi-zone control
+- Plant Reactions & Sound: define emotional reactions, translate to hardware behaviors, choose sound patterns
+- Sound rules: garden sound hierarchy (ambient, interaction, silence), one main sound per plant
+- Instructor mini-lectures: FastLED optimization, sensor calibration, power budgets, pattern design
+- Code refinement: clean up, add comments, test all behavior modes
 
-**Deliverable:** Polished code + custom 3D designs submitted
+**Deliverable:** Sensor-reactive code + custom 3D designs submitted
 
 ---
 
