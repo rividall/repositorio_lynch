@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 1: Electrónica Vestible & Arduino | Taller de Esculturas Luminosas</title>
+
+    <!-- Reveal.js CSS from CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.6.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.6.0/dist/theme/black.css">
+
+    <!-- Syntax highlighting theme -->
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.6.0/plugin/highlight/monokai.css">
+
+    <style>
+        /* =====================================================
+           TRON LEGACY / CIRCUIT BOARD THEME
+           ===================================================== */
+
+        /* ============ CIRCUIT BOARD BACKGROUND ============ */
+
+        .reveal-viewport {
+            background:
+                /* Main dark gradient */
+                linear-gradient(180deg, #050a12 0%, #0a1628 50%, #051018 100%);
+        }
+
+        /* Circuit board grid pattern */
+        .reveal-viewport::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+            background-image:
+                /* Horizontal circuit lines */
+                linear-gradient(0deg, transparent 49px, rgba(56, 189, 248, 0.08) 49px, rgba(56, 189, 248, 0.08) 50px, transparent 50px),
+                /* Vertical circuit lines */
+                linear-gradient(90deg, transparent 49px, rgba(56, 189, 248, 0.08) 49px, rgba(56, 189, 248, 0.08) 50px, transparent 50px),
+                /* Diagonal traces - right */
+                linear-gradient(45deg, transparent 70.5%, rgba(167, 139, 250, 0.05) 70.5%, rgba(167, 139, 250, 0.05) 71%, transparent 71%),
+                /* Diagonal traces - left */
+                linear-gradient(-45deg, transparent 70.5%, rgba(52, 211, 153, 0.05) 70.5%, rgba(52, 211, 153, 0.05) 71%, transparent 71%);
+            background-size: 50px 50px, 50px 50px, 100px 100px, 100px 100px;
+        }
+
+        /* Glowing nodes at grid intersections */
+        .reveal-viewport::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image:
+                /* Corner nodes - bright */
+                radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.4) 0%, transparent 2px),
+                radial-gradient(circle at 100% 0%, rgba(167, 139, 250, 0.4) 0%, transparent 2px),
+                radial-gradient(circle at 0% 100%, rgba(52, 211, 153, 0.4) 0%, transparent 2px),
+                radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.4) 0%, transparent 2px),
+                /* Edge nodes */
+                radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.3) 0%, transparent 3px),
+                radial-gradient(circle at 50% 100%, rgba(56, 189, 248, 0.3) 0%, transparent 3px),
+                radial-gradient(circle at 0% 50%, rgba(167, 139, 250, 0.3) 0%, transparent 3px),
+                radial-gradient(circle at 100% 50%, rgba(52, 211, 153, 0.3) 0%, transparent 3px);
+        }
+
+        /* Bouncing particles - created via JavaScript */
+        .bounce-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: -1;
+            border-radius: 2px;
+            opacity: 0.15;
+        }
+
+        /* Hexagonal corner accents */
+        .reveal .slides::after {
+            content: '';
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: calc(100% - 40px);
+            height: calc(100% - 40px);
+            pointer-events: none;
+            z-index: -1;
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            /* Angled corners - clipped */
+            clip-path: polygon(
+                20px 0%, calc(100% - 20px) 0%,
+                100% 20px, 100% calc(100% - 20px),
+                calc(100% - 20px) 100%, 20px 100%,
+                0% calc(100% - 20px), 0% 20px
+            );
+        }
+
+        /* ============ CONTENT STYLING ============ */
+
+        .reveal {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #e2e8f0;
+        }
+
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+            text-transform: none;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .reveal h1 {
+            font-size: 2.3em;
+            background: linear-gradient(135deg, #38bdf8 0%, #a78bfa 50%, #34d399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(56, 189, 248, 0.5);
+            position: relative;
+        }
+
+        /* Glowing underline for h1 */
+        .reveal h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #38bdf8, #a78bfa, #38bdf8, transparent);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        .reveal h2 {
+            color: #38bdf8;
+            font-size: 1.5em;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+            border-left: 3px solid #38bdf8;
+            padding-left: 0.5em;
+            margin-left: -0.5em;
+        }
+
+        .reveal h3 {
+            color: #a78bfa;
+            font-size: 1em;
+        }
+
+        .reveal p, .reveal li {
+            color: #e2e8f0;
+        }
+
+        .reveal strong {
+            color: #38bdf8;
+            text-shadow: 0 0 8px rgba(56, 189, 248, 0.3);
+        }
+
+        /* Links */
+        .reveal a {
+            color: #38bdf8;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .reveal a:hover {
+            color: #a78bfa;
+            border-bottom-color: #a78bfa;
+            text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+        }
+
+        /* Code styling - circuit board aesthetic */
+        .reveal code {
+            font-size: 0.9em;
+            padding: 0.2em 0.5em;
+            background: rgba(56,189,248,0.1);
+            border: 1px solid rgba(56,189,248,0.3);
+            border-radius: 4px;
+            color: #38bdf8;
+            font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+            box-shadow: 0 0 5px rgba(56, 189, 248, 0.2);
+        }
+
+        .reveal pre {
+            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(56,189,248,0.3);
+            border-radius: 8px;
+            box-shadow:
+                0 0 20px rgba(56,189,248,0.1),
+                inset 0 0 30px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        /* Circuit trace accent on code blocks */
+        .reveal pre::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #38bdf8, #a78bfa, #34d399);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .reveal pre code {
+            max-height: 500px;
+            font-size: 0.7em;
+            line-height: 1.5;
+            padding: 1.2em 1em 1em;
+            background: transparent;
+            border: none;
+            color: #e2e8f0;
+            box-shadow: none;
+        }
+
+        /* ============ TRON SYNTAX HIGHLIGHTING ============ */
+
+        /* Keywords (void, int, return, for, if, const) - Bright Cyan */
+        .reveal pre code .hljs-keyword {
+            color: #38bdf8;
+            text-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+            font-weight: 600;
+        }
+
+        /* Types (CRGB, int, float, long) - Purple */
+        .reveal pre code .hljs-type {
+            color: #a78bfa;
+            text-shadow: 0 0 6px rgba(167, 139, 250, 0.4);
+        }
+
+        /* Functions - Mint Green */
+        .reveal pre code .hljs-function {
+            color: #34d399;
+            text-shadow: 0 0 6px rgba(52, 211, 153, 0.4);
+        }
+
+        /* Numbers - Orange/Gold */
+        .reveal pre code .hljs-number {
+            color: #fbbf24;
+            text-shadow: 0 0 5px rgba(251, 191, 36, 0.3);
+        }
+
+        /* Strings - Soft Pink */
+        .reveal pre code .hljs-string {
+            color: #f472b6;
+            text-shadow: 0 0 5px rgba(244, 114, 182, 0.3);
+        }
+
+        /* Comments - Dim cyan, italic */
+        .reveal pre code .hljs-comment {
+            color: #4a9ead;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        /* Preprocessor/Meta (#include, #define) - Bright Purple */
+        .reveal pre code .hljs-meta {
+            color: #c084fc;
+            text-shadow: 0 0 8px rgba(192, 132, 252, 0.5);
+        }
+
+        /* Variables/Constants (ALL_CAPS) - Cyan-white */
+        .reveal pre code .hljs-variable {
+            color: #67e8f9;
+            text-shadow: 0 0 4px rgba(103, 232, 249, 0.3);
+        }
+
+        /* Built-in values (HIGH, LOW, true, false) - Gold */
+        .reveal pre code .hljs-literal {
+            color: #fde047;
+            text-shadow: 0 0 5px rgba(253, 224, 71, 0.3);
+        }
+
+        /* Operators - White with slight glow */
+        .reveal pre code .hljs-operator {
+            color: #f1f5f9;
+            text-shadow: 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Selection highlight */
+        .reveal pre code::selection,
+        .reveal pre code *::selection {
+            background: rgba(56, 189, 248, 0.3);
+        }
+
+        /* Complexity badges */
+        .reveal .complexity-badge {
+            display: inline-block;
+            padding: 0.3em 0.8em;
+            border-radius: 100px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-right: 0.5em;
+            border: 1px solid;
+        }
+
+        .reveal .beginner {
+            background: rgba(52,211,153,0.15);
+            border-color: rgba(52,211,153,0.3);
+            color: #34d399;
+        }
+        .reveal .intermediate {
+            background: rgba(251,191,36,0.15);
+            border-color: rgba(251,191,36,0.3);
+            color: #fbbf24;
+        }
+        .reveal .advanced {
+            background: rgba(248,113,113,0.15);
+            border-color: rgba(248,113,113,0.3);
+            color: #f87171;
+        }
+
+        /* Warning and success boxes - geometric style */
+        .reveal .warning-box {
+            background: linear-gradient(135deg, rgba(248,113,113,0.1) 0%, rgba(0,0,0,0.3) 100%);
+            border: 1px solid rgba(248,113,113,0.4);
+            border-left: 4px solid #f87171;
+            padding: 1em 1.5em;
+            border-radius: 0 8px 8px 0;
+            margin: 1em 0;
+            color: #fca5a5;
+        }
+
+        .reveal .success-box {
+            background: linear-gradient(135deg, rgba(52,211,153,0.1) 0%, rgba(0,0,0,0.3) 100%);
+            border: 1px solid rgba(52,211,153,0.4);
+            border-left: 4px solid #34d399;
+            padding: 1em 1.5em;
+            border-radius: 0 8px 8px 0;
+            margin: 1em 0;
+            color: #6ee7b7;
+        }
+
+        .reveal .success-box h3 {
+            color: #34d399;
+            margin-bottom: 0.5em;
+        }
+
+        .reveal .info-box {
+            background: linear-gradient(135deg, rgba(56,189,248,0.1) 0%, rgba(0,0,0,0.3) 100%);
+            border: 1px solid rgba(56,189,248,0.4);
+            border-left: 4px solid #38bdf8;
+            padding: 1em 1.5em;
+            border-radius: 0 8px 8px 0;
+            margin: 1em 0;
+            color: #7dd3fc;
+        }
+
+        /* Images with tech frame */
+        .reveal img {
+            max-height: 400px;
+            border-radius: 4px;
+            border: 2px solid rgba(56,189,248,0.3);
+            box-shadow:
+                0 0 20px rgba(56,189,248,0.2),
+                0 10px 40px rgba(0,0,0,0.4);
+        }
+
+        /* Lists with circuit markers */
+        .reveal ul, .reveal ol {
+            display: block;
+            margin-left: 1em;
+        }
+
+        .reveal li {
+            margin: 0.5em 0;
+            position: relative;
+        }
+
+        .reveal ul li::marker {
+            color: #38bdf8;
+        }
+
+        .reveal ol li::marker {
+            color: #a78bfa;
+        }
+
+        /* Small text */
+        .reveal .small-text {
+            font-size: 0.8em;
+            color: #64748b;
+        }
+
+        /* Section divider slides */
+        .reveal section[data-background-color] h1 {
+            background: linear-gradient(135deg, #38bdf8 0%, #a78bfa 50%, #34d399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Progress bar - circuit style */
+        .reveal .progress {
+            background: rgba(56,189,248,0.1);
+            height: 3px;
+        }
+
+        .reveal .progress span {
+            background: linear-gradient(90deg, #38bdf8, #a78bfa);
+            box-shadow: 0 0 15px rgba(56,189,248,0.8);
+        }
+
+        /* Slide number - tech display */
+        .reveal .slide-number {
+            background: rgba(0,0,0,0.5);
+            color: #38bdf8;
+            font-size: 12px;
+            font-family: 'SF Mono', 'Consolas', monospace;
+            padding: 8px 12px;
+            border: 1px solid rgba(56,189,248,0.3);
+            border-radius: 4px;
+        }
+
+        /* Controls - glowing */
+        .reveal .controls button {
+            color: #38bdf8;
+        }
+
+        .reveal .controls button:hover {
+            color: #a78bfa;
+        }
+
+        /* Fragment highlights */
+        .reveal .fragment.highlight-current-blue.current-fragment {
+            color: #38bdf8;
+        }
+
+        /* Prompt box for vibe coding */
+        .reveal .prompt-box {
+            background: rgba(167,139,250,0.1);
+            border: 1px solid rgba(167,139,250,0.3);
+            border-left: 4px solid #a78bfa;
+            padding: 1em 1.5em;
+            border-radius: 0 8px 8px 0;
+            margin: 1em 0;
+            text-align: left;
+            font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+            font-size: 0.7em;
+            color: #e2e8f0;
+        }
+
+        /* Speaker notes styling hint */
+        .reveal aside.notes {
+            display: none;
+        }
+
+        /* Allow scrolling on slides with overflow */
+        .reveal .slides section {
+            overflow-y: auto;
+            max-height: 100%;
+            padding-left: 10%;
+            padding-right: 10%;
+            box-sizing: border-box;
+        }
+
+        /* Hide the mid-screen scrollbar: use custom thin scrollbar that blends in */
+        .reveal .slides section::-webkit-scrollbar {
+            width: 6px;
+        }
+        .reveal .slides section::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .reveal .slides section::-webkit-scrollbar-thumb {
+            background: rgba(56, 189, 248, 0.3);
+            border-radius: 3px;
+        }
+        .reveal .slides section::-webkit-scrollbar-thumb:hover {
+            background: rgba(56, 189, 248, 0.5);
+        }
+
+        /* Compact slides - reduce spacing */
+        .reveal .compact h2 {
+            margin-bottom: 0.3em;
+        }
+        .reveal .compact pre {
+            margin: 0.5em 0;
+        }
+        .reveal .compact img {
+            max-height: 150px;
+        }
+
+        /* ============ SPECIAL TITLE SLIDE ============ */
+        section[data-background-color="#050a12"] h1::after,
+        section[data-background-color="#0a0f1a"] h1::after {
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- ==================== LÁMINA 1: ARDUINO 101 ==================== -->
+            <section>
+                <h1>Arduino 101</h1>
+                <p>Entendamos el hardware</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== LÁMINA 2: QUÉ ES ARDUINO ==================== -->
+            <section>
+                <h2>¿Qué es Arduino?</h2>
+                <ul>
+                    <li class="fragment"><strong>Microcontrolador</strong> - pequeña computadora en un chip</li>
+                    <li class="fragment"><strong>+ Entorno IDE conveniente</strong> - ambiente de programación fácil</li>
+                    <li class="fragment"><strong>+ Ecosistema vasto</strong> - librerías, sensores, shields</li>
+                </ul>
+                <div class="fragment">
+                    <img src="https://raw.githubusercontent.com/rividall/repositorio_lynch/master/Class/Elisava_26/ArduinoWorkshop/images/arduino_uno_board.svg" alt="Arduino Uno Board" style="max-height: 280px;">
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== LÁMINA 3: PINES GPIO ==================== -->
+            <section>
+                <h2>Entendiendo los Pines GPIO</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1em; font-size: 0.8em;">
+                    <div class="fragment">
+                        <h3>Digital</h3>
+                        <p>HIGH (5V) o LOW (0V)</p>
+                        <p>Perfecto para: LEDs, botones</p>
+                    </div>
+                    <div class="fragment">
+                        <h3>Analógico</h3>
+                        <p>Valores: 0-1023</p>
+                        <p>Perfecto para: sensores</p>
+                    </div>
+                    <div class="fragment">
+                        <h3>PWM (~)</h3>
+                        <p>Salida analógica simulada</p>
+                        <p>Perfecto para: atenuación</p>
+                    </div>
+                </div>
+                <div class="fragment" style="margin-top: 1.5em;">
+                    <img src="https://raw.githubusercontent.com/rividall/repositorio_lynch/master/Class/Elisava_26/ArduinoWorkshop/images/arduino_pins_labeled.svg" alt="Arduino pins labeled" style="max-height: 220px;">
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== LÁMINA 4: MODELO DE PROGRAMACIÓN ==================== -->
+            <section>
+                <h2>Modelo de Programación Arduino</h2>
+                <pre><code class="language-cpp" data-trim data-line-numbers="1-3|5-7">
+void setup() {
+    // Se ejecuta UNA VEZ cuando Arduino inicia
+}
+
+void loop() {
+    // Se ejecuta SIEMPRE, una y otra vez
+}
+                </code></pre>
+                <div class="fragment">
+                    <p><strong>Piénsalo así:</strong></p>
+                    <ul>
+                        <li><code>setup()</code> = Inicializar tu programa</li>
+                        <li><code>loop()</code> = while(true) { ... }</li>
+                    </ul>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== LÁMINA 5: PARPADEO ==================== -->
+            <section>
+                <h2>El Clásico: Parpadear LED 💡</h2>
+                <p>El "Hola Mundo" de todo programador</p>
+                <pre><code class="language-cpp" data-trim data-line-numbers>
+void setup() {
+    pinMode(LED_BUILTIN, OUTPUT);
+}
+
+void loop() {
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(1000);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(1000);
+}
+                </code></pre>
+                <p class="fragment">⏱️ ¡Sube esto ahora! Verifica que tu hardware funciona.</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SECCIÓN: VIBE CODING ==================== -->
+            <section data-background-color="#0a0f1a">
+                <h1>Vibe Coding 101 🤖</h1>
+                <p>Tu arma secreta: programación asistida por IA</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== LÁMINA 6: INTRODUCCIÓN VIBE CODING ==================== -->
+            <section>
+                <h2>No Necesitas Memorizar Sintaxis</h2>
+                <img src="https://raw.githubusercontent.com/rividall/repositorio_lynch/master/Class/Elisava_26/ArduinoWorkshop/images/vibe_coding_meme.svg" alt="Vibe coding meme - asking AI for help" style="max-height: 280px;">
+                <p class="fragment" style="margin-top: 1em;">Necesitas saber <strong>qué es posible</strong> y <strong>cómo preguntarlo</strong>.</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== LÁMINA 7: LA CONFIGURACIÓN ==================== -->
+            <section>
+                <h2>La Configuración</h2>
+                <ol>
+                    <li class="fragment">Abre tu LLM de elección (Claude, ChatGPT, etc.)</li>
+                    <li class="fragment">Dale contexto sobre la librería</li>
+                    <li class="fragment">Describe lo que quieres en lenguaje natural</li>
+                </ol>
+                <div class="fragment" style="margin-top: 2em;">
+                    <p><strong>La clave:</strong> ¡Proporciona la documentación de la librería!</p>
+                    <p><a href="https://github.com/FastLED/FastLED" target="_blank">github.com/FastLED/FastLED</a></p>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== LÁMINA 8: PROMPT INICIAL ==================== -->
+            <section>
+                <h2>Prompt Inicial 📋</h2>
+                <p>Copia esto en tu LLM:</p>
+                <div class="prompt-box">
+                    Estoy usando un Arduino Uno con tiras LED WS2812 y la librería FastLED. El pin de datos es D6<br><br>
+                    Aquí está la documentación de la librería: https://github.com/FastLED/FastLED<br><br>
+                    Ayúdame a escribir código para [describe lo que quieres].<br><br>
+                    Si no estás seguro de algo, consulta los foros de FastLED y los temas de GitHub para soluciones comunes.
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== LÁMINA 9: CONSEJOS PARA BUENOS RESULTADOS ==================== -->
+            <section>
+                <h2>Consejos para Buenos Resultados</h2>
+                <ul>
+                    <li class="fragment"><strong>Sé específico:</strong> "arcoíris que se mueve por la tira" > "colores geniales"</li>
+                    <li class="fragment"><strong>Describe el comportamiento</strong>, no el código</li>
+                    <li class="fragment"><strong>Pega errores de vuelta</strong> si no funciona</li>
+                    <li class="fragment">Pregunta: <em>"¿Qué otros efectos puedo hacer con FastLED?"</em></li>
+                </ul>
+                <div class="fragment success-box" style="margin-top: 1em;">
+                    <p><strong>🎯 Inténtalo ahora:</strong> ¡Pregunta a tu LLM qué significa <code>CHSV</code>!</p>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SECCIÓN: LEDS WS2812 ==================== -->
+            <section>
+                <h1>LEDs WS2812 💡🌈</h1>
+                <p>Magia RGB direccionable individualmente</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== LÁMINA 10: QUÉ LOS HACE ESPECIALES ==================== -->
+            <section>
+                <h2>¿Qué los Hace Especiales?</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em;">
+                    <div>
+                        <h3>LEDs Normales:</h3>
+                        <ul class="fragment" style="font-size: 0.85em;">
+                            <li>Un cable por LED</li>
+                            <li>Todos del mismo color</li>
+                            <li>Todos encendidos/apagados juntos</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>WS2812 (NeoPixels):</h3>
+                        <ul class="fragment" style="font-size: 0.85em;">
+                            <li>¡UN cable de datos para todos!</li>
+                            <li>Cada LED = cualquier color RGB</li>
+                            <li>Control individual</li>
+                            <li>Conectados en cadena</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="fragment" style="margin-top: 1.5em;">
+                    <img src="https://raw.githubusercontent.com/rividall/repositorio_lynch/master/Class/Elisava_26/ArduinoWorkshop/images/ws2812_led_strip.png" alt="WS2812 LED Strip close-up" style="max-height: 180px;">
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== LÁMINA 11: CABLEADO LED ==================== -->
+            <section>
+                <h2>Cableado de LEDs WS2812</h2>
+                <div class="warning-box" style="padding: 0.5em 1em; margin: 0.5em 0;">
+                    <p style="margin: 0;"><strong>⚠️ ¡La dirección de la flecha importa! Los datos fluyen en UN SENTIDO →</strong></p>
+                </div>
+                <img src="https://raw.githubusercontent.com/rividall/repositorio_lynch/master/Class/Elisava_26/ArduinoWorkshop/images/led_wiring_diagram.svg" alt="LED Wiring Diagram" style="max-height: 240px;">
+                <p class="fragment" style="font-size: 0.8em; margin-top: 0.5em;">
+                    <strong style="color: #f87171;">Rojo</strong> → 5V &nbsp;|&nbsp;
+                    <strong style="color: #e2e8f0;">Blanco</strong> → GND &nbsp;|&nbsp;
+                    <strong style="color: #34d399;">Verde</strong> → Pin 6
+                </p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== LÁMINA 12: PRIMER CÓDIGO LED ==================== -->
+            <section>
+                <h2>¡Enciende los LEDs!</h2>
+                <pre><code class="language-cpp" data-trim data-line-numbers="1|3-4|6|8-10|12-15">
+#include &lt;FastLED.h&gt;
+
+#define NUM_LEDS 10
+#define DATA_PIN 6
+
+CRGB leds[NUM_LEDS];
+
+void setup() {
+    FastLED.addLeds&lt;WS2812, DATA_PIN, GRB&gt;(leds, NUM_LEDS);
+}
+
+void loop() {
+    leds[0] = CRGB::Red;  // Primer LED = rojo
+    FastLED.show();        // ¡Actualiza los LEDs!
+}
+                </code></pre>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== LÁMINA 13: ENTENDIENDO EL CÓDIGO ==================== -->
+            <section>
+                <h2>Entendiendo el Código</h2>
+                <pre><code class="language-cpp" data-trim data-line-numbers="1|2|3">
+CRGB leds[NUM_LEDS];              // Array de valores de color
+leds[0] = CRGB::Red;              // Establece el color (en memoria)
+FastLED.show();                    // Envía a los LEDs físicos
+                </code></pre>
+                <div class="fragment" style="margin-top: 2em;">
+                    <p><strong>Piénsalo así:</strong></p>
+                    <ol style="text-align: left; font-size: 0.9em;">
+                        <li>Tienes un lienzo (el array)</li>
+                        <li>Pintas en el lienzo (estableces colores)</li>
+                        <li>Muestras el lienzo (<code>FastLED.show()</code>)</li>
+                    </ol>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== LÁMINA 14: EXPLORACIÓN DE COLORES ==================== -->
+            <section>
+                <h2>Explorando Colores 🎨</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em; align-items: center;">
+                    <pre><code class="language-cpp" data-trim style="font-size: 0.65em;">
+// Colores nombrados
+leds[0] = CRGB::Red;
+leds[1] = CRGB::Green;
+leds[2] = CRGB::Blue;
+
+// Valores RGB (0-255 cada uno)
+leds[3] = CRGB(255, 128, 0);  // Naranja
+
+// HSV - ¡más fácil para arcoíris!
+leds[4] = CHSV(160, 255, 255);
+                    </code></pre>
+                    <img src="https://raw.githubusercontent.com/rividall/repositorio_lynch/master/Class/Elisava_26/ArduinoWorkshop/images/hsv_color_wheel.svg" alt="HSV color wheel" style="max-height: 220px;">
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== LÁMINA 15: POR QUÉ HSV ES TU AMIGO ==================== -->
+            <section>
+                <h2>Por Qué HSV es Tu Amigo</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em; font-size: 0.85em;">
+                    <div>
+                        <h3 style="margin-bottom: 0.3em;">RGB</h3>
+                        <p>Mezcla rojo, verde, azul</p>
+                        <p style="color: #64748b;">Difícil hacer arcoíris</p>
+                    </div>
+                    <div>
+                        <h3 style="margin-bottom: 0.3em;">HSV</h3>
+                        <p><strong>H</strong>ue (matiz) 0-255</p>
+                        <p><strong>S</strong>aturation · <strong>V</strong>alue</p>
+                    </div>
+                </div>
+                <div class="fragment success-box" style="margin-top: 1em; padding: 0.7em 1em;">
+                    <p style="margin: 0;">Cambia <strong>solo el matiz</strong> para ciclar a través del arcoíris: <code>CHSV(hue++, 255, 255)</code></p>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== SECCIÓN: PATRONES LED ==================== -->
+            <section>
+                <h1>Patrones LED 🌊</h1>
+                <p>¡Hagamos un poco de magia!</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== LÁMINA 16: GENERACIÓN DE ARCOÍRIS ==================== -->
+            <section>
+                <h2>Generación de Arcoíris</h2>
+                <pre><code class="language-cpp" data-trim data-line-numbers>
+void loop() {
+    static uint8_t hue = 0;
+
+    for(int i = 0; i < NUM_LEDS; i++) {
+        leds[i] = CHSV(hue + (i * 10), 255, 255);
+    }
+
+    FastLED.show();
+    hue++;  // Rota lentamente los colores
+    delay(20);
+}
+                </code></pre>
+                <p class="fragment"><code>static</code> = la variable persiste entre llamadas de loop</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== LÁMINA 17: PALETAS DE COLOR INCORPORADAS ==================== -->
+            <section>
+                <h2>Paletas de Color Incorporadas 🎨</h2>
+                <img src="https://raw.githubusercontent.com/rividall/repositorio_lynch/master/Class/Elisava_26/ArduinoWorkshop/images/fastled_palettes.svg" alt="FastLED built-in color palettes visualization" style="max-height: 200px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1em; font-size: 0.8em; margin-top: 1em;">
+                    <div class="fragment">
+                        <p><code>RainbowColors_p</code></p>
+                        <p><code>LavaColors_p</code></p>
+                    </div>
+                    <div class="fragment">
+                        <p><code>OceanColors_p</code></p>
+                        <p><code>ForestColors_p</code></p>
+                    </div>
+                    <div class="fragment">
+                        <p><code>PartyColors_p</code></p>
+                        <p><code>HeatColors_p</code></p>
+                    </div>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== LÁMINA 18: USANDO PALETAS ==================== -->
+            <section>
+                <h2>Usando Paletas</h2>
+                <pre><code class="language-cpp" data-trim data-line-numbers>
+void loop() {
+    static uint8_t startIndex = 0;
+    startIndex++;  // Velocidad de movimiento
+
+    for(int i = 0; i < NUM_LEDS; i++) {
+        leds[i] = ColorFromPalette(OceanColors_p,
+                                    startIndex + i * 4);
+    }
+
+    FastLED.show();
+    delay(20);
+}
+                </code></pre>
+                <p class="fragment">¡Intenta cambiar <code>OceanColors_p</code> por otras paletas!</p>
+            </section>
+            <!-- ================================================================== -->
+
+            <!-- ==================== LÁMINA 19: EFECTOS TEMPORALES ==================== -->
+            <section>
+                <h2>Efectos Temporales ⏱️</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1em; font-size: 0.8em;">
+                    <div class="fragment">
+                        <h3 style="margin-bottom: 0.2em;">Respiración</h3>
+                        <pre><code class="language-cpp" data-trim style="font-size: 0.75em;">uint8_t brightness =
+  beatsin8(30, 50, 255);</code></pre>
+                    </div>
+                    <div class="fragment">
+                        <h3 style="margin-bottom: 0.2em;">Desvanecimiento</h3>
+                        <pre><code class="language-cpp" data-trim style="font-size: 0.75em;">fadeToBlackBy(leds,
+  NUM_LEDS, 10);</code></pre>
+                    </div>
+                    <div class="fragment">
+                        <h3 style="margin-bottom: 0.2em;">Sin delay()</h3>
+                        <pre><code class="language-cpp" data-trim style="font-size: 0.75em;">if(millis() - last > 20)
+  // actualizar</code></pre>
+                    </div>
+                </div>
+            </section>
+            <!-- ================================================================== -->
+
+        </div>
+    </div>
+
+    <!-- Reveal.js JavaScript from CDN -->
+    <script src="https://unpkg.com/reveal.js@4.6.0/dist/reveal.js"></script>
+    <script src="https://unpkg.com/reveal.js@4.6.0/plugin/highlight/highlight.js"></script>
+    <script src="https://unpkg.com/reveal.js@4.6.0/plugin/notes/notes.js"></script>
+
+    <script>
+        // Initialize reveal.js
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            showSlideNumber: 'all',
+            progress: true,
+            controls: true,
+            controlsLayout: 'bottom-right',
+            controlsBackArrows: 'faded',
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            width: '100%',
+            height: '100%',
+            margin: 0,
+            minScale: 1,
+            maxScale: 1,
+
+            // Plugins
+            plugins: [ RevealHighlight, RevealNotes ]
+        });
+
+        // Reset scroll position when changing slides
+        Reveal.on('slidechanged', function(event) {
+            if (event.currentSlide) {
+                event.currentSlide.scrollTop = 0;
+            }
+        });
+
+        // Auto-scroll to show newly revealed fragments
+        Reveal.on('fragmentshown', function(event) {
+            const fragment = event.fragment;
+            const slide = fragment.closest('section');
+            if (slide) {
+                fragment.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest'
+                });
+            }
+        });
+
+        // Log when presentation starts
+        console.log('🌱 Esculturas de Luz Vegetal - ¡Sesión 1 cargada!');
+
+        // ============ BOUNCING PARTICLES ============
+        const particles = [];
+        const PARTICLE_COUNT = 4;
+        const SPEED = 0.2; // pixels per frame - constant speed
+
+        // Particle colors
+        const colors = [
+            'rgba(56, 189, 248, 0.8)',   // cyan
+            'rgba(167, 139, 250, 0.6)',  // purple
+            'rgba(52, 211, 153, 0.5)',   // mint
+            'rgba(56, 189, 248, 0.6)'    // cyan again
+        ];
+
+        // Particle shapes
+        const shapes = [
+            { width: 150, height: 2 },   // horizontal line
+            { width: 2, height: 150 },   // vertical line
+            { width: 100, height: 100 }, // square
+            { width: 80, height: 80 }    // smaller square
+        ];
+
+        // Initialize particles
+        function initParticles() {
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                const el = document.createElement('div');
+                el.className = 'bounce-particle';
+                el.style.width = shapes[i].width + 'px';
+                el.style.height = shapes[i].height + 'px';
+                el.style.background = `linear-gradient(${Math.random() * 360}deg, transparent 0%, ${colors[i]} 50%, transparent 100%)`;
+
+                // Random starting position
+                const x = Math.random() * (window.innerWidth - shapes[i].width);
+                const y = Math.random() * (window.innerHeight - shapes[i].height);
+
+                // Random direction (normalized for constant speed)
+                const angle = Math.random() * Math.PI * 2;
+                const vx = Math.cos(angle) * SPEED;
+                const vy = Math.sin(angle) * SPEED;
+
+                el.style.left = x + 'px';
+                el.style.top = y + 'px';
+
+                document.body.appendChild(el);
+
+                particles.push({
+                    el: el,
+                    x: x,
+                    y: y,
+                    vx: vx,
+                    vy: vy,
+                    width: shapes[i].width,
+                    height: shapes[i].height
+                });
+            }
+        }
+
+        // Animation loop
+        function animate() {
+            const W = window.innerWidth;
+            const H = window.innerHeight;
+
+            particles.forEach(p => {
+                // Move
+                p.x += p.vx;
+                p.y += p.vy;
+
+                // Bounce off edges
+                if (p.x <= 0 || p.x + p.width >= W) {
+                    p.vx *= -1;
+                    p.x = Math.max(0, Math.min(p.x, W - p.width));
+                }
+                if (p.y <= 0 || p.y + p.height >= H) {
+                    p.vy *= -1;
+                    p.y = Math.max(0, Math.min(p.y, H - p.height));
+                }
+
+                // Update position
+                p.el.style.left = p.x + 'px';
+                p.el.style.top = p.y + 'px';
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        // Start particles
+        initParticles();
+        animate();
+    </script>
+</body>
+</html>
